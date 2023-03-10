@@ -21,7 +21,7 @@ model User {
   linkedin      String?         @unique
   github        String?
   imageUrl      String?   
-  skills        Skillset[]   @relation("candidate_skills") 
+  skills        String?
   address       String
   city          String  
   postcode      String
@@ -40,7 +40,7 @@ model Offer {
   contractType  String
   location      String         
   description   String       
-  skills        Skillset[]   @relation("offer_skills") 
+  skills        String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   users         UsersOnOffers[]
@@ -60,15 +60,6 @@ model UsersOnOffers {
   @@id([userId, offerId])
 
 
-}
-model Skillset {
-  id            Int         @id @unique @default(autoincrement())
-  name       String
-  users     User[]   @relation("candidate_skills")
-  offers    Offer[]  @relation("offer_skills")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-   
 }
 
 model Consultant {
