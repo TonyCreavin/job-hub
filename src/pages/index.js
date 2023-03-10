@@ -1,5 +1,3 @@
-import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import JobDetails from '@/components/JobDetails';
@@ -13,9 +11,15 @@ export default function Home({ offers }) {
     <>
       <Navbar />
 
-      <div className="flex w-full justify-around my-5">
-        <input className="w-[40vw] h-8 border-2 border-black border-solid rounded-md p-2 mr-2" />
-        <input className="w-[40vw] h-8 border-2 border-black border-solid rounded-md p-2 mr-2" />
+      <div className="flex w-full justify-around my-5 border-b border-solid border-gray-500 pb-5">
+        <input
+          className="w-[40vw] h-8 border-2 border-black border-solid rounded-md p-2 mr-2"
+          placeholder="Type of job.."
+        />
+        <input
+          className="w-[40vw] h-8 border-2 border-black border-solid rounded-md p-2 mr-2"
+          placeholder="location.."
+        />
         <button className="bg-[rgb(50,140,234)] text-white rounded-md py-1 px-2">
           Search
         </button>
@@ -28,6 +32,7 @@ export default function Home({ offers }) {
               title={offer.title}
               location={offer.location}
               contractType={offer.contractType}
+              description={offer.description}
             />
           ))}
         </div>
