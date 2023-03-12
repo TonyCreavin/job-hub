@@ -63,7 +63,7 @@ model UsersOnOffers {
 }
 
 model Consultant {
-  id            String         @id @unique @default(uuid())
+  id            Int         @id @unique @default(autoincrement())
   firstName     String
   lastName      String
   email         String         @unique

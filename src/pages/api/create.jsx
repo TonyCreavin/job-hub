@@ -1,20 +1,17 @@
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { title, location, website, contractType, description, skills } =
-      req.body;
-    const offerItem = {
-      title,
-      location,
-      description,
-      skills,
-      contractType,
-      website,
-    };
-    const offer = await prisma.offer.create({
-      data: offerItem,
+  const data = req.body;
+  try {
+    const result = await prisma.offer.create({
+      data: {
+        ...data,
+      },
     });
-    res.status(201).json(offer);
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+    res.status(403).json({ err: 'Error occurred while adding a new offer.' });
   }
 }
