@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import axios from 'axios';
 
 function Create_offer() {
   const [formState, setFormState] = useState({
@@ -36,7 +34,6 @@ function Create_offer() {
 
   return (
     <>
-      <Navbar />
       <h1 className="text-center my-5 text-2xl">Post a job</h1>
       <form className="flex flex-col w-full h-[100%]">
         <div className="flex m-4">
