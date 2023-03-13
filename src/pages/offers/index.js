@@ -7,8 +7,6 @@ import prisma from '../../../lib/prisma';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Offers({ offers }) {
-  const oneOffer = async () => {};
-
   return (
     <>
       <div className="flex w-full justify-around my-5 border-b border-solid border-gray-500 pb-5">
@@ -28,11 +26,12 @@ export default function Offers({ offers }) {
         <div className="flex flex-col flex-1">
           {offers.map((offer) => (
             <JobPost
-              key={offer.id}
-              title={offer.title}
-              location={offer.location}
-              contractType={offer.contractType}
-              description={offer.description}
+              key={offer?.id}
+              title={offer?.title}
+              location={offer?.location}
+              contractType={offer?.contractType}
+              description={offer?.description}
+              consultant={offers?.consultantId}
             />
           ))}
         </div>
