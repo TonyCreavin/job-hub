@@ -3,7 +3,7 @@ import React from 'react';
 function JobDetails({ offer }) {
   return (
     <div
-      className="  w-[40vw] h-screen border-black border-2 m-4 border-solid rounded-lg mt-3 p-2"
+      className="  w-[40vw] h-screen  border-gray-200 border-2 shadow-lg m-4 border-solid rounded-lg mt-3 p-2"
       key={offer?.id}
     >
       <h3>Post: {offer?.title}</h3>
