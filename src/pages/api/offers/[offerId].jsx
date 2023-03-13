@@ -7,6 +7,7 @@ export default function handler(req, res) {
     where: {
       id: offerId,
     },
+    // include: { consultant: true },
   });
   res.status(200).json(offer);
 }
