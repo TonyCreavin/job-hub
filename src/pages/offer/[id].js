@@ -1,13 +1,16 @@
 import React from 'react';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
-
+import EditOffer from '@/components/editOffer';
 import { useRouter } from 'next/router';
 import JobDetailsPage from '@/components/JobDetailsPage';
+import { useState } from 'react';
 
 const prisma = new PrismaClient();
 
 export default function Offer(props) {
+  const [showEditOfferModal, setShowEditOfferModal] = useState(false);
+
   const router = useRouter();
   const { offer } = props;
 
@@ -33,6 +36,18 @@ export default function Offer(props) {
       >
         Delete
       </button>
+      <button
+        onClick={() => setShowEditOfferModal((pV) => !pV)}
+        className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
+      >
+        Edit
+      </button>
+      {showEditOfferModal ? (
+        <EditOffer
+          offer={offer}
+          closeModal={() => setShowEditOfferModal(false)}
+        />
+      ) : null}
     </div>
   );
 }

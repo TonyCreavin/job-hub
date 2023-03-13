@@ -35,86 +35,92 @@ function Create_offer() {
   return (
     <>
       <h1 className="text-center my-5 text-2xl">Post a job</h1>
-      <form className="flex flex-col w-full h-[100%]">
-        <div className="flex m-4">
-          <label htmlFor="title">
-            Job Title
-            <input
-              value={formState.title}
+      <div className="flex justify-center align-middle items-center ml-[30vw] mr-[30vw]">
+        <form className="flex flex-col w-full h-[100%] ">
+          <div className="flex m-4 justify-between">
+            <label htmlFor="title">
+              Job Title
+              <input
+                value={formState.title}
+                onChange={handleInputChange}
+                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
+                type="text"
+                name="title"
+                id="title"
+              />
+            </label>
+            <label htmlFor="contractType">
+              contract Type
+              <input
+                value={formState.contractType}
+                onChange={handleInputChange}
+                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
+                type="text"
+                name="contractType"
+                id="contractType"
+              />
+            </label>{' '}
+          </div>
+          <div className="flex m-4 justify-between">
+            <label htmlFor="location">
+              location
+              <input
+                value={formState.location}
+                onChange={handleInputChange}
+                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
+                type="text"
+                name="location"
+                id="location"
+              />
+            </label>
+
+            <label htmlFor="skills">
+              Skills
+              <input
+                value={formState.skills}
+                onChange={handleInputChange}
+                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
+                type="text"
+                name="skills"
+                id="skills"
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="website" className="flex flex-col m-4 rounded-md">
+              website
+              <input
+                value={formState.website}
+                onChange={handleInputChange}
+                className="border-gray-200 border-2 shadow-lg w-[40%] rounded-md"
+                type="text"
+                name="website"
+                id="website"
+              />
+            </label>
+          </div>
+          <div className="m-4">
+            <h3>description</h3>
+            <textarea
+              className="w-full h-full p-2 border-gray-200 border-2 shadow-lg rounded-md"
+              id="description"
+              name="description"
+              rows="5"
+              cols="33"
+              value={formState.description}
               onChange={handleInputChange}
-              className="mx-2"
-              type="text"
-              name="title"
-              id="title"
             />
-          </label>
-          <label htmlFor="contractType">
-            contract Type
-            <input
-              value={formState.contractType}
-              onChange={handleInputChange}
-              className="mx-2"
-              type="text"
-              name="contractType"
-              id="contractType"
-            />
-          </label>
-          <label htmlFor="location">
-            location
-            <input
-              value={formState.location}
-              onChange={handleInputChange}
-              className="mx-2"
-              type="text"
-              name="location"
-              id="location"
-            />
-          </label>
-        </div>
-        <div className="m-4 flex">
-          <label htmlFor="skills">
-            Skills
-            <input
-              value={formState.skills}
-              onChange={handleInputChange}
-              className="mx-2"
-              type="text"
-              name="skills"
-              id="skills"
-            />
-          </label>
-          <label htmlFor="website">
-            website
-            <input
-              value={formState.website}
-              onChange={handleInputChange}
-              className="mx-2"
-              type="text"
-              name="website"
-              id="website"
-            />
-          </label>
-        </div>
-        <div className="m-4">
-          <h3>description</h3>
-          <textarea
-            className="w-full h-full p-2"
-            id="description"
-            name="description"
-            rows="5"
-            cols="33"
-            value={formState.description}
-            onChange={handleInputChange}
-          />
-        </div>
-      </form>
-      <button
-        onClick={handleSubmit}
-        type="submit"
-        className="w-20 h-10 bg-sky-500  text-white m-3"
-      >
-        Submit
-      </button>
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-20 h-10 bg-sky-500  text-white m-3 rounded-md"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 }
