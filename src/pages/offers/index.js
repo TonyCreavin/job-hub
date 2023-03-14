@@ -26,13 +26,7 @@ export default function Offers({ offers }) {
       <div className="flex flex-row justify-around ">
         <div className="flex flex-col flex-1">
           {offers.map((offer) => (
-            <JobPost
-              key={offer?.id}
-              title={offer?.title}
-              location={offer?.location}
-              contractType={offer?.contractType}
-              description={offer?.description}
-            />
+            <JobPost key={offer.id} offer={offer} />
           ))}
         </div>
         <JobDetails />

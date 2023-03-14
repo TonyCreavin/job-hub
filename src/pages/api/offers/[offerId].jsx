@@ -1,14 +1,9 @@
-// import { PrismaClient } from '@prisma/client';
-// const prisma = new PrismaClient();
+import prisma from '../../../../lib/prisma';
 
-// export default function handler(req, res) {
-//   const { offerId } = req.query;
-
-//   const offer = prisma.offer.findUnique({
-//     where: {
-//       id: offerId,
-//     },
-//     // include: { consultant: true },
-//   });
-//   res.status(200).json(offer);
-// }
+export default async function handle(req, res) {
+  const offerId = req.query.offerId;
+  const offer = await prisma.offer.findUnique({
+    where: { id: offerId },
+  });
+  res.json(offer);
+}
