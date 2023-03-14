@@ -60,7 +60,7 @@ export default function EditOffer({ closeModal, offer }) {
                 />
               </label>
 
-              <label classNAme="flex flex-col">
+              <label className="flex flex-col">
                 Location
                 <input
                   className="border-gray-200 border-2 shadow-lg w-full rounded-md"
