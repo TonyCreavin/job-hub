@@ -23,13 +23,11 @@ export default function Offers({ offers }) {
           Search
         </button>
       </div>
-      <div className="flex flex-row justify-around ">
-        <div className="flex flex-col flex-1">
-          {offers.map((offer) => (
-            <JobPost key={offer.id} offer={offer} />
-          ))}
-        </div>
-        <JobDetails />
+
+      <div className="flex flex-wrap">
+        {offers.map((offer) => (
+          <JobPost key={offer.id} offer={offer} />
+        ))}
       </div>
     </>
   );

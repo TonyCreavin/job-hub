@@ -17,19 +17,21 @@ model User {
   lastName      String
   email         String         @unique
   password      String
-  phone         String?         @unique
+  phone         String?        @unique
   linkedin      String?         @unique
   github        String?
   imageUrl      String?   
   skills        String?
   address       String
   city          String  
-  postcode      String
+  postcode      String?
   country       String
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   offers        UsersOnOffers[]
   hadApplied    Offer[]  @relation("user_applied_offers")
+  cv          String?
+  coverletter String?
  
 }
 
@@ -45,6 +47,9 @@ model Offer {
   updatedAt     DateTime       @updatedAt
   users         UsersOnOffers[]
   hadApplied    User[]   @relation("user_applied_offers")
+  consultant    Consultant? @relation(fields: [consultantId], references: [id])
+  consultantId  String?
+
   
  
 }
@@ -66,15 +71,19 @@ model Consultant {
   id            String   @id @unique @default(uuid())
   firstName     String
   lastName      String
+  website       String?
+  company       String?
   email         String         @unique
   password      String
-  phone         String?         @unique
+  phone         String?       @unique
   linkedin      String?         @unique
   imageUrl      String?   
   city          String  
-  postcode      String
+  postcode      String?
   country       String
-  createdAt     DateTime       @default(now())
+ createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  offers       Offer[]
+ 
 
 }
