@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import JobDetails from '@/components/JobDetails';
+
 import JobPost from '@/components/JobPosts';
 import { PrismaClient } from '@prisma/client';
 
