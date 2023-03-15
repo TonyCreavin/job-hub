@@ -13,7 +13,7 @@ function Create_offer() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('/api/create', {
+    const response = await fetch('/api/offer/create', {
       method: 'POST',
       body: JSON.stringify(formState),
       headers: {
