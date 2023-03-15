@@ -3,13 +3,13 @@ import prisma from '../../../../lib/prisma';
 export default async function handler(req, res) {
   const { id } = req.body;
   try {
-    const deleteConsultant = await prisma.consultant.delete({
+    const deleteUser = await prisma.user.delete({
       where: {
         id,
       },
     });
-    res.status(200).json(deleteConsultant);
+    res.status(200).json(deleteUser);
   } catch (error) {
-    res.status(403).json({ err: 'Error while deleting consultant' });
+    res.status(403).json({ err: 'Error while deleting user' });
   }
 }

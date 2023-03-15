@@ -1,10 +1,10 @@
 import prisma from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
-  const consultant = await prisma.consultant.findMany({
+  const user = await prisma.user.findMany({
     orderBy: {
       createdAt: 'desc',
     },
   });
-  res.status(200).json(consultant);
+  res.status(200).json(user);
 }
