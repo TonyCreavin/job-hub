@@ -78,3 +78,15 @@ export default function SignUp() {
     </div>
   );
 }
+// export async function getServerSideProps() {
+//   const consultants = await prisma.consultant.findMany({
+//     orderBy: {
+//       createdAt: 'desc',
+//     },
+//   });
+//   return {
+//     props: {
+//       consultants: JSON.parse(JSON.stringify(consultants)),
+//     },
+//   };
+// }

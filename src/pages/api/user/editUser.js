@@ -4,8 +4,9 @@ export default async function handler(req, res) {
     id,
     firstName,
     lastName,
-    website,
-    company,
+    github,
+    skills,
+    address,
     email,
     password,
     phone,
@@ -14,14 +15,17 @@ export default async function handler(req, res) {
     city,
     postcode,
     country,
+    cv,
+    coverletter,
   } = req.body;
-  const consultant = await prisma.consultant.update({
+  const user = await prisma.user.update({
     where: { id },
     data: {
       firstName,
       lastName,
-      website,
-      company,
+      github,
+      skills,
+      address,
       email,
       password,
       phone,
@@ -30,7 +34,9 @@ export default async function handler(req, res) {
       city,
       postcode,
       country,
+      cv,
+      coverletter,
     },
   });
-  res.json(consultant);
+  res.json(user);
 }

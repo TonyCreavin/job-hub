@@ -1,10 +1,11 @@
 import prisma from '../../../lib/prisma';
 
-export default async function handle(req, res) {
-  const { id, title, location, contractType, description } = req.body;
+export default async function handler(req, res) {
+  const { id, title, location, contractType, description, website, skills } =
+    req.body;
   const offer = await prisma.offer.update({
     where: { id },
-    data: { title, location, contractType, description },
-  }); // Update a single offer by unique ID (id)
+    data: { title, location, contractType, description, website, skills },
+  });
   res.json(offer);
 }
