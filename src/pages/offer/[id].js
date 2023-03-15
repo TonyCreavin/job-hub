@@ -15,7 +15,7 @@ export default function Offer(props) {
   const { offer } = props;
 
   async function handleDelete() {
-    await axios.post('/api/deleteOffer', { id: offer.id });
+    await axios.post('/api/offers/deleteOffer', { id: offer.id });
     router.push('/offers');
   }
 
