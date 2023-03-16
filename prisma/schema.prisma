@@ -17,8 +17,8 @@ model User {
   lastName      String
   email         String         @unique
   password      String
-  phone         String?        @unique
-  linkedin      String?         @unique
+  phone         String?       
+  linkedin      String?        
   github        String?
   imageUrl      String?   
   skills        String?
@@ -26,29 +26,31 @@ model User {
   city          String  
   postcode      String?
   country       String
+  role          Role           @default(APPLICANT)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   offers        UsersOnOffers[]
-  hadApplied    Offer[]  @relation("user_applied_offers")
+  hadApplied    Offer[]  @relation("user_applied_to_offer")
   cv          String?
   coverletter String?
  
 }
 
 model Offer {
+
   id            String   @id @unique @default(uuid())
-  website       String?
   title         String
   contractType  String
   location      String         
   description   String       
   skills        String?
+  salary        String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   users         UsersOnOffers[]
-  hadApplied    User[]   @relation("user_applied_offers")
-  consultant    Consultant? @relation(fields: [consultantId], references: [id])
-  consultantId  String?
+  hadApplied    User[]   @relation("user_applied_to_offer")
+  company    Company? @relation(fields: [companyId], references: [id])
+  companyId  String?
 
   
  
@@ -67,23 +69,24 @@ model UsersOnOffers {
 
 }
 
-model Consultant {
+
+
+
+model Company{
   id            String   @id @unique @default(uuid())
-  firstName     String
-  lastName      String
   website       String?
-  company       String?
-  email         String         @unique
-  password      String
-  phone         String?       @unique
-  linkedin      String?         @unique
-  imageUrl      String?   
-  city          String  
+  name          String
+  address       String
+  city          String
   postcode      String?
   country       String
- createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  imageUrl      String?
+  description   String?
   offers       Offer[]
- 
+}
 
+enum Role {
+  ADMIN
+  APPLICANT
+  CONSULTANT
 }
