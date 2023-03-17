@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     lastName,
     github,
     skills,
+    emailVerified,
     address,
     email,
     password,
@@ -23,6 +24,7 @@ export default async function handler(req, res) {
     data: {
       firstName,
       lastName,
+      emailVerified,
       github,
       skills,
       address,

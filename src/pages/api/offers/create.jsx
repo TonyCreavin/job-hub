@@ -3,14 +3,19 @@ import prisma from '../../../../lib/prisma';
 export default async function handler(req, res) {
   const data = req.body;
   try {
-    const result = await prisma.offer.create({
+    const offer = await prisma.offer.create({
       data: {
-        ...data,
+        title: data.title,
+        location: data.location,
+        contractType: data.contractType,
+        description: data.description,
+        companyId: data.companyId,
+        skills: data.skills,
+        salary: data.salary,
       },
     });
-    res.status(200).json(result);
-  } catch (err) {
-    console.log(err);
-    res.status(403).json({ err: 'Error occurred while adding a new offer.' });
+    res.json(offer);
+  } catch (error) {
+    console.log(error);
   }
 }
