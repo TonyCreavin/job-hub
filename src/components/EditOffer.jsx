@@ -22,7 +22,7 @@ export default function EditOffer({ closeModal, offer }) {
     const description = editDescription.value;
     const contractType = editContractType.value;
 
-    await axios.put('/api/edit', {
+    await axios.put('/api/offers/edit', {
       id: offer.id,
       title,
       location,
@@ -36,12 +36,12 @@ export default function EditOffer({ closeModal, offer }) {
   }
 
   return (
-    <div>
+    <div className="mb-10">
       <div onClick={() => closeModal()}></div>
       <div className="w-full">
         <h3 className="text-center my-5 text-2xl">Edit Offer</h3>
         <span
-          style={{ padding: '10px', cursor: 'pointer' }}
+          className="p-[10px] cursor-pointer bg-gray-300 text-white rounded-[50%] mb-4 ml-2"
           onClick={() => closeModal()}
         >
           X
@@ -114,20 +114,24 @@ export default function EditOffer({ closeModal, offer }) {
               <div>
                 <textarea
                   defaultValue={offer?.description}
-                  style={{ width: '100%', height: '100px' }}
                   name="editDescription"
                   type="text"
-                  className="border-gray-200 border-2 shadow-lg  rounded-md"
+                  className="border-gray-200 border-2 shadow-lg  rounded-md w-full h-[100px]"
                 ></textarea>
               </div>
             </div>
           </form>
         </div>
         <div className="modal-footer">
-          <button onClick={() => closeModal()}>Cancel</button>
           <button
+            className="bg-red-500 ml-4 text-white rounded-md py-1 px-2"
+            onClick={() => closeModal()}
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
             disabled={disable}
-            className="btn"
             onClick={() => editOffer()}
           >
             Save
