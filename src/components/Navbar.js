@@ -1,14 +1,74 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
-function Navbar() {
+export default function Navbar() {
+  const route = useRouter();
   const { data: session, status } = useSession();
   console.log('session => ', session);
   console.log('status => ', status);
+  console.log('session.user.email => ', session?.user.email);
+  const [userData, setUserData] = React.useState({});
+
+  useEffect(() => {
+    if (session?.user.id) {
+      axios
+        .get(`/api/user/${session?.user.id}`)
+        .then((res) => {
+          console.log('res.data => ', res.data);
+          setUserData(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [session?.user.id]);
+  console.log('userRole =>', userData.role);
+
+  const handleSwitchToApplicant = () => {
+    axios
+      .put(
+        `/api/user/editUser`,
+        {
+          id: session.user.id,
+          role: userData.role === 'CONSULTANT' && 'APPLICANT',
+          name: session.user.name === null ? 'TONY' : 'TONY',
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('res.data => ', res.data);
+        setUserData(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //to switch to CONSULTANT role from APPLICANT role and update the user role in the database
+  const handleSwitchToConsultant = () => {
+    axios
+
+      .put(`/api/user/editUser`, {
+        id: session.user.id,
+        role: userData.role === 'APPLICANT' && 'CONSULTANT',
+        name: session.user.name === null ? 'TONY' : 'TONY',
+      })
+      .then((res) => {
+        console.log('res.data => ', res.data);
+        setUserData(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
-      <h1 className="text-white font-semibold text-2xl">HDM</h1>
+      <h1 className="text-white font-semibold text-2xl">
+        {`HDM ${session ? userData.role : ''}`}
+      </h1>
+
       <div className="flex justify-end">
         {!session && status !== 'authenticated' && (
           <Link
@@ -36,10 +96,31 @@ function Navbar() {
             </button>
           </Link>
         )}
+
         <button className="bg-slate-300 p-3 mr-3 rounded-lg">Register</button>
+
+        {session && userData.role === 'APPLICANT' && (
+          <Link href="/companydetails">
+            <button
+              className="bg-slate-300 p-3 mr-3 rounded-lg"
+              onClick={handleSwitchToConsultant}
+            >
+              Recruiter
+            </button>
+          </Link>
+        )}
+
+        {session && userData.role === 'CONSULTANT' && (
+          <Link href="/offers">
+            <button
+              className="bg-slate-300 p-3 mr-3 rounded-lg"
+              onClick={handleSwitchToApplicant}
+            >
+              Jobseeker
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
 }
-
-export default Navbar;

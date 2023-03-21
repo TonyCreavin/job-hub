@@ -5,6 +5,7 @@ import EditOffer from '@/components/editOffer';
 import { useRouter } from 'next/router';
 import JobDetailsPage from '@/components/JobDetailsPage';
 import { useState } from 'react';
+import { getSession } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
@@ -54,16 +55,26 @@ export default function Offer(props) {
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    };
+  }
 
   const offer = await prisma.offer.findUnique({
     where: {
       id,
     },
-    // include: { consultant: true },
   });
   return {
     props: {
       offer: JSON.parse(JSON.stringify(offer)),
+      session,
     },
   };
 }
