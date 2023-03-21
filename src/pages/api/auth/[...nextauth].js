@@ -32,6 +32,9 @@ export default NextAuth({
   jwt: {
     secret: process.env.JWT_SECRET,
   },
+  pages: {
+    newUser: '/',
+  },
 
   callbacks: {
     async jwt({ token, user }) {

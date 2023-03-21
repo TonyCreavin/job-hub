@@ -32,7 +32,7 @@ export default function Navbar() {
         {
           id: session.user.id,
           role: userData.role === 'CONSULTANT' && 'APPLICANT',
-          name: session.user.name === null ? 'TONY' : 'TONY',
+          // name: session.user.name === null ? 'TONY' : 'TONY',
         },
         {
           headers: {
@@ -47,14 +47,13 @@ export default function Navbar() {
       .catch((err) => console.log(err));
   };
 
-  //to switch to CONSULTANT role from APPLICANT role and update the user role in the database
   const handleSwitchToConsultant = () => {
     axios
 
       .put(`/api/user/editUser`, {
         id: session.user.id,
         role: userData.role === 'APPLICANT' && 'CONSULTANT',
-        name: session.user.name === null ? 'TONY' : 'TONY',
+        //name: session.user.name === null && userData.name,
       })
       .then((res) => {
         console.log('res.data => ', res.data);
@@ -65,9 +64,7 @@ export default function Navbar() {
 
   return (
     <div className="w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
-      <h1 className="text-white font-semibold text-2xl">
-        {`HDM ${session ? userData.role : ''}`}
-      </h1>
+      <h1 className="text-white font-semibold text-2xl">HDM</h1>
 
       <div className="flex justify-end">
         {!session && status !== 'authenticated' && (
@@ -97,8 +94,6 @@ export default function Navbar() {
           </Link>
         )}
 
-        <button className="bg-slate-300 p-3 mr-3 rounded-lg">Register</button>
-
         {session && userData.role === 'APPLICANT' && (
           <Link href="/companydetails">
             <button
@@ -117,6 +112,13 @@ export default function Navbar() {
               onClick={handleSwitchToApplicant}
             >
               Jobseeker
+            </button>
+          </Link>
+        )}
+        {session && userData.role === 'CONSULTANT' && (
+          <Link href="/create_offer">
+            <button className="bg-slate-300 p-3 mr-3 rounded-lg">
+              create offer
             </button>
           </Link>
         )}

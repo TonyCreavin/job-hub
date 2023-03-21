@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getSession } from 'next-auth/react';
 
 function Create_offer() {
   const [formState, setFormState] = useState({
@@ -126,3 +127,19 @@ function Create_offer() {
 }
 
 export default Create_offer;
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin?callbackUrl=/offers',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
