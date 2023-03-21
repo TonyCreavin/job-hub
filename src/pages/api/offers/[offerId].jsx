@@ -6,6 +6,7 @@ export default async function handle(req, res) {
     where: { id: offerId },
     include: {
       company: true,
+      user: true,
     },
   });
   res.json(offer);
