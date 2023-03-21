@@ -14,11 +14,8 @@ datasource db {
 model User {
   id            String   @id @unique @default(uuid())
   name          String?
-  firstName     String?
-  lastName      String?
   email         String?         @unique
   emailVerified DateTime?
-  password      String?
   phone         String?       
   linkedin      String?        
   github        String?
@@ -39,6 +36,8 @@ model User {
   sessions      Session[]
  
 }
+
+
 
 
 model Offer {
@@ -128,3 +127,5 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+

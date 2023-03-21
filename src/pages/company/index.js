@@ -2,12 +2,10 @@ import React from 'react';
 
 export default function SignUp() {
   const [formState, setFormState] = React.useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     city: '',
     country: '',
-    password: '',
   });
 
   const handleChange = (e) => {
@@ -18,7 +16,7 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
-    const response = await fetch('/api/consultant/createConsultant', {
+    const response = await fetch('/api/user', {
       method: 'POST',
       body: JSON.stringify(formState),
       headers: {
@@ -34,17 +32,10 @@ export default function SignUp() {
       SignUp
       <input
         type="text"
-        value={formState.firstName}
+        value={formState.name}
         onChange={handleChange}
-        placeholder="firstName"
-        name="firstName"
-      />
-      <input
-        type="text"
-        value={formState.lastName}
-        onChange={handleChange}
-        placeholder="Last Name"
-        name="lastName"
+        placeholder="name"
+        name="name"
       />
       <input
         type="text"
@@ -66,13 +57,6 @@ export default function SignUp() {
         onChange={handleChange}
         placeholder="country"
         name="country"
-      />
-      <input
-        type="text"
-        value={formState.password}
-        onChange={handleChange}
-        placeholder="password"
-        name="password"
       />
       <button onClick={handleSubmit}>Submit</button>
     </div>
