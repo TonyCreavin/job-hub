@@ -61,7 +61,7 @@ export default function Offer({ offer }) {
             Delete
           </button>
           <button
-            onClick={() => setShowEditOfferModal((pV) => !pV)}
+            onClick={() => setShowEditOfferModal((state) => !state)}
             className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
           >
             Edit
@@ -85,12 +85,11 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin',
+        destination: '/api/auth/signin?callbackUrl=/offers',
         permanent: false,
       },
     };
   }
-
   const offer = await prisma.offer.findUnique({
     where: {
       id,

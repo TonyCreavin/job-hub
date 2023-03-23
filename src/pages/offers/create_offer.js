@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 function Create_offer(props) {
+  const router = useRouter();
   const [formState, setFormState] = useState({
     title: '',
     location: '',
@@ -25,6 +27,7 @@ function Create_offer(props) {
     });
     const data = await response.json();
     console.log(data);
+    router.push('/offers');
   };
 
   const handleInputChange = (event) => {
@@ -106,7 +109,7 @@ function Create_offer(props) {
               <input
                 value={formState.website}
                 onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-[40%] rounded-md"
+                className="border-gray-200 border-2 shadow-lg w-[100%] rounded-md"
                 type="text"
                 name="website"
                 id="website"

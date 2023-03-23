@@ -62,7 +62,19 @@ export default function Navbar() {
   return (
     <div className="w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
       <h1 className="text-white font-semibold text-2xl">HDM</h1>
-
+      <Link href="/offers" className="text-white">
+        Home
+      </Link>
+      {session && userData?.role === 'CONSULTANT' && (
+        <Link href="/offers/consultantOffers" className="text-white">
+          My Offers
+        </Link>
+      )}
+      {session && userData?.role === 'CONSULTANT' && (
+        <Link href="/offers/create_offer" className="text-white">
+          create offer
+        </Link>
+      )}
       <div className="flex justify-end">
         {!session && status !== 'authenticated' && (
           <Link
@@ -92,7 +104,7 @@ export default function Navbar() {
         )}
 
         {session && userData?.role === 'APPLICANT' && (
-          <Link href="/offers/create_offer">
+          <Link href="/offers">
             <button
               className="bg-slate-300 p-3 mr-3 rounded-lg"
               onClick={handleSwitchToConsultant}
@@ -109,13 +121,6 @@ export default function Navbar() {
               onClick={handleSwitchToApplicant}
             >
               Jobseeker
-            </button>
-          </Link>
-        )}
-        {session && userData?.role === 'CONSULTANT' && (
-          <Link href="/create_offer">
-            <button className="bg-slate-300 p-3 mr-3 rounded-lg">
-              create offer
             </button>
           </Link>
         )}
