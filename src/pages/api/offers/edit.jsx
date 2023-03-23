@@ -7,9 +7,12 @@ export default async function handler(req, res) {
     location,
     contractType,
     description,
-    companyId,
+
     skills,
     salary,
+    company,
+    website,
+    companyDescription,
   } = req.body;
   const offer = await prisma.offer.update({
     where: { id },
@@ -18,9 +21,12 @@ export default async function handler(req, res) {
       location,
       contractType,
       description,
-      companyId,
+
       skills,
       salary,
+      company,
+      website,
+      companyDescription,
     },
   });
   res.json(offer);

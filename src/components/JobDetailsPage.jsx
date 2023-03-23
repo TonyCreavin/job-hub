@@ -6,7 +6,9 @@ function JobDetailsPage({
   location,
   contractType,
   description,
-  consultant,
+  company,
+  website,
+  companyDescription,
   id,
 }) {
   const router = useRouter();
@@ -21,7 +23,9 @@ function JobDetailsPage({
       <h3>Contract: {contractType}</h3>
       <h3>Description:</h3>
       <h3>{description}</h3>
-      {consultant}
+      <h3>company :{company}</h3>
+      <h3>website :{website}</h3>
+      <h3>company description :{companyDescription}</h3>
     </div>
   );
 }

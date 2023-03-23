@@ -23,8 +23,7 @@ export default function Navbar() {
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userRole =>', userData.role);
-
+  console.log('userData => ', userData);
   const handleSwitchToApplicant = () => {
     axios
       .put(
@@ -32,7 +31,6 @@ export default function Navbar() {
         {
           id: session.user.id,
           role: userData.role === 'CONSULTANT' && 'APPLICANT',
-          // name: session.user.name === null ? 'TONY' : 'TONY',
         },
         {
           headers: {
@@ -53,7 +51,6 @@ export default function Navbar() {
       .put(`/api/user/editUser`, {
         id: session.user.id,
         role: userData.role === 'APPLICANT' && 'CONSULTANT',
-        //name: session.user.name === null && userData.name,
       })
       .then((res) => {
         console.log('res.data => ', res.data);
@@ -94,8 +91,8 @@ export default function Navbar() {
           </Link>
         )}
 
-        {session && userData.role === 'APPLICANT' && (
-          <Link href="/companydetails">
+        {session && userData?.role === 'APPLICANT' && (
+          <Link href="/offers/create_offer">
             <button
               className="bg-slate-300 p-3 mr-3 rounded-lg"
               onClick={handleSwitchToConsultant}
@@ -105,7 +102,7 @@ export default function Navbar() {
           </Link>
         )}
 
-        {session && userData.role === 'CONSULTANT' && (
+        {session && userData?.role === 'CONSULTANT' && (
           <Link href="/offers">
             <button
               className="bg-slate-300 p-3 mr-3 rounded-lg"
@@ -115,7 +112,7 @@ export default function Navbar() {
             </button>
           </Link>
         )}
-        {session && userData.role === 'CONSULTANT' && (
+        {session && userData?.role === 'CONSULTANT' && (
           <Link href="/create_offer">
             <button className="bg-slate-300 p-3 mr-3 rounded-lg">
               create offer

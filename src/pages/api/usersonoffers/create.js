@@ -2,6 +2,7 @@ import prisma from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
   const { userId, offerId } = req.body;
+
   try {
     const result = await prisma.usersonoffers.create({
       data: {
