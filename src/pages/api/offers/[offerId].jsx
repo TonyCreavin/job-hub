@@ -5,7 +5,6 @@ export default async function handle(req, res) {
   const offer = await prisma.offer.findUnique({
     where: { id: offerId },
     include: {
-      company: true,
       user: true,
     },
   });

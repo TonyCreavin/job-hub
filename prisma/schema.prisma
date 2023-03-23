@@ -25,11 +25,13 @@ model User {
   city          String?
   postcode      String?
   country       String?
+  
+  
   role          Role           @default(APPLICANT)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  offers        UsersOnOffers[]
-  hadApplied    Offer[]  @relation("user_applied_to_offer")
+  offers        Offer[]
+  
   cv          String?
   coverletter String?
    accounts      Account[]
@@ -49,52 +51,51 @@ model Offer {
   description   String       
   skills        String?
   salary        String?
-  createdAt     DateTime       @default(now())
+  company        String
+  website        String
+  companyDescription String   
+ createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  users         UsersOnOffers[]
-  hadApplied    User[]   @relation("user_applied_to_offer")
-  company    Company? @relation(fields: [companyId], references: [id])
-  companyId  String?
+
+  user        User    @relation(fields: [userId], references: [id])
+  userId       String
+  //users         UsersOnOffers[]
+
+
+
+  // company    Company? @relation(fields: [companyId], references: [id])
+  // companyId  String?
 
   
  
 }
 
-model UsersOnOffers {
-  user      User  @relation(fields: [userId], references: [id])
-  userId     String 
-  offer   Offer  @relation(fields: [offerId], references: [id])
-  offerId  String
-  assignedAt DateTime @default(now())
-  assignedBy String
-
-  @@id([userId, offerId])
-
-
-}
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
+// model UsersOnOffers {
+//   id            String   @id @unique @default(uuid())
+//   // user      User  @relation(fields: [userId], references: [id])
+//   // userId     String 
+//   // offer   Offer  @relation(fields: [offerId], references: [id])
+//   // offerId  String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   }
 
 
 
 
-model Company{
-  id            String   @id @unique @default(uuid())
-  website       String?
-  name          String
-  address       String
-  city          String
-  postcode      String?
-  country       String
-  imageUrl      String?
-  description   String?
-  offers       Offer[]
-}
+
+// model Company{
+//   id            String   @id @unique @default(uuid())
+//   website       String?  @unique
+//   name          String
+//   address       String
+//   city          String
+//   postcode      String?
+//   country       String
+//   imageUrl      String?
+//   description   String?
+//   offers       Offer[]
+// }
 
 enum Role {
   ADMIN
@@ -128,4 +129,10 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
+  @@unique([identifier, token])
+}

@@ -1,3 +1,5 @@
+import prisma from '../../../../lib/prisma';
+
 export default async function handler(req, res) {
   const usersonoffersId = req.query.usersonoffersId;
   const usersonoffers = await prisma.useronoffers.findUnique({
