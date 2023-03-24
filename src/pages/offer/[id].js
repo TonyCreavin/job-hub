@@ -26,6 +26,14 @@ export default function Offer({ offer }) {
     router.push('/offers');
   }
 
+  async function handleApplication() {
+    await axios.post('/api/application/create', {
+      userId: session.user.id,
+      offerId: offer.id,
+    });
+    router.push('/offers');
+  }
+
   useEffect(() => {
     if (session?.user.id) {
       axios
@@ -67,6 +75,14 @@ export default function Offer({ offer }) {
             Edit
           </button>
         </div>
+      )}
+      {session && userData.role === 'APPLICANT' && (
+        <button
+          onClick={handleApplication}
+          className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
+        >
+          Apply
+        </button>
       )}
       {showEditOfferModal ? (
         <EditOffer

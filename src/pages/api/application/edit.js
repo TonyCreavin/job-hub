@@ -2,12 +2,12 @@ import prisma from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
   const { userId, offerId } = req.body;
-  const { usersonoffersId } = req.query;
+  const { applicationId } = req.query;
 
   try {
-    const result = await prisma.usersonoffers.update({
+    const result = await prisma.application.update({
       where: {
-        id: usersonoffersId,
+        id: applicationId,
       },
       data: {
         user: {
@@ -26,6 +26,6 @@ export default async function handler(req, res) {
     res.status(200).json(result);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Unable to update usersonoffers record.' });
+    res.status(500).json({ error: 'Unable to update application record.' });
   }
 }
