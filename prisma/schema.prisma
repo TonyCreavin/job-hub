@@ -25,7 +25,7 @@ model User {
   city          String?
   postcode      String?
   country       String?
-  
+  applications Application[] @relation("applicant_applications")
   
   role          Role           @default(APPLICANT)
   createdAt     DateTime       @default(now())
@@ -66,7 +66,7 @@ model Offer {
   // company    Company? @relation(fields: [companyId], references: [id])
   // companyId  String?
 
-  
+  applications Application[] @relation("offer_applications")
  
 }
 
@@ -80,22 +80,13 @@ model Offer {
 //   updatedAt DateTime @updatedAt
 //   }
 
-
-
-
-
-// model Company{
-//   id            String   @id @unique @default(uuid())
-//   website       String?  @unique
-//   name          String
-//   address       String
-//   city          String
-//   postcode      String?
-//   country       String
-//   imageUrl      String?
-//   description   String?
-//   offers       Offer[]
-// }
+model Application {
+    id            String   @id @unique @default(uuid())
+  user         User          @relation("applicant_applications", fields: [userId], references: [id])
+  userId       String
+  offer        Offer         @relation("offer_applications", fields: [offerId], references: [id])
+  offerId      String
+}
 
 enum Role {
   ADMIN
