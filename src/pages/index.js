@@ -9,5 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-  return <div>Registration page</div>;
+  return (
+    <div>
+      <h1>HDM JOB FINDER</h1>
+    </div>
+  );
 }
