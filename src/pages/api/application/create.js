@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const { userId, offerId } = req.body;
 
   try {
-    const result = await prisma.usersonoffers.create({
+    const result = await prisma.application.create({
       data: {
         user: { connect: { id: userId } },
         offer: { connect: { id: offerId } },
