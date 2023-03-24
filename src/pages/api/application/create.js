@@ -1,13 +1,17 @@
 import prisma from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
-  const { userId, offerId } = req.body;
+  const { userId, offerId, cv, coverLetter, favorite, applied } = req.body;
 
   try {
     const result = await prisma.application.create({
       data: {
         user: { connect: { id: userId } },
         offer: { connect: { id: offerId } },
+        cv,
+        coverLetter,
+        favorite,
+        applied,
       },
     });
     res.status(200).json(result);
