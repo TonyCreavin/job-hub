@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Home() {
   const { data: session, status } = useSession();
   return (
-    <div>
+    <div className="w-full h-screen">
       <h1>HDM JOB FINDER</h1>
     </div>
   );
