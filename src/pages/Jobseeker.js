@@ -16,7 +16,7 @@ const Registration = () => {
         <div
           style={{ width: '600px', marginLeft: 'auto', marginRight: 'auto' }}
         >
-          <h1>Chercheur</h1>
+          <h1>Registration</h1>
           <br /> <b></b>
           <form
             className="row d-flex justify-content-around"
@@ -27,7 +27,13 @@ const Registration = () => {
               <input
                 type="text"
                 className="form form-control"
-                placeholder="name"
+                placeholder="firstname"
+              />{' '}
+              <br />
+              <input
+                type="text"
+                className="form form-control"
+                placeholder="lastname"
               />{' '}
               <br />
               <input
@@ -39,19 +45,13 @@ const Registration = () => {
               <input
                 type="text"
                 className="form form-control"
-                placeholder="linkedin"
-              />{' '}
-              <br />
-              <input
-                type="text"
-                className="form form-control"
                 placeholder="github"
               />{' '}
               <br />
               <input
                 type="text"
                 className="form form-control"
-                placeholder="image"
+                placeholder="linkedin"
               />
             </div>
             <div className="col-6">
