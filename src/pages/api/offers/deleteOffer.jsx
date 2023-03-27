@@ -9,6 +9,12 @@ export default async function handler(req, res) {
       where: {
         id,
       },
+      user: {
+        connect: { id: user.id },
+      },
+      include: {
+        user: true,
+      },
     });
     res.status(200).json(deleteOffer);
   } catch (error) {
