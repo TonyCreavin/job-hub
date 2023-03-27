@@ -1,4 +1,13 @@
-const Jobseeker = () => {
+import { Inter } from 'next/font/google';
+import { useSession } from 'next-auth/react';
+
+// import JobDetails from '@/components/JobDetails';
+// import JobPost from '@/components/JobPosts';
+// import prisma from '../../lib/prisma';
+
+const inter = Inter({ subsets: ['latin'] });
+
+const Registration = () => {
   return (
     <div className="container">
       <br />
@@ -18,55 +27,61 @@ const Jobseeker = () => {
               <input
                 type="text"
                 className="form form-control"
-                placeholder="nom"
+                placeholder="name"
+              />{' '}
+              <br />
+              <input
+                type="tel"
+                className="form form-control"
+                placeholder="phone"
               />{' '}
               <br />
               <input
                 type="text"
                 className="form form-control"
-                placeholder="prenom"
-              />{' '}
-              <br />
-              <input
-                type="email"
-                className="form form-control"
-                placeholder="email"
-              />{' '}
-              <br />
-              <input
-                type="number"
-                className="form form-control"
-                placeholder="telephone"
+                placeholder="linkedin"
               />{' '}
               <br />
               <input
                 type="text"
                 className="form form-control"
-                placeholder="nom de l'entréprise"
+                placeholder="github"
+              />{' '}
+              <br />
+              <input
+                type="text"
+                className="form form-control"
+                placeholder="image"
               />
             </div>
             <div className="col-6">
               <input
                 type="text"
                 className="form form-control"
-                placeholder="site web"
+                placeholder="skills"
               />{' '}
               <br />
               <input
-                type="email"
+                type="text"
                 className="form form-control"
-                placeholder="ville"
+                placeholder="address"
               />{' '}
               <br />
               <input
-                type="number"
+                type="text"
                 className="form form-control"
-                placeholder="code postal"
+                placeholder="city"
               />{' '}
               <br />
               <input
-                type="number"
-                placeholder="paie"
+                type="text"
+                placeholder="postcode"
+                className="form form-control"
+              />{' '}
+              <br />
+              <input
+                type="text"
+                placeholder="country"
                 className="form form-control"
               />{' '}
               <br />
@@ -85,4 +100,4 @@ const Jobseeker = () => {
   );
 };
 
-export default Jobseeker;
+export default Registration;

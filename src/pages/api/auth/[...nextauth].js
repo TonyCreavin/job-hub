@@ -23,8 +23,6 @@ export default NextAuth({
       from: process.env.EMAIL_FROM,
     }),
   ],
-  database: process.env.DATABASE_URL,
-  secret: process.env.SECRET,
 
   session: {
     strategy: 'jwt',
@@ -33,7 +31,7 @@ export default NextAuth({
     secret: process.env.JWT_SECRET,
   },
   pages: {
-    newUser: '/',
+    newUser: '/Jobseeker',
   },
 
   callbacks: {
@@ -50,4 +48,6 @@ export default NextAuth({
       return session;
     },
   },
+  database: process.env.DATABASE_URL,
+  secret: process.env.SECRET,
 });
