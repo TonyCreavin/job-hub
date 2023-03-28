@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  
 }
 
 datasource db {
@@ -64,9 +65,9 @@ applications Application[] @relation("offer_applications")
 
 model Application {
     id            String   @id @unique @default(uuid())
-  user         User          @relation("applicant_applications", fields: [userId], references: [id])
+  user         User          @relation("applicant_applications", fields: [userId], references: [id], onDelete: Cascade)
   userId       String
-  offer        Offer         @relation("offer_applications", fields: [offerId], references: [id])
+  offer        Offer         @relation("offer_applications", fields: [offerId], references: [id], onDelete: Cascade)
   offerId      String
   cv            String
   coverLetter   String?
