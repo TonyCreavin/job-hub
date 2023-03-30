@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
-import EditOffer from '@/components/editOffer';
+import EditOffer from '../../components/EditOffer';
 import { useRouter } from 'next/router';
-import JobDetailsPage from '@/components/JobDetailsPage';
+import JobDetailsPage from '../../components/JobDetailsPage';
+import UploadCv from '../../components/UploadCv';
 
 import { getSession, useSession } from 'next-auth/react';
 
@@ -14,6 +15,7 @@ export default function Offer({ offer }) {
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
   const [showEditOfferModal, setShowEditOfferModal] = useState(false);
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
 
   const router = useRouter();
   //const { offer } = props;
@@ -82,7 +84,8 @@ export default function Offer({ offer }) {
       )}
       {session && userData.role === 'APPLICANT' && (
         <button
-          onClick={handleApplication}
+          onClick={() => setShowApplicationModal((state) => !state)}
+          // onClick={handleApplication}
           className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
         >
           Apply
@@ -94,6 +97,9 @@ export default function Offer({ offer }) {
           closeModal={() => setShowEditOfferModal(false)}
         />
       ) : null}
+      {showApplicationModal && (
+        <UploadCv handleApplication={handleApplication} />
+      )}
     </div>
   );
 }
