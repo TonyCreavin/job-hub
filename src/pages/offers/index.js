@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 
-import JobPost from '@/components/JobPosts';
+import JobPost from '../../components/JobPosts';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -10,7 +10,9 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Offers({ offers }) {
   return (
     <>
-      <div className="flex w-full h-screen justify-around my-5 border-b border-solid border-gray-500 pb-5 w">
+
+      <div className="flex w-full  justify-around my-5 border-b border-solid border-gray-500 pb-5 ">
+
         <input
           className="w-[40vw] h-8 shadow-lg rounded-md p-2 mr-2"
           placeholder="Type of job.."
