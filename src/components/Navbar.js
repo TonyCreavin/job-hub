@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import React, { useEffect } from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import Link from "next/link";
+import React, { useEffect } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const route = useRouter();
   const { data: session, status } = useSession();
-  console.log('session => ', session);
-  console.log('status => ', status);
-  console.log('session.user.email => ', session?.user.email);
+  console.log("session => ", session);
+  console.log("status => ", status);
+  console.log("session.user.email => ", session?.user.email);
   const [userData, setUserData] = React.useState({});
 
   useEffect(() => {
@@ -17,20 +17,20 @@ export default function Navbar() {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log('res.data => ', res.data);
+          console.log("res.data => ", res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userData => ', userData);
+  console.log("userData => ", userData);
   const handleSwitchToApplicant = () => {
     axios
       .put(
         `/api/user/editUser`,
         {
           id: session.user.id,
-          role: userData.role === 'CONSULTANT' && 'APPLICANT',
+          role: userData.role === "CONSULTANT" && "APPLICANT",
         },
         {
           headers: {
@@ -39,7 +39,7 @@ export default function Navbar() {
         }
       )
       .then((res) => {
-        console.log('res.data => ', res.data);
+        console.log("res.data => ", res.data);
         setUserData(res.data);
       })
       .catch((err) => console.log(err));
@@ -50,10 +50,10 @@ export default function Navbar() {
 
       .put(`/api/user/editUser`, {
         id: session.user.id,
-        role: userData.role === 'APPLICANT' && 'CONSULTANT',
+        role: userData.role === "APPLICANT" && "CONSULTANT",
       })
       .then((res) => {
-        console.log('res.data => ', res.data);
+        console.log("res.data => ", res.data);
         setUserData(res.data);
       })
       .catch((err) => console.log(err));
@@ -65,18 +65,18 @@ export default function Navbar() {
       <Link href="/offers" className="text-white">
         Home
       </Link>
-      {session && userData?.role === 'CONSULTANT' && (
+      {session && userData?.role === "CONSULTANT" && (
         <Link href="/offers/consultantOffers" className="text-white">
           My Offers
         </Link>
       )}
-      {session && userData?.role === 'CONSULTANT' && (
+      {session && userData?.role === "CONSULTANT" && (
         <Link href="/offers/create_offer" className="text-white">
           create offer
         </Link>
       )}
       <div className="flex justify-end">
-        {!session && status !== 'authenticated' && (
+        {!session && status !== "authenticated" && (
           <Link
             href="/api/auth/signin"
             onClick={(e) => {
@@ -103,7 +103,7 @@ export default function Navbar() {
           </Link>
         )}
 
-        {session && userData?.role === 'APPLICANT' && (
+        {session && userData?.role === "APPLICANT" && (
           <Link href="/offers">
             <button
               className="bg-slate-300 p-3 mr-3 rounded-lg"
@@ -114,7 +114,7 @@ export default function Navbar() {
           </Link>
         )}
 
-        {session && userData?.role === 'CONSULTANT' && (
+        {session && userData?.role === "CONSULTANT" && (
           <Link href="/offers">
             <button
               className="bg-slate-300 p-3 mr-3 rounded-lg"

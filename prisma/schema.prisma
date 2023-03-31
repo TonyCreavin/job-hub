@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  
 }
 
 datasource db {
@@ -66,7 +67,9 @@ model Offer {
 
 model Application {
     id            String   @id @unique @default(uuid())
+
    cv            String
+
   coverLetter   String?
   favorite      Boolean  @default(false)
   applied       Boolean  @default(false)
