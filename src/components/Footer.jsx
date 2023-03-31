@@ -3,8 +3,9 @@ import React from 'react';
 export default function Footer() {
   return (
     <div
-      className="footer bg-black text-white"
       style={{
+        backgroundColor: 'black',
+        color: 'white',
         height: '100px',
         padding: '30px',
         textAlign: 'center',
@@ -13,7 +14,7 @@ export default function Footer() {
       }}
     >
       {' '}
-      <p>copyright 20023</p>
+      <p>copyright 2023</p>
     </div>
   );
 }
