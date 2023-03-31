@@ -2,6 +2,7 @@ import type { NextApiHandler, NextApiRequest } from 'next';
 import formidable from 'formidable';
 import path from 'path';
 import fs from 'fs/promises';
+import prisma from '../../../../lib/prisma';
 
 export const config = {
   api: {
@@ -14,7 +15,7 @@ const readFile = (
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   const options: formidable.Options = {};
   if (saveLocally) {
-    options.uploadDir = '/opt/documents/CVs/';
+    options.uploadDir = process.env.CV_DIR;
     options.filename = (name, ext, path, form) => {
       return Date.now().toString() + '_' + path.originalFilename;
     };
@@ -31,11 +32,12 @@ const readFile = (
 
 const handler: NextApiHandler = async (req, res) => {
   try {
-    await fs.readdir('/opt/documents/CVs/');
+    await fs.readdir(process.env.CV_DIR);
   } catch (error) {
     console.log('error uploading cv to server');
   }
   await readFile(req, true);
   res.json({ done: 'ok' });
 };
+
 export default handler;

@@ -32,7 +32,7 @@ export default function Home({ cvs, dirs }) {
       if (!selectedFile2) return;
       const formData = new FormData();
       formData.append('myCv', selectedFile2);
-      const { data } = await axios.post('/api/cvs', formData);
+      const { data } = await axios.post('/api/document', formData);
       console.log(data);
     } catch (error) {
       console.log(error.response?.data);
@@ -41,7 +41,7 @@ export default function Home({ cvs, dirs }) {
   };
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full">
       <div className="max-w-4xl mx-auto p-20 space-y-6 flex flex-col">
         <label>
           <input
@@ -113,7 +113,7 @@ export default function Home({ cvs, dirs }) {
         </button>
         <div className="mt-20 flex flex-col space-y-3">
           {cvs.map((item) => (
-            <Link key={item} href={'opt/documents/CVs' + item}>
+            <Link key={item} href={process.env.CV_DIR + item}>
               {item}
             </Link>
           ))}
@@ -129,10 +129,12 @@ export const getServerSideProps = async () => {
     const dirs = await fs.readdir(path.join(process.cwd(), 'public/images'));
 
     props.dirs = dirs;
-    const cvs = await fs.readdir(path('/opt/documents/CVs/'));
+    const cvs = await fs.readdir(process.env.CV_DIR);
     props.cvs = cvs;
+
     return { props };
   } catch (error) {
+    console.log(error);
     return { props };
   }
 };
