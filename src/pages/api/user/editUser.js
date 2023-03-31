@@ -11,15 +11,13 @@ export default async function handler(req, res) {
     emailVerified,
     address,
     email,
-    password,
+
     phone,
     linkedin,
     image,
     city,
     postcode,
     country,
-    cv,
-    coverletter,
   } = req.body;
   const user = await prisma.user.update({
     where: { id },
@@ -33,15 +31,13 @@ export default async function handler(req, res) {
       skills,
       address,
       email,
-      password,
+
       phone,
       linkedin,
       image,
       city,
       postcode,
       country,
-      cv,
-      coverletter,
     },
   });
   res.json(user);
