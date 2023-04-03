@@ -111,7 +111,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=/offers',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };
