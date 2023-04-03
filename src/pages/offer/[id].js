@@ -15,29 +15,27 @@ export default function Offer({ offer }) {
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
   const [showEditOfferModal, setShowEditOfferModal] = useState(false);
-  const [showApplicationModal, setShowApplicationModal] = useState(false);
+  //const [showApplicationModal, setShowApplicationModal] = useState(false);
 
   const router = useRouter();
-  //const { offer } = props;
-  //console.log session.user.id
+
   console.log('recreuiter user id', userData.role);
 
-  console.log('3333333', session);
   async function handleDelete() {
     await axios.post('/api/offers/deleteOffer', { id: offer.id });
-    router.push('/offers');
+    router.push('/');
   }
 
   async function handleApplication() {
     await axios.post('/api/application/create', {
       userId: session.user.id,
       offerId: offer.id,
-      cv: 'this is my cv',
+      cv: 'myCv',
       coverLetter: 'this is my cover letter',
       favorite: false,
       applied: true,
     });
-    router.push('/offers');
+    router.push('/');
   }
 
   useEffect(() => {
@@ -84,8 +82,8 @@ export default function Offer({ offer }) {
       )}
       {session && userData.role === 'APPLICANT' && (
         <button
-          onClick={() => setShowApplicationModal((state) => !state)}
-          // onClick={handleApplication}
+          //onClick={() => setShowApplicationModal((state) => !state)}
+          onClick={handleApplication}
           className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
         >
           Apply
@@ -97,9 +95,9 @@ export default function Offer({ offer }) {
           closeModal={() => setShowEditOfferModal(false)}
         />
       ) : null}
-      {showApplicationModal && (
+      {/* {showApplicationModal && (
         <UploadCv handleApplication={handleApplication} />
-      )}
+      )} */}
     </div>
   );
 }

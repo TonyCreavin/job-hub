@@ -24,7 +24,7 @@ export default function Offers({ offers }) {
         </button>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap w-full h-screen">
         {offers.map((offer) => (
           <JobPost key={offer.id} offer={offer} />
         ))}

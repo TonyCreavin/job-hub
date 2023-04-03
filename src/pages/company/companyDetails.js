@@ -140,7 +140,7 @@ export default function CompanyDetails(props) {
 }
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log('this is my session', session);
+  console.log('this is my session data', session);
 
   if (!session) {
     return {
