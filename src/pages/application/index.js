@@ -1,4 +1,4 @@
-import ApplicationCard from '@/components/ApplicationCard';
+import ApplicationCard from '../../components/ApplicationCard';
 import React from 'react';
 import { PrismaClient } from '@prisma/client';
 

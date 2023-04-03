@@ -29,7 +29,6 @@ export default function Home({ cvs }) {
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userData => ', userData);
 
   const handleUpload = async () => {
     setUploading(true);
@@ -45,7 +44,8 @@ export default function Home({ cvs }) {
     setUploading(false);
     router.push('/');
   };
-  console.log('thiqqqs is my session', userData);
+  console.log('this is my session', userData);
+
   return (
     <>
       <ProfileForm userData={userData} key={userData.id} session={session} />

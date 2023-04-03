@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 import { useSession } from 'next-auth/react';
-import JobPost from '@/components/JobPosts';
+import JobPost from '../../components/JobPosts';
 import { PrismaClient } from '@prisma/client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';

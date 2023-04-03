@@ -71,7 +71,7 @@ export default function ProfileForm({
                     type="text"
                     className="form form-control"
                     placeholder="firstname"
-                    value={formState.firstName}
+                    value={formState.firstName || null}
                     onChange={handleInputChange}
                     name="firstName"
                     id="firstName"
