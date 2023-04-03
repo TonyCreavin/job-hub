@@ -27,7 +27,7 @@ function Create_offer(props) {
     });
     const data = await response.json();
     console.log(data);
-    router.push('/offers');
+    router.push('/');
   };
 
   const handleInputChange = (event) => {
@@ -164,7 +164,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=/offers',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };
