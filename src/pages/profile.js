@@ -5,11 +5,13 @@ import axios from 'axios';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import ProfileForm from '../components/ProfileForm';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({ cvs }) {
+  const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [selectedImage, setSelectedImage] = useState('');
@@ -40,6 +42,7 @@ export default function Home({ cvs }) {
       console.log(error.response?.data);
     }
     setUploading(false);
+    router.push('/');
   };
   console.log('this is my session', userData);
 

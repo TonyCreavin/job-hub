@@ -33,7 +33,7 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   offers        Offer[]
-   accounts      Account[]
+  accounts      Account[]
   sessions      Session[]
   documents     Document[]
  
@@ -57,7 +57,9 @@ model Offer {
  createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 applications Application[] @relation("offer_applications")
+
   user        User    @relation(fields: [userId], references: [id] )
+
   userId       String
 
   documents     Document[]
@@ -71,7 +73,7 @@ model Application {
   userId       String
   offer        Offer         @relation("offer_applications", fields: [offerId], references: [id], onDelete: Cascade)
   offerId      String
-  cv            String
+
   coverLetter   String?
   favorite      Boolean  @default(false)
   applied       Boolean  @default(false)
@@ -102,6 +104,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -120,9 +123,7 @@ model VerificationToken {
 
 model Document {
   id        String  @id @default(cuid())
-  name      String
-  type      String
-  category   String
+  cv     String
   path      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
