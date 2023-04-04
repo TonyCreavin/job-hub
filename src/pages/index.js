@@ -1,3 +1,7 @@
+
+import React from "react";
+
+
 import { Inter } from 'next/font/google';
 
 import JobPost from '../components/JobPosts';
