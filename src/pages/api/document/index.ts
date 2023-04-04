@@ -31,6 +31,9 @@ const readFile = (
 };
 
 const handler: NextApiHandler = async (req, res) => {
+  // if (req.method === 'GET') {
+  //   const documents = await prisma.document.findMany();
+  // }
   try {
     await fs.readdir(process.env.CV_DIR);
   } catch (error) {
@@ -39,5 +42,4 @@ const handler: NextApiHandler = async (req, res) => {
   await readFile(req, true);
   res.json({ done: 'ok' });
 };
-
 export default handler;

@@ -8,8 +8,7 @@ export default async function handler(req, res) {
     const result = await prisma.application.create({
       data: {
         user: { connect: { id: userId } },
-        offer: { connect: { id: offerId } },
-        application: { connect: { id: applicationId } },
+
         name,
         type,
         category,
