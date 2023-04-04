@@ -27,7 +27,7 @@ function Create_offer(props) {
     });
     const data = await response.json();
     console.log(data);
-    router.push('/offers');
+    router.push('/');
   };
 
   const handleInputChange = (event) => {
@@ -37,7 +37,7 @@ function Create_offer(props) {
       [name]: value,
     });
   };
-  console.log('this is my session', props.data.user.id);
+  console.log('this is my session =>', props.data.user.id);
   return (
     <>
       <h1 className="text-center my-5 text-2xl">Post a job</h1>
@@ -164,7 +164,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=/offers',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };

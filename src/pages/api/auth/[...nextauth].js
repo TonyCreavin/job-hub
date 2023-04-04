@@ -31,7 +31,7 @@ export default NextAuth({
     secret: process.env.JWT_SECRET,
   },
   pages: {
-    newUser: '/Jobseeker',
+    newUser: '/profile',
   },
 
   callbacks: {

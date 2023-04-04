@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
-import EditOffer from '@/components/editOffer';
+import EditOffer from '../../components/EditOffer';
 import { useRouter } from 'next/router';
-import JobDetailsPage from '@/components/JobDetailsPage';
+import JobDetailsPage from '../../components/JobDetailsPage';
+import UploadCv from '../../components/UploadCv';
 
 import { getSession, useSession } from 'next-auth/react';
 
@@ -14,28 +15,27 @@ export default function Offer({ offer }) {
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
   const [showEditOfferModal, setShowEditOfferModal] = useState(false);
+  //const [showApplicationModal, setShowApplicationModal] = useState(false);
 
   const router = useRouter();
-  //const { offer } = props;
-  //console.log session.user.id
+
   console.log('recreuiter user id', userData.role);
 
-  console.log('3333333', session);
   async function handleDelete() {
     await axios.post('/api/offers/deleteOffer', { id: offer.id });
-    router.push('/offers');
+    router.push('/');
   }
 
   async function handleApplication() {
     await axios.post('/api/application/create', {
       userId: session.user.id,
       offerId: offer.id,
-      cv: 'this is my cv',
+      cv: 'myCv',
       coverLetter: 'this is my cover letter',
       favorite: false,
       applied: true,
     });
-    router.push('/offers');
+    router.push('/');
   }
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function Offer({ offer }) {
   console.log('userData => ', userData);
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <JobDetailsPage
         title={offer?.title}
         key={offer?.id}
@@ -67,14 +67,14 @@ export default function Offer({ offer }) {
       {userData.role === 'CONSULTANT' && session.user.id === offer?.userId && (
         <div>
           <button
-            className="bg-red-500 ml-4 text-white rounded-md py-1 px-2"
+            className="bg-red-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
             onClick={handleDelete}
           >
             Delete
           </button>
           <button
             onClick={() => setShowEditOfferModal((state) => !state)}
-            className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
+            className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
           >
             Edit
           </button>
@@ -82,8 +82,9 @@ export default function Offer({ offer }) {
       )}
       {session && userData.role === 'APPLICANT' && (
         <button
+          //onClick={() => setShowApplicationModal((state) => !state)}
           onClick={handleApplication}
-          className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
+          className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
         >
           Apply
         </button>
@@ -94,6 +95,9 @@ export default function Offer({ offer }) {
           closeModal={() => setShowEditOfferModal(false)}
         />
       ) : null}
+      {/* {showApplicationModal && (
+        <UploadCv handleApplication={handleApplication} />
+      )} */}
     </div>
   );
 }
@@ -105,7 +109,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=/offers',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };
