@@ -9,7 +9,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 const Registration = () => {
   return (
-
     <div className="container">
       <br />
       <br /> <br />
@@ -101,8 +100,7 @@ const Registration = () => {
             Envoyer
           </button>
         </form>
-
-    <div className="w-full h-screen mt-3">
+        <div className="w-full h-screen mt-3"></div>
       </div>
     </div>
   );
