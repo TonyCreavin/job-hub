@@ -1,16 +1,15 @@
+import { useEffect } from 'react';
 
-import { useEffect } from "react";
+import Script from 'next/script';
+import Navbar from '../components/Navbar';
+import '../styles/globals.css';
+import { SessionProvider } from 'next-auth/react';
+import 'bootstrap/dist/css/bootstrap.css';
 
-import Script from "next/script";
-import Navbar from "@/components/Navbar";
-import "@/styles/globals.css";
-import { SessionProvider } from "next-auth/react";
-import "bootstrap/dist/css/bootstrap.css";
+import SideBar from '../components/SideBar';
 
-import SideBar from "@/components/SideBar";
-
-import Footer from "@/components/Footer";
-import { useRouter } from "next/router";
+import Footer from '../components/Footer';
+import { useRouter } from 'next/router';
 
 export default function App({
   Component,
@@ -19,7 +18,7 @@ export default function App({
   const router = useRouter();
   useEffect(() => {
     typeof document !== undefined
-      ? require("bootstrap/dist/js/bootstrap")
+      ? require('bootstrap/dist/js/bootstrap')
       : null;
   }, [router.events]);
   return (
