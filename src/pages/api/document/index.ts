@@ -26,14 +26,36 @@ const readFile = (
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
       resolve({ fields, files });
+      console.log('fields => ', fields);
+      console.log('files => ', `${process.env.CV_DIR}`);
+      const file = files.myCv;
     });
   });
 };
 
 const handler: NextApiHandler = async (req, res) => {
-  // if (req.method === 'GET') {
-  //   const documents = await prisma.document.findMany();
+  // const { userId, name, type, path } = req.body;
+  // console.log('req.body => ', req.body);
+
+  // try {
+  //   const result = await prisma.application.create({
+  //     data: {
+  //       user: { connect: { id: userId } },
+  //       name,
+  //       type,
+
+  //       path,
+  //     },
+  //   });
+  //   prisma.$disconnect();
+  //   res.status(200).json(result);
+  // } catch (err) {
+  //   console.log(err);
+  //   res
+  //     .status(403)
+  //     .json({ err: 'Error occurred while adding a new user to offer.' });
   // }
+
   try {
     await fs.readdir(process.env.CV_DIR);
   } catch (error) {
@@ -43,3 +65,6 @@ const handler: NextApiHandler = async (req, res) => {
   res.json({ done: 'ok' });
 };
 export default handler;
+function getPath(arg0: string): any {
+  throw new Error('Function not implemented.');
+}
