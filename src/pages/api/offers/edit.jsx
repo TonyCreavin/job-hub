@@ -29,6 +29,6 @@ export default async function handler(req, res) {
       companyDescription,
     },
   });
-  res.json(offer);
   await prisma.$disconnect();
+  res.json(offer);
 }

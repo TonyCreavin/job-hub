@@ -8,10 +8,10 @@ export default async function handler(req, res) {
         id,
       },
     });
+    await prisma.$disconnect();
     res.status(200).json(deleteApplication);
-    await prisma.$disconnect();
   } catch (error) {
-    res.status(403).json({ err: 'Error while deleting application' });
     await prisma.$disconnect();
+    res.status(403).json({ err: 'Error while deleting application' });
   }
 }
