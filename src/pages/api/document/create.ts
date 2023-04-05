@@ -15,7 +15,7 @@ const readFile = (
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   const options: formidable.Options = {};
   if (saveLocally) {
-    options.uploadDir = process.env.CV_DIR;
+    options.uploadDir = path.join(process.env.CV_DIR, '/cvs');
     options.filename = (name, ext, path, form) => {
       return Date.now().toString() + '_' + path.originalFilename;
     };
@@ -34,30 +34,8 @@ const readFile = (
 };
 
 const handler: NextApiHandler = async (req, res) => {
-  // const { userId, name, type, path } = req.body;
-  // console.log('req.body => ', req.body);
-
-  // try {
-  //   const result = await prisma.application.create({
-  //     data: {
-  //       user: { connect: { id: userId } },
-  //       name,
-  //       type,
-
-  //       path,
-  //     },
-  //   });
-  //   prisma.$disconnect();
-  //   res.status(200).json(result);
-  // } catch (err) {
-  //   console.log(err);
-  //   res
-  //     .status(403)
-  //     .json({ err: 'Error occurred while adding a new user to offer.' });
-  // }
-
   try {
-    await fs.readdir(process.env.CV_DIR);
+    await fs.readdir(process.env.CV_DIR + '/cvs');
   } catch (error) {
     console.log('error uploading cv to server');
   }
@@ -65,6 +43,22 @@ const handler: NextApiHandler = async (req, res) => {
   res.json({ done: 'ok' });
 };
 export default handler;
-function getPath(arg0: string): any {
-  throw new Error('Function not implemented.');
-}
+// function getPath(arg0: string): any {
+//   throw new Error('Function not implemented.');
+// }
+// export const handle = async (req, res) => {
+//   const { userId, cv, path } = req.body as {
+//     userId: string;
+//     cv: string;
+//     path: string;
+//   };
+//   console.log('req.body => ', req.body);
+//   const document = await prisma.document.create({
+//     data: {
+//       userId,
+//       cv,
+//       path,
+//     },
+//   });
+//   res.json(document);
+//};

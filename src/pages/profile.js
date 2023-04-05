@@ -37,7 +37,7 @@ export default function Home({ cvs }) {
       const formData = new FormData();
       formData.append('myCv', selectedFile);
       console.log('formdata', formData);
-      const { data } = await axios.post('/api/document', formData);
+      const { data } = await axios.post('/api/document/create', formData);
 
       console.log(data);
     } catch (error) {
@@ -85,7 +85,7 @@ export default function Home({ cvs }) {
           </button>
           <div className="mt-20 flex flex-col space-y-3">
             {cvs.map((item) => (
-              <Link key={item} href={`${process.env.CV_DIR}/${item}`}>
+              <Link key={item} href={process.env.CV_DIR + '/cvs/' + item}>
                 {item}
               </Link>
             ))}
@@ -101,7 +101,7 @@ export const getServerSideProps = async (context) => {
 
   const props = { cvs: [] };
   try {
-    const cvs = await fs.readdir(process.env.CV_DIR);
+    const cvs = await fs.readdir(path.join(process.env.CV_DIR), '/cvs');
     props.cvs = cvs;
 
     return { props };
