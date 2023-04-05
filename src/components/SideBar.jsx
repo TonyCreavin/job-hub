@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import React, { useRef, useState, useEffect } from "react";
-import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-import axios from "axios";
+import { useRouter } from 'next/router';
+import React, { useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import axios from 'axios';
 
 const SideBar = () => {
   const route = useRouter();
   const { data: session, status } = useSession();
-  console.log("session => ", session);
-  console.log("status => ", status);
-  console.log("session.user.email => ", session?.user.email);
+  console.log('session => ', session);
+  console.log('status => ', status);
+  console.log('session.user.email => ', session?.user.email);
   const [userData, setUserData] = React.useState({});
 
   useEffect(() => {
@@ -17,20 +17,20 @@ const SideBar = () => {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log("res.data => ", res.data);
+          console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log("userData => ", userData);
+  console.log('userData => ', userData);
   const handleSwitchToApplicant = () => {
     axios
       .put(
         `/api/user/editUser`,
         {
           id: session.user.id,
-          role: userData.role === "CONSULTANT" && "APPLICANT",
+          role: userData.role === 'CONSULTANT' && 'APPLICANT',
         },
         {
           headers: {
@@ -39,7 +39,7 @@ const SideBar = () => {
         }
       )
       .then((res) => {
-        console.log("res.data => ", res.data);
+        console.log('res.data => ', res.data);
         setUserData(res.data);
       })
       .catch((err) => console.log(err));
@@ -50,10 +50,10 @@ const SideBar = () => {
 
       .put(`/api/user/editUser`, {
         id: session.user.id,
-        role: userData.role === "APPLICANT" && "CONSULTANT",
+        role: userData.role === 'APPLICANT' && 'CONSULTANT',
       })
       .then((res) => {
-        console.log("res.data => ", res.data);
+        console.log('res.data => ', res.data);
         setUserData(res.data);
       })
       .catch((err) => console.log(err));
@@ -124,14 +124,14 @@ const SideBar = () => {
               <ul class="navbar-nav mx-auto bd-navbar-nav d-flex">
                 <li class="nav-item col-6 col-lg-auto">
                   <Link
-                    href="/offers"
+                    href="/"
                     className="text-white nav-link py-2 px-0 px-lg-2 text-decoration-underline"
                   >
                     Home
                   </Link>
                 </li>
 
-                {session && userData?.role === "CONSULTANT" && (
+                {session && userData?.role === 'CONSULTANT' && (
                   <li class="nav-item col-6 col-lg-auto">
                     <Link
                       href="/offers/consultantOffers"
@@ -141,7 +141,7 @@ const SideBar = () => {
                     </Link>
                   </li>
                 )}
-                {session && userData?.role === "CONSULTANT" && (
+                {session && userData?.role === 'CONSULTANT' && (
                   <li class="nav-item col-6 col-lg-auto">
                     <Link href="/offers/create_offer" className="text-white">
                       create offer
@@ -150,7 +150,7 @@ const SideBar = () => {
                 )}
               </ul>
               <div className="flex justify-end">
-                {!session && status !== "authenticated" && (
+                {!session && status !== 'authenticated' && (
                   <Link
                     href="/api/auth/signin"
                     onClick={(e) => {
@@ -177,8 +177,8 @@ const SideBar = () => {
                   </Link>
                 )}
 
-                {session && userData?.role === "APPLICANT" && (
-                  <Link href="/offers">
+                {session && userData?.role === 'APPLICANT' && (
+                  <Link href="/">
                     <button
                       className="bg-slate-300 p-3 mr-3 rounded-lg"
                       onClick={handleSwitchToConsultant}
@@ -188,8 +188,8 @@ const SideBar = () => {
                   </Link>
                 )}
 
-                {session && userData?.role === "CONSULTANT" && (
-                  <Link href="/offers">
+                {session && userData?.role === 'CONSULTANT' && (
+                  <Link href="/">
                     <button
                       className="bg-slate-300 p-3 mr-3 rounded-lg"
                       onClick={handleSwitchToApplicant}

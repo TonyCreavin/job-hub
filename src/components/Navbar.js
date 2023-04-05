@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 export default function Navbar() {
-  const route = useRouter();
+  const router = useRouter();
   const { data: session, status } = useSession();
   console.log('session => ', session);
   console.log('status => ', status);
