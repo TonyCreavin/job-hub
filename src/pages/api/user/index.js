@@ -6,6 +6,6 @@ export default async function handler(req, res) {
       createdAt: 'desc',
     },
   });
-  res.status(200).json(user);
   await prisma.$disconnect();
+  res.status(200).json(user);
 }

@@ -14,13 +14,13 @@ export default async function handler(req, res) {
         applied,
       },
     });
-    res.status(200).json(result);
     await prisma.$disconnect();
+    res.status(200).json(result);
   } catch (err) {
     console.log(err);
+    await prisma.$disconnect();
     res
       .status(403)
       .json({ err: 'Error occurred while adding a new user to offer.' });
-    await prisma.$disconnect();
   }
 }

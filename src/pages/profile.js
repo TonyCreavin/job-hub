@@ -50,7 +50,7 @@ export default function Home({ cvs }) {
   console.log('this is my session', userData);
   console.log('this is the item', cvs);
 
-  console.log('files => ', `${process.env.CV_DIR}`);
+  console.log('files => ', 'Users/tonycreavin/coding/cl');
   return (
     <>
       <ProfileForm userData={userData} key={userData.id} session={session} />
@@ -88,7 +88,7 @@ export default function Home({ cvs }) {
           </button>
           <div className="mt-20 flex flex-col space-y-3">
             {cvs.map((item) => (
-              <Link key={item} href={process.env.CV_DIR + item}>
+              <Link key={item} href={'Users/tonycreavin/Coding/cl/' + item}>
                 {item}
               </Link>
             ))}
@@ -104,7 +104,7 @@ export const getServerSideProps = async (context) => {
 
   const props = { cvs: [] };
   try {
-    const cvs = await fs.readdir(process.env.CV_DIR);
+    const cvs = await fs.readdir(path.join('Users/tonycreavin/Coding/cl'));
     props.cvs = cvs;
 
     return { props };

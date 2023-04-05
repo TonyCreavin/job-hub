@@ -8,11 +8,11 @@ export default async function handler(req, res) {
         ...data,
       },
     });
-    res.status(200).json(result);
     await prisma.$disconnect();
+    res.status(200).json(result);
   } catch (err) {
     console.log(err);
-    res.status(403).json({ err: 'Error occurred while adding a new user.' });
     await prisma.$disconnect();
+    res.status(403).json({ err: 'Error occurred while adding a new user.' });
   }
 }

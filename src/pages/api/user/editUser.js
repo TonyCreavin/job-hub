@@ -40,6 +40,6 @@ export default async function handler(req, res) {
       country,
     },
   });
-  res.json(user);
   await prisma.$disconnect();
+  res.json(user);
 }
