@@ -17,7 +17,9 @@ export default async function handler(req, res) {
       },
     });
     res.status(200).json(deleteOffer);
+    await prisma.$disconnect();
   } catch (error) {
     res.status(403).json({ err: 'Error while deleting offer' });
+    await prisma.$disconnect();
   }
 }

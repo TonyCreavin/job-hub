@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfileForm from '../components/ProfileForm';
+import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,58 +37,64 @@ export default function Home({ cvs }) {
       if (!selectedFile) return;
       const formData = new FormData();
       formData.append('myCv', selectedFile);
-      const { data } = await axios.post('/api/document', formData);
+      console.log('formdata', formData);
+      const { data } = await axios.post('/api/document/create', formData);
+
       console.log(data);
     } catch (error) {
       console.log(error.response?.data);
     }
     setUploading(false);
-    router.push('/');
+    router.push('/profile');
   };
   console.log('this is my session', userData);
+  console.log('this is the item', cvs);
 
+  console.log('files => ', `${process.env.CV_DIR}`);
   return (
     <>
       <ProfileForm userData={userData} key={userData.id} session={session} />
 
-      <div className="max-w-4xl mx-auto p-20 space-y-6 flex flex-col">
-        <label>
-          <input
-            type="file"
-            hidden
-            onChange={({ target }) => {
-              if (target.files) {
-                const file = target.files[0];
+      <form onSubmit={handleUpload} encType="multipart/form-data">
+        <div className="max-w-4xl mx-auto p-20 space-y-6 flex flex-col">
+          <label>
+            <input
+              type="file"
+              hidden
+              onChange={({ target }) => {
+                if (target.files) {
+                  const file = target.files[0];
 
-                setSelectedImage(URL.createObjectURL(file));
-                setSelectedFile(file);
-              }
-            }}
-          />
-          <div className="w-40 aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
-            {selectedImage ? (
-              <Image src={selectedImage} alt="" width={500} height={500} />
-            ) : (
-              <span>Select CV</span>
-            )}
+                  setSelectedImage(URL.createObjectURL(file));
+                  setSelectedFile(file);
+                }
+              }}
+            />
+            <div className="w-40 aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
+              {selectedImage ? (
+                <Image src={selectedImage} alt="" width={500} height={500} />
+              ) : (
+                <span>Select CV</span>
+              )}
+            </div>
+          </label>
+          <button
+            onClick={handleUpload}
+            disabled={uploading}
+            style={{ opacity: uploading ? '.5' : '1' }}
+            className="bg-blue-500 text-white p-3 w-32 text-center rounded"
+          >
+            {uploading ? 'Uploading...' : 'Upload'}
+          </button>
+          <div className="mt-20 flex flex-col space-y-3">
+            {cvs.map((item) => (
+              <Link key={item} href={process.env.CV_DIR + item}>
+                {item}
+              </Link>
+            ))}
           </div>
-        </label>
-        <button
-          onClick={handleUpload}
-          disabled={uploading}
-          style={{ opacity: uploading ? '.5' : '1' }}
-          className="bg-blue-500 text-white p-3 w-32 text-center rounded"
-        >
-          {uploading ? 'Uploading...' : 'Upload'}
-        </button>
-        <div className="mt-20 flex flex-col space-y-3">
-          {cvs.map((item) => (
-            <Link key={item} href={process.env.CV_DIR + item}>
-              {item}
-            </Link>
-          ))}
         </div>
-      </div>
+      </form>
     </>
   );
 }

@@ -3,6 +3,7 @@ import formidable from 'formidable';
 import path from 'path';
 import fs from 'fs/promises';
 import prisma from '../../../../lib/prisma';
+import { fileURLToPath } from 'url';
 
 export const config = {
   api: {
@@ -18,6 +19,7 @@ const readFile = (
     options.uploadDir = process.env.CV_DIR;
     options.filename = (name, ext, path, form) => {
       return Date.now().toString() + '_' + path.originalFilename;
+      console.log('filepath', fileURLToPath);
     };
   }
   options.maxFileSize = 4000 * 1024 * 1024;
@@ -26,16 +28,16 @@ const readFile = (
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
       resolve({ fields, files });
+      console.log('fields => ', fields);
+      console.log('files => ', `${process.env.CV_DIR}`);
+      const file = files.myCv;
     });
   });
 };
 
 const handler: NextApiHandler = async (req, res) => {
-  // if (req.method === 'GET') {
-  //   const documents = await prisma.document.findMany();
-  // }
   try {
-    await fs.readdir(process.env.CV_DIR);
+    await fs.readdir(process.env.CV_DIR as string);
   } catch (error) {
     console.log('error uploading cv to server');
   }
@@ -43,3 +45,22 @@ const handler: NextApiHandler = async (req, res) => {
   res.json({ done: 'ok' });
 };
 export default handler;
+function getPath(arg0: string): any {
+  throw new Error('Function not implemented.');
+}
+// export const handle = async (req, res) => {
+//   const { userId, cv, path } = req.body as {
+//     userId: string;
+//     cv: string;
+//     path: string;
+//   };
+//   console.log('req.body => ', req.body);
+//   const document = await prisma.document.create({
+//     data: {
+//       userId,
+//       cv,
+//       path,
+//     },
+//   });
+//   res.json(document);
+//};

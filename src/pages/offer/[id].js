@@ -30,7 +30,7 @@ export default function Offer({ offer }) {
     await axios.post('/api/application/create', {
       userId: session.user.id,
       offerId: offer.id,
-      cv: 'myCv',
+
       coverLetter: 'this is my cover letter',
       favorite: false,
       applied: true,

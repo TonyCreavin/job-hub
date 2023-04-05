@@ -41,4 +41,5 @@ export default async function handler(req, res) {
     },
   });
   res.json(user);
+  await prisma.$disconnect();
 }
