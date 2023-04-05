@@ -45,11 +45,11 @@ export default function Home({ cvs }) {
       console.log(error.response?.data);
     }
     setUploading(false);
-    //router.push('/');
+    router.push('/profile');
   };
   console.log('this is my session', userData);
   console.log('this is the item', cvs);
-  console.log('this is address', process.env.CV_DIR);
+
   console.log('files => ', `${process.env.CV_DIR}`);
   return (
     <>

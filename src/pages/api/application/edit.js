@@ -28,8 +28,10 @@ export default async function handler(req, res) {
     });
 
     res.status(200).json(result);
+    await prisma.$disconnect();
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Unable to update application record.' });
+    await prisma.$disconnect();
   }
 }

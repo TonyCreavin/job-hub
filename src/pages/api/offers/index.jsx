@@ -7,4 +7,5 @@ export default async function handle(req, res) {
     },
   });
   res.status(200).json(offers);
+  await prisma.$disconnect();
 }

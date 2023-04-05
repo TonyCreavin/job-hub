@@ -29,7 +29,9 @@ export default async function handler(req, res) {
       },
     });
     res.json(offer);
+    await prisma.$disconnect();
   } catch (error) {
     console.log(error);
+    await prisma.$disconnect();
   }
 }
