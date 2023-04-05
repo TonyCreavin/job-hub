@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfileForm from '../components/ProfileForm';
+import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -48,6 +49,7 @@ export default function Home({ cvs }) {
   };
   console.log('this is my session', userData);
   console.log('this is the item', cvs);
+  console.log('this is address', process.env.CV_DIR);
   return (
     <>
       <ProfileForm userData={userData} key={userData.id} session={session} />
@@ -85,7 +87,7 @@ export default function Home({ cvs }) {
           </button>
           <div className="mt-20 flex flex-col space-y-3">
             {cvs.map((item) => (
-              <Link key={item} href={process.env.CV_DIR + '/cvs/' + item}>
+              <Link key={item} href={process.env.CV_DIR + item}>
                 {item}
               </Link>
             ))}
@@ -101,7 +103,7 @@ export const getServerSideProps = async (context) => {
 
   const props = { cvs: [] };
   try {
-    const cvs = await fs.readdir(path.join(process.env.CV_DIR), '/cvs');
+    const cvs = await fs.readdir(process.env.CV_DIR);
     props.cvs = cvs;
 
     return { props };
