@@ -4,18 +4,19 @@ import axios from 'axios';
 import EditOffer from '../../components/EditOffer';
 import { useRouter } from 'next/router';
 import JobDetailsPage from '../../components/JobDetailsPage';
-import UploadCv from '../../components/UploadCv';
+import UploadCoverLetter from '../../components/UploadCoverLetter';
 
 import { getSession, useSession } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
-export default function Offer({ offer }) {
+export default function Offer({ offer, user, application }) {
   const [userData, setUserData] = React.useState({});
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
   const [showEditOfferModal, setShowEditOfferModal] = useState(false);
-  //const [showApplicationModal, setShowApplicationModal] = useState(false);
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
+  const [coverLetter, setCoverLetter] = useState('');
 
   const router = useRouter();
 
@@ -26,12 +27,13 @@ export default function Offer({ offer }) {
     router.push('/');
   }
 
-  async function handleApplication() {
+  async function handleApplication(e) {
+    e.preventDefault();
+
     await axios.post('/api/application/create', {
       userId: session.user.id,
       offerId: offer.id,
-
-      coverLetter: 'this is my cover letter',
+      coverLetter: coverLetter,
       favorite: false,
       applied: true,
     });
@@ -52,7 +54,7 @@ export default function Offer({ offer }) {
   console.log('userData => ', userData);
 
   return (
-    <div className="w-full h-full">
+    <div className="flex flex-col w-full h-full">
       <JobDetailsPage
         title={offer?.title}
         key={offer?.id}
@@ -82,12 +84,24 @@ export default function Offer({ offer }) {
       )}
       {session && userData.role === 'APPLICANT' && (
         <button
-          //onClick={() => setShowApplicationModal((state) => !state)}
-          onClick={handleApplication}
-          className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
+          onClick={() => setShowApplicationModal((state) => !state)}
+          //onClick={handleApplication}
+          className="bg-blue-500 w-40 ml-40 text-white rounded-md py-1 px-2 mb-2"
         >
-          Apply
+          Start
         </button>
+      )}
+      {showApplicationModal && (
+        <UploadCoverLetter
+          handleApplication={handleApplication}
+          setCoverLetter={setCoverLetter}
+          coverLetter={coverLetter}
+          closeModal={() => setShowApplicationModal(false)}
+          offer={offer}
+          document={document}
+          user={user}
+          application={application}
+        />
       )}
       {showEditOfferModal ? (
         <EditOffer
@@ -95,9 +109,6 @@ export default function Offer({ offer }) {
           closeModal={() => setShowEditOfferModal(false)}
         />
       ) : null}
-      {/* {showApplicationModal && (
-        <UploadCv handleApplication={handleApplication} />
-      )} */}
     </div>
   );
 }
@@ -119,6 +130,7 @@ export async function getServerSideProps(context) {
       id,
     },
   });
+
   return {
     props: {
       offer: JSON.parse(JSON.stringify(offer)),
@@ -126,3 +138,35 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+//   const application = await prisma.application.findUnique({
+//     where: {
+//       id,
+//     },
+//   });
+//   const offer = await prisma.offer.findUnique({
+//     where: {
+//       id,
+//     },
+//   });
+//   const user = await prisma.user.findUnique({
+//     where: {
+//       id,
+//     },
+//   });
+//   const document = await prisma.document.findUnique({
+//     where: {
+//       id,
+//     },
+//   });
+
+//   return {
+//     props: {
+//       application: JSON.parse(JSON.stringify(application)),
+//       user: JSON.parse(JSON.stringify(user)),
+//       document: JSON.parse(JSON.stringify(document)),
+//       offer: JSON.parse(JSON.stringify(offer)),
+//       session: session,
+//     },
+//   };
+// }

@@ -58,180 +58,180 @@ export default function ProfileForm({
         >
           <h1>Profile</h1>
           <br /> <b></b>
-          <form
+          {/* <form
             className="row d-flex justify-content-around"
             style={{}}
             action=""
-          >
+          > */}
+          <div className="row my-3">
+            <div className="col-md-6 mb-2 col-sm-12">
+              <label htmlFor="firstName">
+                First Name
+                <input
+                  type="text"
+                  className="form form-control"
+                  placeholder="firstname"
+                  value={formState.firstName || null}
+                  onChange={handleInputChange}
+                  name="firstName"
+                  id="firstName"
+                  style={{ marginBottom: '20px' }}
+                />
+              </label>
+            </div>
+            <div className="col-md-6 mb-2 col-sm-12">
+              <label htmlFor="lastName">
+                Lastname
+                <input
+                  type="text"
+                  className="form form-control"
+                  placeholder="lastname"
+                  value={formState.lastName || null}
+                  onChange={handleInputChange}
+                  name="lastName"
+                  id="lastName"
+                  style={{ marginBottom: '20px' }}
+                />
+              </label>
+            </div>
             <div className="row my-3">
               <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="firstName">
-                  First Name
+                <label htmlFor="phone">
+                  Phone
                   <input
-                    type="text"
+                    type="tel"
                     className="form form-control"
-                    placeholder="firstname"
-                    value={formState.firstName || null}
+                    placeholder="phone"
+                    value={formState.phone || null}
                     onChange={handleInputChange}
-                    name="firstName"
-                    id="firstName"
+                    name="phone"
+                    id="phone"
                     style={{ marginBottom: '20px' }}
                   />
                 </label>
               </div>
               <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="lastName">
-                  Lastname
+                <label htmlFor="github">
+                  Github
                   <input
                     type="text"
                     className="form form-control"
-                    placeholder="lastname"
-                    value={formState.lastName || null}
+                    placeholder="github"
+                    value={formState.github || null}
                     onChange={handleInputChange}
-                    name="lastName"
-                    id="lastName"
+                    name="github"
+                    id="github"
                     style={{ marginBottom: '20px' }}
                   />
                 </label>
               </div>
-              <div className="row my-3">
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="phone">
-                    Phone
-                    <input
-                      type="tel"
-                      className="form form-control"
-                      placeholder="phone"
-                      value={formState.phone || null}
-                      onChange={handleInputChange}
-                      name="phone"
-                      id="phone"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="github">
-                    Github
-                    <input
-                      type="text"
-                      className="form form-control"
-                      placeholder="github"
-                      value={formState.github || null}
-                      onChange={handleInputChange}
-                      name="github"
-                      id="github"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-              </div>
-              <div className="row my-3">
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="linkedin">
-                    Linkedin
-                    <input
-                      type="text"
-                      className="form form-control"
-                      placeholder="linkedin"
-                      value={formState.linkedin || null}
-                      onChange={handleInputChange}
-                      name="linkedin"
-                      id="linkedin"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="skills">
-                    Skills
-                    <input
-                      type="text"
-                      className="form form-control"
-                      placeholder="skills"
-                      value={formState.skills || null}
-                      onChange={handleInputChange}
-                      name="skills"
-                      id="skills"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-              </div>
-              <div className="row my-3">
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="address">
-                    Address
-                    <input
-                      type="text"
-                      className="form form-control"
-                      placeholder="address"
-                      value={formState.address || null}
-                      onChange={handleInputChange}
-                      name="address"
-                      id="address"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="city">
-                    City
-                    <input
-                      type="text"
-                      className="form form-control"
-                      placeholder="city"
-                      value={formState.city || null}
-                      onChange={handleInputChange}
-                      name="city"
-                      id="city"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-              </div>
-              <div className="row my-3">
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="postcode">
-                    Postcode
-                    <input
-                      type="text"
-                      placeholder="postcode"
-                      className="form form-control"
-                      value={formState.postcode || null}
-                      onChange={handleInputChange}
-                      name="postcode"
-                      id="postcode"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-6 mb-2 col-sm-12">
-                  <label htmlFor="country">
-                    Country
-                    <input
-                      type="text"
-                      placeholder="country"
-                      className="form form-control"
-                      value={formState.country || null}
-                      onChange={handleInputChange}
-                      name="country"
-                      id="country"
-                      style={{ marginBottom: '20px' }}
-                    />
-                  </label>
-                </div>
-              </div>
-              <button
-                onClick={handleSubmit}
-                type="submit"
-                className="btn btn-primary  mb-3"
-                //style={{ width: '70%' }}
-              >
-                envoyer
-              </button>
             </div>
-          </form>
+            <div className="row my-3">
+              <div className="col-md-6 mb-2 col-sm-12">
+                <label htmlFor="linkedin">
+                  Linkedin
+                  <input
+                    type="text"
+                    className="form form-control"
+                    placeholder="linkedin"
+                    value={formState.linkedin || null}
+                    onChange={handleInputChange}
+                    name="linkedin"
+                    id="linkedin"
+                    style={{ marginBottom: '20px' }}
+                  />
+                </label>
+              </div>
+              <div className="col-md-6 mb-2 col-sm-12">
+                <label htmlFor="skills">
+                  Skills
+                  <input
+                    type="text"
+                    className="form form-control"
+                    placeholder="skills"
+                    value={formState.skills || null}
+                    onChange={handleInputChange}
+                    name="skills"
+                    id="skills"
+                    style={{ marginBottom: '20px' }}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="row my-3">
+              <div className="col-md-6 mb-2 col-sm-12">
+                <label htmlFor="address">
+                  Address
+                  <input
+                    type="text"
+                    className="form form-control"
+                    placeholder="address"
+                    value={formState.address || null}
+                    onChange={handleInputChange}
+                    name="address"
+                    id="address"
+                    style={{ marginBottom: '20px' }}
+                  />
+                </label>
+              </div>
+              <div className="col-md-6 mb-2 col-sm-12">
+                <label htmlFor="city">
+                  City
+                  <input
+                    type="text"
+                    className="form form-control"
+                    placeholder="city"
+                    value={formState.city || null}
+                    onChange={handleInputChange}
+                    name="city"
+                    id="city"
+                    style={{ marginBottom: '20px' }}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="row my-3">
+              <div className="col-md-6 mb-2 col-sm-12">
+                <label htmlFor="postcode">
+                  Postcode
+                  <input
+                    type="text"
+                    placeholder="postcode"
+                    className="form form-control"
+                    value={formState.postcode || null}
+                    onChange={handleInputChange}
+                    name="postcode"
+                    id="postcode"
+                    style={{ marginBottom: '20px' }}
+                  />
+                </label>
+              </div>
+              <div className="col-md-6 mb-2 col-sm-12">
+                <label htmlFor="country">
+                  Country
+                  <input
+                    type="text"
+                    placeholder="country"
+                    className="form form-control"
+                    value={formState.country || null}
+                    onChange={handleInputChange}
+                    name="country"
+                    id="country"
+                    style={{ marginBottom: '20px' }}
+                  />
+                </label>
+              </div>
+            </div>
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="btn btn-primary  mb-3"
+              //style={{ width: '70%' }}
+            >
+              envoyer
+            </button>
+          </div>
+          {/* </form> */}
         </div>
       </div>
     </div>
