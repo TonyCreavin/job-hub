@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import formidable from 'formidable';
 import path from 'path';
 import fs from 'fs/promises';
+import { getSession } from 'next-auth/react';
+
 const prisma = new PrismaClient();
 export const config = {
   api: {
@@ -10,18 +12,18 @@ export const config = {
 };
 const handler = async (req, res) => {
   try {
-    await fs.readdir(path.join('/Users/tonycreavin/coding/cl'), {
+    await fs.readdir(path.join('/Users/tonycreavin/Coding/cl'), {
       recursive: true,
     });
   } catch (error) {
     console.error(error);
-    await fs.mkdir(path.join('/Users/tonycreavin/coding/cl'), {
+    await fs.mkdir(path.join('/Users/tonycreavin/Coding/cl'), {
       recursive: true,
     });
   }
 
   const form = formidable({
-    uploadDir: path.join('/Users/tonycreavin/coding/cl'),
+    uploadDir: path.join('/Users/tonycreavin/Coding/cl'),
     keepExtensions: true,
     multiples: true,
     filename: (name, ext, file, form) => {
@@ -34,6 +36,9 @@ const handler = async (req, res) => {
 
       return res.status(500).send('Internal Server Error');
     }
+    const session = await getSession({ req });
+    const userId = session.user.id;
+
     console.log('files => +>', files.myCv.filepath);
     const file = files.myCv;
     console.log(file);
@@ -43,6 +48,7 @@ const handler = async (req, res) => {
         path: file.filepath,
         size: file.size,
         mimetype: file.mimetype,
+        userId: userId,
       },
     });
     await prisma.$disconnect();
