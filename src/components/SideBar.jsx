@@ -61,20 +61,20 @@ const SideBar = () => {
 
   return (
     <>
-      <header class="mt-3 navbar navbar-expand-lg bd-navbar sticky-top w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
+      <header className=" navbar navbar-expand-lg bd-navbar sticky-top w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
         <nav
-          class="container-xxl bd-gutter flex-wrap flex-lg-nowrap"
+          className="container-xxl bd-gutter flex-wrap flex-lg-nowrap"
           aria-label="Main navigation"
         >
-          <div class="bd-navbar-toggle"></div>
+          <div className="bd-navbar-toggle"></div>
 
-          <h1 class="navbar-brand p-0 me-0 me-lg-2 text-white font-semibold text-2xl">
+          <h1 className="navbar-brand p-0 me-0 me-lg-2 text-white font-semibold text-2xl">
             HDM
           </h1>
 
-          <div class="d-flex">
+          <div className="d-flex">
             <button
-              class="navbar-toggler d-flex d-lg-none order-3 p-2 bg-white"
+              className="navbar-toggler d-flex d-lg-none order-3 p-2 bg-white"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#bdNavbar"
@@ -85,12 +85,12 @@ const SideBar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                class="bi"
+                className="bi"
                 fill="currentColor"
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
                 ></path>
               </svg>
@@ -98,31 +98,31 @@ const SideBar = () => {
           </div>
 
           <div
-            class="offcanvas-lg offcanvas-end flex-grow-1"
-            tabindex="-1"
+            className="offcanvas-lg offcanvas-end flex-grow-1"
+            tabIndex="-1"
             id="bdNavbar"
             aria-labelledby="bdNavbarOffcanvasLabel"
             data-bs-scroll="true"
           >
-            <div class="offcanvas-header px-4 pb-0 bg-[#2D3E64]">
+            <div className="offcanvas-header px-4 pb-0 bg-[#2D3E64]">
               <h5
-                class="offcanvas-title text-white font-semibold text-2xl"
+                className="offcanvas-title text-white font-semibold text-2xl"
                 id="bdNavbarOffcanvasLabel"
               >
                 HDM
               </h5>
               <button
                 type="button"
-                class="btn-close btn-close-white"
+                className="btn-close btn-close-white"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
                 data-bs-target="#bdNavbar"
               ></button>
             </div>
 
-            <div class="offcanvas-body p-4 pt-0 p-lg-0 bg-[#2D3E64]">
-              <ul class="navbar-nav mx-auto bd-navbar-nav d-flex">
-                <li class="nav-item col-6 col-lg-auto">
+            <div className="offcanvas-body p-4 pt-0 p-lg-0 bg-[#2D3E64]">
+              <ul className="navbar-nav mx-auto bd-navbar-nav d-flex">
+                <li className="nav-item col-6 col-lg-auto">
                   <Link
                     href="/"
                     className="text-white nav-link py-2 px-0 px-lg-2 text-decoration-underline"
@@ -132,7 +132,7 @@ const SideBar = () => {
                 </li>
 
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li class="nav-item col-6 col-lg-auto">
+                  <li className="nav-item col-6 col-lg-auto">
                     <Link
                       href="/offers/consultantOffers"
                       className="text-white"
@@ -142,7 +142,7 @@ const SideBar = () => {
                   </li>
                 )}
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li class="nav-item col-6 col-lg-auto">
+                  <li className="nav-item col-6 col-lg-auto">
                     <Link href="/offers/create_offer" className="text-white">
                       create offer
                     </Link>

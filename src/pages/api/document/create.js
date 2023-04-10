@@ -12,24 +12,25 @@ export const config = {
 };
 const handler = async (req, res) => {
   try {
-    await fs.readdir(path.join('/Users/tonycreavin/Coding/cl'), {
+    await fs.readdir(path.join(process.env.CV_DIR), {
       recursive: true,
     });
   } catch (error) {
     console.error(error);
-    await fs.mkdir(path.join('/Users/tonycreavin/Coding/cl'), {
+    await fs.mkdir(path.join(process.env.CV_DIR), {
       recursive: true,
     });
   }
 
   const form = formidable({
-    uploadDir: path.join('/Users/tonycreavin/Coding/cl'),
+    uploadDir: path.join(process.env.CV_DIR),
     keepExtensions: true,
     multiples: true,
     filename: (name, ext, file, form) => {
       return Date.now().toString() + '_' + file.originalFilename;
     },
   });
+
   form.parse(req, async (err, fields, files) => {
     if (err) {
       console.error(err);
