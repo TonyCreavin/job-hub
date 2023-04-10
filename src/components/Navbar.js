@@ -62,16 +62,22 @@ export default function Navbar() {
   return (
     <div className="w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
       <h1 className="text-white font-semibold text-2xl">HDM</h1>
-      <Link href="/" className="text-white">
+      <Link href="/" className="text-white text-decoration-none">
         Home
       </Link>
       {session && userData?.role === 'CONSULTANT' && (
-        <Link href="/offers/consultantOffers" className="text-white">
+        <Link
+          href="/offers/consultantOffers"
+          className="text-white text-decoration-none"
+        >
           My Offers
         </Link>
       )}
       {session && userData?.role === 'CONSULTANT' && (
-        <Link href="/offers/create_offer" className="text-white">
+        <Link
+          href="/offers/create_offer"
+          className="text-white text-decoration-none"
+        >
           create offer
         </Link>
       )}

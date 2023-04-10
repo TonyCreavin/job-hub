@@ -61,7 +61,7 @@ const SideBar = () => {
 
   return (
     <>
-      <header className=" navbar navbar-expand-lg bd-navbar sticky-top w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-center">
+      <header className=" navbar navbar-expand-lg bd-navbar sticky-top w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-stretch">
         <nav
           className="container-xxl bd-gutter flex-wrap flex-lg-nowrap"
           aria-label="Main navigation"
@@ -105,12 +105,12 @@ const SideBar = () => {
             data-bs-scroll="true"
           >
             <div className="offcanvas-header px-4 pb-0 bg-[#2D3E64]">
-              <h5
+              <h3
                 className="offcanvas-title text-white font-semibold text-2xl"
                 id="bdNavbarOffcanvasLabel"
               >
                 HDM
-              </h5>
+              </h3>
               <button
                 type="button"
                 className="btn-close btn-close-white"
@@ -122,33 +122,39 @@ const SideBar = () => {
 
             <div className="offcanvas-body p-4 pt-0 p-lg-0 bg-[#2D3E64]">
               <ul className="navbar-nav mx-auto bd-navbar-nav d-flex">
-                <li className="nav-item col-6 col-lg-auto">
-                  <Link
-                    href="/"
-                    className="text-white nav-link py-2 px-0 px-lg-2 text-decoration-underline"
-                  >
+                <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+                  <Link href="/" className="text-white no-underline">
                     Home
                   </Link>
                 </li>
 
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li className="nav-item col-6 col-lg-auto">
+                  <li className="nav-item col-6 col-lg-auto mt-2 mr-20">
                     <Link
                       href="/offers/consultantOffers"
-                      className="text-white"
+                      className="text-white no-underline "
                     >
                       My Offers
                     </Link>
                   </li>
                 )}
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li className="nav-item col-6 col-lg-auto">
-                    <Link href="/offers/create_offer" className="text-white">
+                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+                    <Link
+                      href="/offers/create_offer"
+                      className="text-white no-underline"
+                    >
                       create offer
                     </Link>
                   </li>
                 )}
+                <li className="nav-item    col-6 col-lg-auto mt-2 mr-20">
+                  <Link href="/profile" className="text-white no-underline">
+                    Profile
+                  </Link>
+                </li>
               </ul>
+
               <div className="flex justify-end">
                 {!session && status !== 'authenticated' && (
                   <Link
