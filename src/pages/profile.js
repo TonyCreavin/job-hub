@@ -18,6 +18,7 @@ export default function Home({ cvs }) {
   const [selectedImage, setSelectedImage] = useState('');
   const [userData, setUserData] = React.useState({});
   const { data: session, status } = useSession();
+  const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     if (session?.user.id) {
@@ -31,15 +32,41 @@ export default function Home({ cvs }) {
     }
   }, [session?.user.id]);
 
+  const getDocuments = async () => {
+    const result = await axios.get('/api/document').catch((err) => {
+      console.log('Error fetching documents:', err);
+    });
+    if (result) {
+      setDocuments(result.data);
+    }
+  };
+
+  useEffect(() => {
+    getDocuments();
+  }, []);
+
+  const openDocument = (document) => {
+    window.open(`/api/document/${document.id}`, '_blank');
+  };
+
+  const deleteCv = async (document) => {
+    console.log('Deleting CV with ID:');
+    try {
+      await axios.delete(`/api/document/_delete/${document.id}`);
+      getDocuments();
+      console.log('CV deleted successfully!');
+    } catch (error) {
+      console.log('Error deleting CV:', error);
+    }
+  };
+
   const handleUpload = async () => {
     setUploading(true);
     try {
       if (!selectedFile) return;
       const formData = new FormData();
       formData.append('myCv', selectedFile);
-      console.log('formdata', formData);
       const { data } = await axios.post('/api/document/create', formData);
-
       console.log(data);
     } catch (error) {
       console.log(error.response?.data);
@@ -48,9 +75,9 @@ export default function Home({ cvs }) {
     router.push('/profile');
   };
   console.log('this is my session', userData);
-  console.log('this is the item', cvs);
 
-  console.log('files => ', 'Users/tonycreavin/coding/cl');
+  console.log('files => ', process.env.CV_DIR);
+
   return (
     <>
       <form onSubmit={handleUpload} encType="multipart/form-data">
@@ -70,9 +97,20 @@ export default function Home({ cvs }) {
                 }
               }}
             />
+            {documents
+              .filter((doc) => doc.userId === session?.user.id)
+              .map((document) => (
+                <p key={document.id} onClick={() => openDocument(document)}>
+                  CV: {document.filename}
+                </p>
+              ))}
+
+            <button onClick={deleteCv}>Delete</button>
+
             <div className="w-40 aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
               {selectedImage ? (
-                <Image src={selectedImage} alt="" width={500} height={500} />
+                // <Image src={selectedImage} alt="" width={500} height={500} />
+                <span>CV Selected</span>
               ) : (
                 <span>Select CV</span>
               )}
@@ -86,13 +124,15 @@ export default function Home({ cvs }) {
           >
             {uploading ? 'Uploading...' : 'Upload'}
           </button>
-          <div className="mt-20 flex flex-col space-y-3">
-            {cvs.map((item) => (
-              <Link key={item} href={'Users/tonycreavin/Coding/cl/' + item}>
-                {item}
-              </Link>
-            ))}
-          </div>
+          {
+            <div className="mt-20 flex flex-col space-y-3">
+              {cvs.map((item) => (
+                <Link key={item} href={process.env.CV_DIR + '/' + item}>
+                  {item}
+                </Link>
+              ))}
+            </div>
+          }
         </div>
       </form>
     </>
@@ -104,7 +144,7 @@ export const getServerSideProps = async (context) => {
 
   const props = { cvs: [] };
   try {
-    const cvs = await fs.readdir(path.join('Users/tonycreavin/Coding/cl'));
+    const cvs = await fs.readdir(path.join(process.env.CV_DIR));
     props.cvs = cvs;
 
     return { props };

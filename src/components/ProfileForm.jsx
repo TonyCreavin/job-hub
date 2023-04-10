@@ -71,7 +71,7 @@ export default function ProfileForm({
                   type="text"
                   className="form form-control"
                   placeholder="firstname"
-                  value={formState.firstName || null}
+                  value={formState.firstName || ''}
                   onChange={handleInputChange}
                   name="firstName"
                   id="firstName"
@@ -86,7 +86,7 @@ export default function ProfileForm({
                   type="text"
                   className="form form-control"
                   placeholder="lastname"
-                  value={formState.lastName || null}
+                  value={formState.lastName || ''}
                   onChange={handleInputChange}
                   name="lastName"
                   id="lastName"
@@ -102,7 +102,7 @@ export default function ProfileForm({
                     type="tel"
                     className="form form-control"
                     placeholder="phone"
-                    value={formState.phone || null}
+                    value={formState.phone || ''}
                     onChange={handleInputChange}
                     name="phone"
                     id="phone"
@@ -117,7 +117,7 @@ export default function ProfileForm({
                     type="text"
                     className="form form-control"
                     placeholder="github"
-                    value={formState.github || null}
+                    value={formState.github || ''}
                     onChange={handleInputChange}
                     name="github"
                     id="github"
@@ -134,7 +134,7 @@ export default function ProfileForm({
                     type="text"
                     className="form form-control"
                     placeholder="linkedin"
-                    value={formState.linkedin || null}
+                    value={formState.linkedin || ''}
                     onChange={handleInputChange}
                     name="linkedin"
                     id="linkedin"
@@ -149,7 +149,7 @@ export default function ProfileForm({
                     type="text"
                     className="form form-control"
                     placeholder="skills"
-                    value={formState.skills || null}
+                    value={formState.skills || ''}
                     onChange={handleInputChange}
                     name="skills"
                     id="skills"
@@ -166,7 +166,7 @@ export default function ProfileForm({
                     type="text"
                     className="form form-control"
                     placeholder="address"
-                    value={formState.address || null}
+                    value={formState.address || ''}
                     onChange={handleInputChange}
                     name="address"
                     id="address"
@@ -181,7 +181,7 @@ export default function ProfileForm({
                     type="text"
                     className="form form-control"
                     placeholder="city"
-                    value={formState.city || null}
+                    value={formState.city || ''}
                     onChange={handleInputChange}
                     name="city"
                     id="city"
@@ -198,7 +198,7 @@ export default function ProfileForm({
                     type="text"
                     placeholder="postcode"
                     className="form form-control"
-                    value={formState.postcode || null}
+                    value={formState.postcode || ''}
                     onChange={handleInputChange}
                     name="postcode"
                     id="postcode"
@@ -213,7 +213,7 @@ export default function ProfileForm({
                     type="text"
                     placeholder="country"
                     className="form form-control"
-                    value={formState.country || null}
+                    value={formState.country || ''}
                     onChange={handleInputChange}
                     name="country"
                     id="country"

@@ -39,122 +39,107 @@ function Create_offer(props) {
   };
   console.log('this is my session =>', props.data.user.id);
   return (
-    <>
-      <h1 className="text-center my-5 text-2xl">Post a job</h1>
-      <div className="flex justify-center align-middle items-center ml-[30vw] mr-[30vw]">
-        <form className="flex flex-col w-full h-[100%] ">
-          <div className="flex-col md:flex-row m-4 justify-between">
-            <label htmlFor="title">
-              Job Title
+    <div className="container">
+      <div className="recruiter">
+        <div style={{ width: '80vw', margin: 'auto' }}>
+          <h1 className="text-center my-4">Post an offer</h1>
+
+          <form className="row d-flex justify-content-around">
+            <div className="col-md-6">
               <input
+                type="text"
                 value={formState.title}
                 onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
-                type="text"
+                className="form form-control"
+                placeholder="Job title"
+                style={{ marginBottom: '5vh' }}
                 name="title"
                 id="title"
-              />
-            </label>
-            <label htmlFor="contractType">
-              contract Type
+              />{' '}
               <input
                 value={formState.contractType}
                 onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
                 type="text"
+                className="form form-control"
+                placeholder="contract type"
+                style={{ marginBottom: '5vh' }}
                 name="contractType"
                 id="contractType"
-              />
-            </label>
-            <label htmlFor="company">
-              company
+              />{' '}
+            </div>
+            <div className="col-md-6">
               <input
                 value={formState.company}
                 onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
                 type="text"
+                className="form form-control"
+                placeholder="company"
+                style={{ marginBottom: '5vh' }}
                 name="company"
                 id="company"
-              />
-            </label>{' '}
-          </div>
-          <div className="flex-col md:flex-row m-4 justify-between">
-            <label htmlFor="location">
-              location
+              />{' '}
               <input
                 value={formState.location}
                 onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
                 type="text"
+                className="form form-control"
+                placeholder="location"
+                style={{ marginBottom: '5vh' }}
                 name="location"
                 id="location"
-              />
-            </label>
-
-            <label htmlFor="skills">
-              Skills
-              <input
-                value={formState.skills}
-                onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-full rounded-md"
-                type="text"
-                name="skills"
-                id="skills"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="website" className="flex flex-col m-4 rounded-md">
-              website
+              />{' '}
+            </div>
+            <div className="col-12">
               <input
                 value={formState.website}
                 onChange={handleInputChange}
-                className="border-gray-200 border-2 shadow-lg w-[100%] rounded-md"
                 type="text"
+                className="form form-control"
+                placeholder="website"
+                style={{ marginBottom: '5vh' }}
                 name="website"
                 id="website"
               />
-            </label>
-          </div>
-          <div className="m-4">
-            <h3>description</h3>
-            <textarea
-              className="w-full h-full p-2 border-gray-200 border-2 shadow-lg rounded-md"
-              id="description"
-              name="description"
-              rows="5"
-              cols="33"
-              value={formState.description}
-              onChange={handleInputChange}
-            />
-          </div>
+            </div>
+            <div className="col-12">
+              <textarea
+                className="form form-control"
+                value={formState.description}
+                onChange={handleInputChange}
+                id="description"
+                cols="30"
+                rows="10"
+                name="description"
+                placeholder="description"
+                style={{ marginBottom: '5vh' }}
+              ></textarea>
+              <textarea
+                className="form form-control"
+                id="companyDescription"
+                name="companyDescription"
+                cols="30"
+                rows="10"
+                placeholder="company description"
+                style={{ marginBottom: '5vh' }}
+                value={formState.companyDescription}
+                onChange={handleInputChange}
+              ></textarea>
 
-          <div className="m-4">
-            <h3>company description</h3>
-            <textarea
-              className="w-full h-full p-2 border-gray-200 border-2 shadow-lg rounded-md"
-              id="companyDescription"
-              name="companyDescription"
-              rows="5"
-              cols="33"
-              value={formState.companyDescription}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            type="submit"
-            className="w-20 h-10 bg-sky-500  text-white m-3 rounded-md"
-          >
-            Submit
-          </button>
-        </form>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="btn btn-primary btn-block"
+                style={{ width: '100%', marginBottom: '5vh' }}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
-
 export default Create_offer;
 
 export async function getServerSideProps(context) {
