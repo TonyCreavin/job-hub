@@ -42,7 +42,7 @@ export default function ConsultantOffers({ offers }) {
         </button>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap w-full h-screen">
         {offers.map(
           (offer) =>
             userData.role === 'CONSULTANT' &&

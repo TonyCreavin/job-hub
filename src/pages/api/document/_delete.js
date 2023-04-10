@@ -3,10 +3,14 @@ import path from 'path';
 import fs from 'fs/promises';
 
 export default async function handler(req, res) {
-  const documentId = req.query.documentId;
+  const { id, userId } = req.body;
   const document = await prisma.document.findUnique({
     where: {
-      id: documentId,
+      id: id,
+      user: { connect: { id: userId } },
+      include: {
+        user: true,
+      },
     },
   });
 
