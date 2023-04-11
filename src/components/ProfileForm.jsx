@@ -50,32 +50,28 @@ export default function ProfileForm({
 
   return (
     <div className="container">
-      <br />
-      <br /> <br />
       <div className="jobseeker">
-        <div
-          style={{ width: '600px', marginLeft: 'auto', marginRight: 'auto' }}
-        >
-          <h1>Profile</h1>
-          <br /> <b></b>
+        <div style={{ width: '80vw', margin: 'auto' }}>
+          <h1 className="text-center my-4">Profile</h1>
+
           {/* <form
             className="row d-flex justify-content-around"
             style={{}}
             action=""
           > */}
-          <div className="row my-3">
-            <div className="col-md-6 mb-2 col-sm-12">
+          <div className="d-flex row  justify-between ">
+            <div className="col-md-6  mb-2 col-sm-12 ">
               <label htmlFor="firstName">
                 First Name
                 <input
                   type="text"
-                  className="form form-control"
+                  className="form form-control "
                   placeholder="firstname"
                   value={formState.firstName || ''}
                   onChange={handleInputChange}
                   name="firstName"
                   id="firstName"
-                  style={{ marginBottom: '20px' }}
+                  style={{ marginBottom: '20px', width: '30vw' }}
                 />
               </label>
             </div>
@@ -84,13 +80,13 @@ export default function ProfileForm({
                 Lastname
                 <input
                   type="text"
-                  className="form form-control"
+                  className="form form-control w-[50%] flex-1"
                   placeholder="lastname"
                   value={formState.lastName || ''}
                   onChange={handleInputChange}
                   name="lastName"
                   id="lastName"
-                  style={{ marginBottom: '20px' }}
+                  style={{ marginBottom: '20px', width: '30vw' }}
                 />
               </label>
             </div>
@@ -106,7 +102,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="phone"
                     id="phone"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -121,7 +117,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="github"
                     id="github"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -138,7 +134,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="linkedin"
                     id="linkedin"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -153,7 +149,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="skills"
                     id="skills"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -170,7 +166,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="address"
                     id="address"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -185,7 +181,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="city"
                     id="city"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -202,7 +198,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="postcode"
                     id="postcode"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
@@ -217,7 +213,7 @@ export default function ProfileForm({
                     onChange={handleInputChange}
                     name="country"
                     id="country"
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', width: '30vw' }}
                   />
                 </label>
               </div>
