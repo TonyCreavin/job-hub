@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function DocumentList({ application, user }) {
+  const router = useRouter();
   const [documents, setDocuments] = useState([]);
   const [coverLetter, setCoverLetter] = useState(false);
 
@@ -12,6 +14,13 @@ export default function DocumentList({ application, user }) {
     if (result) {
       setDocuments(result.data);
     }
+  };
+
+  const deleteApplication = async () => {
+    await axios.post(`/api/application/deleteApplication`, {
+      id: application.id,
+    });
+    router.reload();
   };
 
   useEffect(() => {
@@ -49,6 +58,7 @@ export default function DocumentList({ application, user }) {
 
         {coverLetter && application.coverLetter}
       </div>
+      <button onClick={deleteApplication}>delete</button>
     </div>
   );
 }

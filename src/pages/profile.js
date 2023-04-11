@@ -41,6 +41,10 @@ export default function Home({ cvs }) {
     }
   };
 
+  useEffect(() => {
+    getDocuments();
+  }, []);
+
   const openDocument = (document) => {
     window.open(`/api/document/${document.id}`, '_blank');
   };
@@ -74,6 +78,7 @@ export default function Home({ cvs }) {
       getDocuments();
       console.log('CV deleted successfully!');
       setSelectedFile(null);
+      router.push('/profile');
     } catch (error) {
       console.log('Error deleting CV:', error);
     }
