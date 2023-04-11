@@ -53,7 +53,7 @@ export default function Home({ cvs }) {
       formData.append('myCv', selectedFile);
       const { data } = await axios.post('/api/document/create', formData);
       console.log(data);
-      await getDocuments(); // Call the function to fetch documents
+      await getDocuments();
       setSelectedFile(null);
 
       router.push('/profile');
