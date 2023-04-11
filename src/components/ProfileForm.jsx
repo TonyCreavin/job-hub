@@ -207,7 +207,7 @@ export default function ProfileForm({
           <button
             onClick={handleSubmit}
             type="submit"
-            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
+            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg mb-4"
           >
             envoyer
           </button>
