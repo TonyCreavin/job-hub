@@ -59,176 +59,166 @@ export default function ProfileForm({
             style={{}}
             action=""
           > */}
-          <div className="d-flex row  justify-between ">
-            <div className="col-md-6  mb-2 col-sm-12 ">
-              <label htmlFor="firstName">
-                First Name
-                <input
-                  type="text"
-                  className="form form-control "
-                  placeholder="firstname"
-                  value={formState.firstName || ''}
-                  onChange={handleInputChange}
-                  name="firstName"
-                  id="firstName"
-                  style={{ marginBottom: '20px', width: '30vw' }}
-                />
-              </label>
+          <div className="flex flex-col md:flex-row  justify-between  gap-28">
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="firstName"></label>
+              First Name
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="firstname"
+                value={formState.firstName || ''}
+                onChange={handleInputChange}
+                name="firstName"
+                id="firstName"
+                style={{ marginBottom: '20px' }}
+              />
             </div>
-            <div className="col-md-6 mb-2 col-sm-12">
-              <label htmlFor="lastName">
-                Lastname
-                <input
-                  type="text"
-                  className="form form-control w-[50%] flex-1"
-                  placeholder="lastname"
-                  value={formState.lastName || ''}
-                  onChange={handleInputChange}
-                  name="lastName"
-                  id="lastName"
-                  style={{ marginBottom: '20px', width: '30vw' }}
-                />
-              </label>
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="lastName"></label>
+              Lastname
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="lastname"
+                value={formState.lastName || ''}
+                onChange={handleInputChange}
+                name="lastName"
+                id="lastName"
+                style={{ marginBottom: '20px' }}
+              />
             </div>
-            <div className="row my-3">
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="phone">
-                  Phone
-                  <input
-                    type="tel"
-                    className="form form-control"
-                    placeholder="phone"
-                    value={formState.phone || ''}
-                    onChange={handleInputChange}
-                    name="phone"
-                    id="phone"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="github">
-                  Github
-                  <input
-                    type="text"
-                    className="form form-control"
-                    placeholder="github"
-                    value={formState.github || ''}
-                    onChange={handleInputChange}
-                    name="github"
-                    id="github"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-            </div>
-            <div className="row my-3">
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="linkedin">
-                  Linkedin
-                  <input
-                    type="text"
-                    className="form form-control"
-                    placeholder="linkedin"
-                    value={formState.linkedin || ''}
-                    onChange={handleInputChange}
-                    name="linkedin"
-                    id="linkedin"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="skills">
-                  Skills
-                  <input
-                    type="text"
-                    className="form form-control"
-                    placeholder="skills"
-                    value={formState.skills || ''}
-                    onChange={handleInputChange}
-                    name="skills"
-                    id="skills"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-            </div>
-            <div className="row my-3">
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="address">
-                  Address
-                  <input
-                    type="text"
-                    className="form form-control"
-                    placeholder="address"
-                    value={formState.address || ''}
-                    onChange={handleInputChange}
-                    name="address"
-                    id="address"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="city">
-                  City
-                  <input
-                    type="text"
-                    className="form form-control"
-                    placeholder="city"
-                    value={formState.city || ''}
-                    onChange={handleInputChange}
-                    name="city"
-                    id="city"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-            </div>
-            <div className="row my-3">
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="postcode">
-                  Postcode
-                  <input
-                    type="text"
-                    placeholder="postcode"
-                    className="form form-control"
-                    value={formState.postcode || ''}
-                    onChange={handleInputChange}
-                    name="postcode"
-                    id="postcode"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-              <div className="col-md-6 mb-2 col-sm-12">
-                <label htmlFor="country">
-                  Country
-                  <input
-                    type="text"
-                    placeholder="country"
-                    className="form form-control"
-                    value={formState.country || ''}
-                    onChange={handleInputChange}
-                    name="country"
-                    id="country"
-                    style={{ marginBottom: '20px', width: '30vw' }}
-                  />
-                </label>
-              </div>
-            </div>
-            <button
-              onClick={handleSubmit}
-              type="submit"
-              className="btn btn-primary  mb-3"
-              //style={{ width: '70%' }}
-            >
-              envoyer
-            </button>
           </div>
-          {/* </form> */}
+          <div className="flex flex-col md:flex-row  justify-between gap-28">
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="phone"> </label>
+              Phone
+              <input
+                type="tel"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="phone"
+                value={formState.phone || ''}
+                onChange={handleInputChange}
+                name="phone"
+                id="phone"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="github"> </label>
+              Github
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="github"
+                value={formState.github || ''}
+                onChange={handleInputChange}
+                name="github"
+                id="github"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row  justify-between gap-28">
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="linkedin"> </label>
+              Linkedin
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="linkedin"
+                value={formState.linkedin || ''}
+                onChange={handleInputChange}
+                name="linkedin"
+                id="linkedin"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="skills"> </label>
+              Skills
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="skills"
+                value={formState.skills || ''}
+                onChange={handleInputChange}
+                name="skills"
+                id="skills"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row  justify-between gap-28">
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="address"> </label>
+              Address
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                placeholder="address"
+                value={formState.address || ''}
+                onChange={handleInputChange}
+                name="address"
+                id="address"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="city"> </label>
+              City
+              <input
+                type="text"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white  "
+                placeholder="city"
+                value={formState.city || ''}
+                onChange={handleInputChange}
+                name="city"
+                id="city"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row  justify-between gap-28">
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="postcode"> </label>
+              Postcode
+              <input
+                type="text"
+                placeholder="postcode"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                value={formState.postcode || ''}
+                onChange={handleInputChange}
+                name="postcode"
+                id="postcode"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="flex flex-col  mb-2  ">
+              <label htmlFor="country"> </label>
+              Country
+              <input
+                type="text"
+                placeholder="country"
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                value={formState.country || ''}
+                onChange={handleInputChange}
+                name="country"
+                id="country"
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+          </div>
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
+            //style={{ width: '70%' }}
+          >
+            envoyer
+          </button>
         </div>
+        {/* </form> */}
       </div>
     </div>
   );

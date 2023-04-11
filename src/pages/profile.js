@@ -113,7 +113,7 @@ export default function Home({ cvs }) {
                 </div>
               ))}
 
-            <div className="w-40 aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
+            <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
               {selectedImage ? (
                 // <Image src={selectedImage} alt="" width={500} height={500} />
                 <span>CV Selected</span>
@@ -126,7 +126,7 @@ export default function Home({ cvs }) {
             onClick={handleUpload}
             disabled={uploading}
             style={{ opacity: uploading ? '.5' : '1' }}
-            className="bg-blue-500 text-white p-3 w-32 text-center rounded"
+            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
           >
             {uploading ? 'Uploading...' : 'Upload'}
           </button>
