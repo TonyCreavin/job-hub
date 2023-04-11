@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export default function Application({ applications }) {
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full">
       {applications.map((application) => {
         return (
           <ApplicationCard

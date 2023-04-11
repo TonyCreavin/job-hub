@@ -52,6 +52,14 @@ export default function Home({ cvs }) {
   const handleUpload = async () => {
     setUploading(true);
     try {
+      const existingCv = documents.find(
+        (doc) => doc.userId === application.userId
+      );
+      if (existingCv) {
+        alert('You already have a CV uploaded');
+        return;
+      }
+
       if (!selectedFile) return;
       const formData = new FormData();
       formData.append('myCv', selectedFile);
@@ -92,70 +100,71 @@ export default function Home({ cvs }) {
         className="flex flex-col items-center justify-center"
       >
         <ProfileForm userData={userData} key={userData.id} session={session} />
+        {session && userData?.role === 'APPLICANT' && (
+          <div className="max-w-4xl mx-auto py-20 space-y-6 flex flex-col">
+            <label>
+              <input
+                type="file"
+                hidden
+                onChange={({ target }) => {
+                  if (target.files) {
+                    const file = target.files[0];
 
-        <div className="max-w-4xl mx-auto py-20 space-y-6 flex flex-col">
-          <label>
-            <input
-              type="file"
-              hidden
-              onChange={({ target }) => {
-                if (target.files) {
-                  const file = target.files[0];
+                    setSelectedImage(URL.createObjectURL(file));
+                    setSelectedFile(file);
+                  }
+                }}
+              />
 
-                  setSelectedImage(URL.createObjectURL(file));
-                  setSelectedFile(file);
-                }
-              }}
-            />
-
-            {documents
-              .filter((doc) => doc.userId === session?.user.id)
-              .map((document) => (
-                <div
-                  key={document.id}
-                  className="flex flex-row justify-between border-2 border-solid rounded-md p-2"
-                >
-                  {' '}
-                  <p onClick={() => openDocument(document)}>
-                    CV: {document.filename}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => deleteCv(document.id)}
-                    className=" w-16 h-[4vh] bg-red-500 text-white rounded-md  mb-2 "
+              {documents
+                .filter((doc) => doc.userId === session?.user.id)
+                .map((document) => (
+                  <div
+                    key={document.id}
+                    className="flex flex-row justify-between border-2 border-solid rounded-md p-2"
                   >
-                    Delete
-                  </button>
-                </div>
-              ))}
+                    {' '}
+                    <p onClick={() => openDocument(document)}>
+                      CV: {document.filename}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => deleteCv(document.id)}
+                      className=" w-16 h-[4vh] bg-red-500 text-white rounded-md  mb-2 "
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
 
-            <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
-              {selectedImage ? (
-                // <Image src={selectedImage} alt="" width={500} height={500} />
-                <span>CV Selected</span>
-              ) : (
-                <span>Select CV</span>
-              )}
-            </div>
-          </label>
-          <button
-            onClick={handleUpload}
-            disabled={uploading}
-            style={{ opacity: uploading ? '.5' : '1' }}
-            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
-          >
-            {uploading ? 'Uploading...' : 'Upload'}
-          </button>
-          {
-            // <div className="mt-20 flex flex-col space-y-3">
-            //   {cvs.map((item) => (
-            //     <Link key={item} href={process.env.CV_DIR + item}>
-            //       {item}
-            //     </Link>
-            //   ))}
-            // </div>
-          }
-        </div>
+              <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
+                {selectedImage ? (
+                  // <Image src={selectedImage} alt="" width={500} height={500} />
+                  <span>CV Selected</span>
+                ) : (
+                  <span>Select CV</span>
+                )}
+              </div>
+            </label>
+            <button
+              onClick={handleUpload}
+              disabled={uploading}
+              style={{ opacity: uploading ? '.5' : '1' }}
+              className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
+            >
+              {uploading ? 'Uploading...' : 'Upload'}
+            </button>
+            {
+              // <div className="mt-20 flex flex-col space-y-3">
+              //   {cvs.map((item) => (
+              //     <Link key={item} href={process.env.CV_DIR + item}>
+              //       {item}
+              //     </Link>
+              //   ))}
+              // </div>
+            }
+          </div>
+        )}
       </form>
     </>
   );

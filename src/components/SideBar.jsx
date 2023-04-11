@@ -138,6 +138,16 @@ const SideBar = () => {
                     </Link>
                   </li>
                 )}
+                {session && userData?.role === 'APPLICANT' && (
+                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+                    <Link
+                      href="/offers/ApplicantOffers"
+                      className="text-white no-underline"
+                    >
+                      My Applications
+                    </Link>
+                  </li>
+                )}
                 {session && userData?.role === 'CONSULTANT' && (
                   <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
                     <Link
