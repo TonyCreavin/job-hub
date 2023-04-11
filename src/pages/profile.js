@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import fs from 'fs/promises';
 import axios from 'axios';
-import Link from 'next/link';
+
 import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -41,10 +41,6 @@ export default function Home({ cvs }) {
     }
   };
 
-  useEffect(() => {
-    getDocuments();
-  }, []);
-
   const openDocument = (document) => {
     window.open(`/api/document/${document.id}`, '_blank');
   };
@@ -57,21 +53,27 @@ export default function Home({ cvs }) {
       formData.append('myCv', selectedFile);
       const { data } = await axios.post('/api/document/create', formData);
       console.log(data);
+      await getDocuments(); // Call the function to fetch documents
+      setSelectedFile(null);
+
+      router.push('/profile');
     } catch (error) {
       console.log(error.response?.data);
     }
     setUploading(false);
-    router.push('/profile');
   };
+
   console.log('this is my session', userData);
 
   console.log('files => ', process.env.CV_DIR);
 
   const deleteCv = async (id) => {
+    console.log('id');
     try {
-      await axios.delete(`/api/document/_delete/${id}`);
+      await axios.post(`/api/document/_delete/`, { id });
       getDocuments();
       console.log('CV deleted successfully!');
+      setSelectedFile(null);
     } catch (error) {
       console.log('Error deleting CV:', error);
     }
@@ -79,10 +81,14 @@ export default function Home({ cvs }) {
 
   return (
     <>
-      <form onSubmit={handleUpload} encType="multipart/form-data">
+      <form
+        onSubmit={handleUpload}
+        encType="multipart/form-data"
+        className="flex flex-col items-center justify-center"
+      >
         <ProfileForm userData={userData} key={userData.id} session={session} />
 
-        <div className="max-w-4xl mx-auto p-20 space-y-6 flex flex-col">
+        <div className="max-w-4xl mx-auto py-20 space-y-6 flex flex-col">
           <label>
             <input
               type="file"
@@ -96,17 +102,22 @@ export default function Home({ cvs }) {
                 }
               }}
             />
+
             {documents
               .filter((doc) => doc.userId === session?.user.id)
               .map((document) => (
-                <div key={document.id}>
+                <div
+                  key={document.id}
+                  className="flex flex-row justify-between border-2 border-solid rounded-md p-2"
+                >
                   {' '}
                   <p onClick={() => openDocument(document)}>
                     CV: {document.filename}
                   </p>
                   <button
+                    type="button"
                     onClick={() => deleteCv(document.id)}
-                    className="mb-2"
+                    className=" w-16 h-[4vh] bg-red-500 text-white rounded-md  mb-2 "
                   >
                     Delete
                   </button>
