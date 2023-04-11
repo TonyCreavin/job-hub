@@ -49,17 +49,6 @@ export default function Home({ cvs }) {
     window.open(`/api/document/${document.id}`, '_blank');
   };
 
-  const deleteCv = async (document) => {
-    console.log('Deleting CV with ID:');
-    try {
-      await axios.delete(`/api/document/_delete/${document.id}`);
-      getDocuments();
-      console.log('CV deleted successfully!');
-    } catch (error) {
-      console.log('Error deleting CV:', error);
-    }
-  };
-
   const handleUpload = async () => {
     setUploading(true);
     try {
@@ -77,6 +66,16 @@ export default function Home({ cvs }) {
   console.log('this is my session', userData);
 
   console.log('files => ', process.env.CV_DIR);
+
+  const deleteCv = async (id) => {
+    try {
+      await axios.delete(`/api/document/_delete/${id}`);
+      getDocuments();
+      console.log('CV deleted successfully!');
+    } catch (error) {
+      console.log('Error deleting CV:', error);
+    }
+  };
 
   return (
     <>
@@ -100,14 +99,21 @@ export default function Home({ cvs }) {
             {documents
               .filter((doc) => doc.userId === session?.user.id)
               .map((document) => (
-                <p key={document.id} onClick={() => openDocument(document)}>
-                  CV: {document.filename}
-                </p>
+                <div key={document.id}>
+                  {' '}
+                  <p onClick={() => openDocument(document)}>
+                    CV: {document.filename}
+                  </p>
+                  <button
+                    onClick={() => deleteCv(document.id)}
+                    className="mb-2"
+                  >
+                    Delete
+                  </button>
+                </div>
               ))}
 
-            <button onClick={deleteCv}>Delete</button>
-
-            <div className="w-40 aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
+            <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
               {selectedImage ? (
                 // <Image src={selectedImage} alt="" width={500} height={500} />
                 <span>CV Selected</span>
@@ -120,18 +126,18 @@ export default function Home({ cvs }) {
             onClick={handleUpload}
             disabled={uploading}
             style={{ opacity: uploading ? '.5' : '1' }}
-            className="bg-blue-500 text-white p-3 w-32 text-center rounded"
+            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
           >
             {uploading ? 'Uploading...' : 'Upload'}
           </button>
           {
-            <div className="mt-20 flex flex-col space-y-3">
-              {cvs.map((item) => (
-                <Link key={item} href={process.env.CV_DIR + '/' + item}>
-                  {item}
-                </Link>
-              ))}
-            </div>
+            // <div className="mt-20 flex flex-col space-y-3">
+            //   {cvs.map((item) => (
+            //     <Link key={item} href={process.env.CV_DIR + item}>
+            //       {item}
+            //     </Link>
+            //   ))}
+            // </div>
           }
         </div>
       </form>

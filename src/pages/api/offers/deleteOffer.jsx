@@ -3,17 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-  const { id, userId } = req.body;
+  const { id } = req.body;
   try {
     const deleteOffer = await prisma.offer.delete({
       where: {
         id,
-        user: {
-          connect: { id: userId },
-        },
-        include: {
-          user: true,
-        },
       },
     });
     await prisma.$disconnect();
