@@ -54,12 +54,7 @@ export default function ProfileForm({
         <div style={{ width: '80vw', margin: 'auto' }}>
           <h1 className="text-center my-4">Profile</h1>
 
-          {/* <form
-            className="row d-flex justify-content-around"
-            style={{}}
-            action=""
-          > */}
-          <div className="flex flex-col md:flex-row  justify-between  gap-28">
+          <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="firstName"></label>
               First Name
@@ -89,7 +84,7 @@ export default function ProfileForm({
               />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-28">
+          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="phone"> </label>
               Phone
@@ -119,7 +114,7 @@ export default function ProfileForm({
               />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-28">
+          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="linkedin"> </label>
               Linkedin
@@ -149,7 +144,7 @@ export default function ProfileForm({
               />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-28">
+          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="address"> </label>
               Address
@@ -179,7 +174,7 @@ export default function ProfileForm({
               />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-28">
+          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="postcode"> </label>
               Postcode
@@ -205,7 +200,7 @@ export default function ProfileForm({
                 onChange={handleInputChange}
                 name="country"
                 id="country"
-                style={{ marginBottom: '20px' }}
+                style={{ marginBottom: '30px' }}
               />
             </div>
           </div>
@@ -213,12 +208,10 @@ export default function ProfileForm({
             onClick={handleSubmit}
             type="submit"
             className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
-            //style={{ width: '70%' }}
           >
             envoyer
           </button>
         </div>
-        {/* </form> */}
       </div>
     </div>
   );
