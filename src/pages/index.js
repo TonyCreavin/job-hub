@@ -1,36 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Inter } from 'next/font/google';
 
 import JobPost from '../components/JobPosts';
 import { PrismaClient } from '@prisma/client';
+import PlaceSearchbar from '../components/PlaceSearchbar';
+import JobSearchbar from '../components/JobSearchbar';
 
 const prisma = new PrismaClient();
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Offers({ offers }) {
+  const [filterData, setFilterData] = React.useState([]);
+  const [filterJob, setFilterJob] = React.useState([]);
+
   return (
     <>
-      <div className="flex w-full  justify-around my-5 border-b border-solid border-gray-500 pb-5 ">
-        <input
-          className="w-[40vw] h-8 shadow-lg rounded-md p-2 mr-2"
-          placeholder="Type of job.."
-        />
-        <input
-          className="w-[40vw] h-8 shadow-lg rounded-md p-2 mr-2"
-          placeholder="location.."
-        />
-        <button className="bg-[rgb(50,140,234)] h-8 text-white rounded-md py-1 px-2">
-          Search
-        </button>
+      <div className="flex flex-col items-center  md:flex-row w-full  justify-around my-5 border-b border-solid border-gray-500  ">
+        <JobSearchbar offers={offers} setFilterJob={setFilterJob} />
+        <PlaceSearchbar offers={offers} setFilterData={setFilterData} />
       </div>
-
-      <div className="flex flex-wrap w-full h-screen">
-        {offers.map((offer) => (
-          <JobPost key={offer.id} offer={offer} />
-        ))}
-      </div>
+      {filterData.length !== 0 && (
+        <div className="flex flex-wrap w-full h-screen">
+          {filterData.map((offer) => (
+            <JobPost key={offer.id} offer={offer} />
+          ))}
+        </div>
+      )}
+      {filterJob.length !== 0 && (
+        <div className="flex flex-wrap w-full h-screen">
+          {filterJob.map((offer) => (
+            <JobPost key={offer.id} offer={offer} />
+          ))}
+        </div>
+      )}
+      {filterData.length === 0 && filterJob.length === 0 && (
+        <div className="flex flex-wrap w-full h-screen">
+          {offers.map((offer) => (
+            <JobPost key={offer.id} offer={offer} />
+          ))}
+        </div>
+      )}
     </>
   );
 }
