@@ -15,7 +15,7 @@ function JobDetailsPage({
 
   return (
     <div
-      className="  w-[80vw] h-screen  border-gray-200 border-2 shadow-lg m-4 border-solid rounded-lg mt-3 p-2 overflow-scroll"
+      className="  w-[80vw] h-screen   border-gray-200 border-2  mx-auto border-solid rounded-lg mt-3 p-2 overflow-scroll"
       key={id}
     >
       <h3>Post: {title}</h3>

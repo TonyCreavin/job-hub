@@ -67,7 +67,7 @@ export default function Offer({ offer, user, application }) {
         website={offer?.website}
       />
       {userData.role === 'CONSULTANT' && session.user.id === offer?.userId && (
-        <div>
+        <div className="  mx-auto my-4">
           <button
             className="bg-red-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
             onClick={handleDelete}
@@ -86,7 +86,7 @@ export default function Offer({ offer, user, application }) {
         <button
           onClick={() => setShowApplicationModal((state) => !state)}
           //onClick={handleApplication}
-          className="bg-blue-500 w-40 ml-40 text-white rounded-md py-1 px-2 mb-2"
+          className="bg-blue-500 w-40 mx-auto my-4 text-white rounded-md py-1 px-2 mb-2"
         >
           Start
         </button>

@@ -10,20 +10,20 @@ export default function UploadCoverLetter({
     <>
       <div className="flex flex-col items-center">
         <h3 className="text-center">Write a cover letter</h3>
-        <form onSubmit={handleApplication}>
+        <form onSubmit={handleApplication} className="flex flex-col">
           <textarea
             name="coverLetter"
             id="coverLetter"
             cols="30"
             rows="10"
-            className="border-2 border-gray-300 rounded-md w-3/4 h-full mb-6"
+            className="w-[80vw] h-[80vh] border-solid border-gray-200 border-2  rounded-lg p-3  bg-white"
             value={coverLetter}
             onChange={(e) => setCoverLetter(e.target.value)}
           ></textarea>
 
           <button
             type="submit"
-            className="bg-blue-500 rounded-md text-white w-1/4 h-7 align-middle items-center justify-center mx-auto mb-6"
+            className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
             onClick={handleApplication}
           >
             Upload
