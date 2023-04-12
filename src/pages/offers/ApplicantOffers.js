@@ -24,7 +24,7 @@ export default function Application({ applications }) {
   }, [session?.user.id]);
   console.log('userData => ', userData);
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full">
       <h2 className="text-center my-5">My Applications</h2>
       {applications
         .filter((application) => application.userId === userData.id)

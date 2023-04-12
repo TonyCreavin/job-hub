@@ -21,27 +21,29 @@ export default function Offers({ offers }) {
         <JobSearchbar offers={offers} setFilterJob={setFilterJob} />
         <PlaceSearchbar offers={offers} setFilterData={setFilterData} />
       </div>
-      {filterData.length !== 0 && (
-        <div className="flex flex-wrap w-full h-screen">
-          {filterData.map((offer) => (
-            <JobPost key={offer.id} offer={offer} />
-          ))}
-        </div>
-      )}
-      {filterJob.length !== 0 && (
-        <div className="flex flex-wrap w-full h-screen">
-          {filterJob.map((offer) => (
-            <JobPost key={offer.id} offer={offer} />
-          ))}
-        </div>
-      )}
-      {filterData.length === 0 && filterJob.length === 0 && (
-        <div className="flex flex-wrap w-full h-screen">
-          {offers.map((offer) => (
-            <JobPost key={offer.id} offer={offer} />
-          ))}
-        </div>
-      )}
+      <div className=" w-full h-full">
+        {filterData.length !== 0 && (
+          <div className="flex flex-wrap w-full h-full">
+            {filterData.map((offer) => (
+              <JobPost key={offer.id} offer={offer} />
+            ))}
+          </div>
+        )}
+        {filterJob.length !== 0 && (
+          <div className="flex flex-wrap w-full h-full">
+            {filterJob.map((offer) => (
+              <JobPost key={offer.id} offer={offer} />
+            ))}
+          </div>
+        )}
+        {filterData.length === 0 && filterJob.length === 0 && (
+          <div className="flex flex-wrap w-full h-full">
+            {offers.map((offer) => (
+              <JobPost key={offer.id} offer={offer} />
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }

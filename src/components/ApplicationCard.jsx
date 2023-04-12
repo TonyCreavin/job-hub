@@ -45,36 +45,46 @@ export default function DocumentList({ application, user }) {
   };
 
   return (
-    <div
-      className=" flex flex-col items-start border-solid overflow-scroll  border-gray-200 border-2  w-[90vw] h-[40vh] m-4 rounded-lg p-3 bg-white"
-      key={application.id}
-    >
-      {/* <h3>userId: {application.userId}</h3>
+    <div className="w-full h-full flex flex-col items-center my-4 justify-center">
+      <div
+        className=" flex flex-col items-start border-solid overflow-scroll  border-gray-200 border-2  w-[90vw] h-[40vh] rounded-lg p-3 bg-white"
+        key={application.id}
+      >
+        {/* <h3>userId: {application.userId}</h3>
       <h3>offerId: {application.offerId}</h3>
       <h3>application id: {application.id}</h3> */}
-      <h3>
-        name : {user.firstName} {user.lastName}
-      </h3>
-      {/* <h3>offerId : {application.offerId}</h3> */}
-      {offer.title && <h3 key={offer.id}>offer : {offer.title}</h3>}
-      <h3>company : {offer.company}</h3>
+        <h3>
+          name : {user.firstName} {user.lastName}
+        </h3>
+        {/* <h3>offerId : {application.offerId}</h3> */}
+        {offer.title && <h3 key={offer.id}>offer : {offer.title}</h3>}
+        <h3>company : {offer.company}</h3>
 
-      {documents
-        .filter((doc) => doc.userId === application.userId)
-        .map((document) => (
-          <p key={document.id} onClick={() => openDocument(document)}>
-            cv: {document.filename}
-          </p>
-        ))}
+        {documents
+          .filter((doc) => doc.userId === application.userId)
+          .map((document) => (
+            <p key={document.id} onClick={() => openDocument(document)}>
+              cv: {document.filename}
+            </p>
+          ))}
 
-      <div className="flex flex-col items-start">
-        <button onClick={() => setCoverLetter((coverLetter) => !coverLetter)}>
-          {coverLetter ? 'hide coverletter' : 'show coverletter'}
+        <div className="flex flex-col items-start">
+          <button
+            onClick={() => setCoverLetter((coverLetter) => !coverLetter)}
+            className="bg-green-500 text-white rounded-md w-32 h-7 mb-2"
+          >
+            {coverLetter ? 'hide coverletter' : 'show coverletter'}
+          </button>
+
+          {coverLetter && application.coverLetter}
+        </div>
+        <button
+          onClick={deleteApplication}
+          className="bg-red-500 text-white rounded-md w-20 h-7"
+        >
+          delete
         </button>
-
-        {coverLetter && application.coverLetter}
       </div>
-      <button onClick={deleteApplication}>delete</button>
     </div>
   );
 }
