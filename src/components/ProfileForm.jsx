@@ -52,7 +52,7 @@ export default function ProfileForm({
     <div className="container">
       <div className="jobseeker">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h1 className="text-center my-4">Profile</h1>
+          <h2 className="text-center my-5">My Profile</h2>
 
           <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
@@ -209,7 +209,7 @@ export default function ProfileForm({
             type="submit"
             className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg mb-4"
           >
-            envoyer
+            send
           </button>
         </div>
       </div>

@@ -42,7 +42,7 @@ function Create_offer(props) {
     <div className="container">
       <div className="recruiter">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h1 className="text-center my-4">Post an offer</h1>
+          <h2 className="text-center my-5">Post an offer</h2>
 
           <form className="row d-flex justify-content-around">
             <div className="col-md-6">

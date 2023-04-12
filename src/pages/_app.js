@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import Script from 'next/script';
-import Navbar from '../components/Navbar';
+
 import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
 import 'bootstrap/dist/css/bootstrap.css';

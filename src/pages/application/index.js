@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 export default function Application({ applications }) {
   return (
     <div className="w-full h-full">
+      <h2 className="text-center my-5">Applicants</h2>
       {applications.map((application) => {
         return (
           <ApplicationCard

@@ -19,6 +19,8 @@ export default function Home({ cvs }) {
   const [userData, setUserData] = React.useState({});
   const { data: session, status } = useSession();
   const [documents, setDocuments] = useState([]);
+  const [application, setApplication] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (session?.user.id) {
@@ -40,9 +42,18 @@ export default function Home({ cvs }) {
       setDocuments(result.data);
     }
   };
+  const getApplicants = async () => {
+    const result = await axios.get('/api/application').catch((err) => {
+      console.log('Error fetching applicants:', err);
+    });
+    if (result) {
+      setApplication(result.data);
+    }
+  };
 
   useEffect(() => {
     getDocuments();
+    getApplicants();
   }, []);
 
   const openDocument = (document) => {
@@ -55,11 +66,7 @@ export default function Home({ cvs }) {
       const existingCv = documents.find(
         (doc) => doc.userId === application.userId
       );
-      if (existingCv) {
-        alert('You already have a CV uploaded');
-        return;
-      }
-
+      if (existingCv) return;
       if (!selectedFile) return;
       const formData = new FormData();
       formData.append('myCv', selectedFile);
@@ -67,7 +74,7 @@ export default function Home({ cvs }) {
       console.log(data);
       await getDocuments();
       setSelectedFile(null);
-
+      setUploading(false);
       router.push('/profile');
     } catch (error) {
       console.log(error.response?.data);
@@ -115,7 +122,7 @@ export default function Home({ cvs }) {
                   }
                 }}
               />
-
+              <h3 className="text-center mb-3">Upload you CV</h3>
               {documents
                 .filter((doc) => doc.userId === session?.user.id)
                 .map((document) => (
@@ -138,6 +145,7 @@ export default function Home({ cvs }) {
                 ))}
 
               <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
+                {errorMessage && <p>{errorMessage}</p>}
                 {selectedImage ? (
                   // <Image src={selectedImage} alt="" width={500} height={500} />
                   <span>CV Selected</span>

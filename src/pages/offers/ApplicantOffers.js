@@ -25,6 +25,7 @@ export default function Application({ applications }) {
   console.log('userData => ', userData);
   return (
     <div className="w-full h-screen">
+      <h2 className="text-center my-5">My Applications</h2>
       {applications
         .filter((application) => application.userId === userData.id)
         .map((application) => {
