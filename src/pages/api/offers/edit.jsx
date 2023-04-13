@@ -7,7 +7,8 @@ export default async function handler(req, res) {
     location,
     contractType,
     description,
-
+    favorite,
+    categoryId,
     skills,
     salary,
     company,
@@ -21,7 +22,8 @@ export default async function handler(req, res) {
       location,
       contractType,
       description,
-
+      categoryId,
+      favorite: favorite === 'true' ? true : false,
       skills,
       salary,
       company,
