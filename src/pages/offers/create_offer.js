@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function Create_offer(props) {
+  const [categories, setCategories] = useState([]);
   const router = useRouter();
   const [formState, setFormState] = useState({
     title: '',
@@ -13,7 +15,21 @@ function Create_offer(props) {
     skills: '',
     company: '',
     companyDescription: '',
+    categoryId: '',
   });
+
+  const [formCategory, setFormCategory] = useState({
+    name: '',
+  });
+
+  const getCategory = async () => {
+    const response = await axios.get('/api/category');
+    const data = await response.data;
+    setCategories(data);
+  };
+  useEffect(() => {
+    getCategory();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,6 +105,21 @@ function Create_offer(props) {
                 id="location"
               />{' '}
             </div>
+
+            <select
+              onChange={handleInputChange}
+              name="categoryId"
+              id="categoryId"
+              className="border-solid border-gray-300 border-[1px] h-[5vh] w-[65vw] rounded-md mb-5"
+            >
+              <option className="text-center">Select a category </option>
+              {categories.map((category) => (
+                <option value={category.id} key={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+
             <div className="col-12">
               <input
                 value={formState.website}

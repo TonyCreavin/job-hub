@@ -162,15 +162,6 @@ export default function Home({ cvs }) {
             >
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
-            {
-              // <div className="mt-20 flex flex-col space-y-3">
-              //   {cvs.map((item) => (
-              //     <Link key={item} href={process.env.CV_DIR + item}>
-              //       {item}
-              //     </Link>
-              //   ))}
-              // </div>
-            }
           </div>
         )}
       </form>

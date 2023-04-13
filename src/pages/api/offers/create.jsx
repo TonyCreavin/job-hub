@@ -9,6 +9,11 @@ export default async function handler(req, res) {
         id: data.userId,
       },
     });
+    const category = await prisma.category.findUnique({
+      where: {
+        id: data.categoryId,
+      },
+    });
     const offer = await prisma.offer.create({
       data: {
         title: data.title,
@@ -23,9 +28,13 @@ export default async function handler(req, res) {
         user: {
           connect: { id: user.id },
         },
-      },
-      include: {
-        user: true,
+        category: {
+          connect: { id: category.id },
+        },
+        // include: {
+        //   user: true,
+        //   category: true,
+        // },
       },
     });
     await prisma.$disconnect();
