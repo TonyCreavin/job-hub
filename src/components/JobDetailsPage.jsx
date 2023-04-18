@@ -17,7 +17,7 @@ function JobDetailsPage({
   userId,
 }) {
   const router = useRouter();
-  console.log('id', id);
+  // console.log('id', id);
 
   const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
@@ -25,60 +25,88 @@ function JobDetailsPage({
   const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
-    console.log('xxmyfavorite', myFavorite);
+    // console.log('xxmyfavorite', myFavorite);
     if (myFavorite !== undefined) {
       setIsLoaded(false);
     }
-  }, [myFavorite]);
+  }, []);
 
   useEffect(() => {
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log('res.data => ', res.data);
+          // console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
 
+  // const getFavorite = async () => {
+  //   const res = await axios.get(`/api/favorite`).then((res) => {
+  //     const matchedData = res.data.find((fav) => fav.offerId === id);
+  //     // console.log('matchedData', matchedData);
+  //     setMyFavorite(matchedData);
+  //   });
+  // };
+
   const getFavorite = async () => {
-    const res = await axios.get(`/api/favorite`).then((res) => {
-      const matchedData = res.data.find((fav) => fav.offerId === id);
-      console.log('matchedData', matchedData);
-      setMyFavorite(matchedData);
-    });
+    const res = await axios.get(`/api/favorite`);
+    const matchedData = res.data.find((fav) => fav.offerId === id);
+    setMyFavorite(matchedData || { isFavorite: false });
   };
   useEffect(() => {
     getFavorite();
   }, []);
 
   const handleClick = async () => {
-    setMyFavorite((prev) => ({ ...prev, isFavorite: !prev.isFavorite }));
-    console.log('myFavorite', myFavorite);
+    const updatedFavorite = {
+      ...myFavorite,
+      isFavorite: !myFavorite.isFavorite,
+    };
+    setMyFavorite(updatedFavorite);
 
-    console.log(
-      'favorite',
-      myFavorite.isFavorite,
-      myFavorite.id,
-      myFavorite.userId,
-      myFavorite.offerId,
-      userId,
-      id
-    );
-    console.log('iddddd', id);
-    console.log('userIdddddd', userId);
-
-    const res = await axios.put(`/api/favorite/edit`, {
-      id: myFavorite.id,
-      offerId: id,
-      userId: session?.user.id,
-      isFavorite: myFavorite.isFavorite,
-    });
-    console.log('res.data', res.data);
+    try {
+      const res = await axios.put(`/api/favorite/edit`, {
+        id: updatedFavorite.id,
+        offerId: id,
+        userId: session?.user.id,
+        isFavorite: updatedFavorite.isFavorite,
+      });
+      setMyFavorite(res.data);
+    } catch (err) {
+      console.log(err);
+      setMyFavorite(myFavorite);
+    }
   };
-  console.log('myFavorite XXX', myFavorite);
+
+  // const handleClick = async () => {
+  //   setMyFavorite((prev) => ({ ...prev, isFavorite: !prev.isFavorite }));
+  //   // console.log('myFavorite', myFavorite);
+
+  //   // console.log(
+  //   //   'favorite',
+  //   //   myFavorite.isFavorite,
+  //   //   myFavorite.id,
+  //   //   myFavorite.userId,
+  //   //   myFavorite.offerId,
+  //   //   userId,
+  //   //   id
+  //   // );
+  //   // console.log('iddddd', id);
+  //   // console.log('userIdddddd', userId);
+
+  //   const res = await axios.put(`/api/favorite/edit`, {
+  //     id: myFavorite.id,
+  //     offerId: id,
+  //     userId: session?.user.id,
+  //     isFavorite: myFavorite.isFavorite,
+  //   });
+  //   // console.log('res.data', res.data);
+  // };
+  console.log('res.data', myFavorite);
+  // console.log('myFavorite XXX', myFavorite);
   if (isLoaded) {
     return <div>Loading...</div>;
   }
@@ -93,7 +121,7 @@ function JobDetailsPage({
           userData?.role === 'APPLICANT' &&
           myFavorite != null &&
           myFavorite != undefined &&
-          myFavorite.isFavorite === true && (
+          myFavorite.isFavorite === false && (
             <button onClick={handleClick}>
               <AiOutlineHeart size={30} />
             </button>
@@ -102,7 +130,7 @@ function JobDetailsPage({
           userData?.role === 'APPLICANT' &&
           myFavorite != null &&
           myFavorite != undefined &&
-          myFavorite.isFavorite === false && (
+          myFavorite.isFavorite === true && (
             <button onClick={handleClick}>
               <AiTwotoneHeart size={30} />
             </button>
