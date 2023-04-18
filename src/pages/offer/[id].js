@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import EditOffer from '../../components/EditOffer';
@@ -34,7 +35,6 @@ export default function Offer({ offer, user, application }) {
       userId: session.user.id,
       offerId: offer.id,
       coverLetter: coverLetter,
-      favorite: false,
       applied: true,
     });
     router.push('/');
@@ -65,6 +65,9 @@ export default function Offer({ offer, user, application }) {
         company={offer?.company}
         companyDescription={offer?.companyDescription}
         website={offer?.website}
+        favorite={offer?.favorite}
+        id={offer?.id}
+        userId={offer?.userId}
       />
       {userData.role === 'CONSULTANT' && session.user.id === offer?.userId && (
         <div className="  mx-auto my-4">

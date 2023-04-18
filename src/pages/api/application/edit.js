@@ -1,7 +1,7 @@
 import prisma from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
-  const { userId, offerId, cv, coverLetter, favorite, applied } = req.body;
+  const { userId, offerId, coverLetter, applied } = req.body;
   const { applicationId } = req.query;
 
   try {
@@ -10,9 +10,8 @@ export default async function handler(req, res) {
         id: applicationId,
       },
       data: {
-        cv,
         coverLetter,
-        favorite,
+
         applied,
         user: {
           connect: {

@@ -56,7 +56,7 @@ export default function EditOffer({ closeModal, offer }) {
             />
           </div>
           <div className="flex flex-col  mb-2  ">
-            <label htmlfor="location"> </label>
+            <label htmlFor="location"> </label>
             Location
             <input
               className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
