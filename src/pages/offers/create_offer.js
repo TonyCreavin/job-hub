@@ -5,7 +5,9 @@ import axios from 'axios';
 
 function Create_offer(props) {
   const [categories, setCategories] = useState([]);
+  const [offer, setOffer] = useState(null);
   const router = useRouter();
+  const [offers, setOffers] = useState([]);
   const [formState, setFormState] = useState({
     title: '',
     location: '',
@@ -22,6 +24,14 @@ function Create_offer(props) {
     name: '',
   });
 
+  const getOffers = async () => {
+    const response = await axios.get('/api/offers');
+    const data = await response.data;
+    console.log('res.data =>', response.data);
+    setOffers(data);
+    console.log('data =>', data);
+  };
+
   const getCategory = async () => {
     const response = await axios.get('/api/category');
     const data = await response.data;
@@ -31,18 +41,67 @@ function Create_offer(props) {
     getCategory();
   }, []);
 
+  // useEffect(() => {
+  //   const findOffer = () => {
+  //     const offer = offers.find(
+  //       (off) =>
+  //         off.title === formState.title &&
+  //         off.contractType === formState.contractType &&
+  //         off.location === formState.location &&
+  //         off.company === formState.company &&
+  //         off.companyDescription === formState.companyDescription &&
+  //         off.description === formState.description &&
+  //         off.skills === formState.skills &&
+  //         off.website === formState.website &&
+  //         off.categoryId === formState.categoryId
+  //     );
+  //     if (offer) {
+  //       setOffer(offer);
+  //     }
+  //   };
+
+  //   findOffer();
+  // }, [offers, formState]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = props.data.user.id;
-    const response = await fetch('/api/offers/create', {
-      method: 'POST',
-      body: JSON.stringify({ ...formState, userId }),
-      headers: {
-        'Content-Type': 'application/json',
+
+    const response = await axios.post(
+      '/api/offers/create',
+      {
+        ...formState,
+        userId,
       },
-    });
-    const data = await response.json();
-    console.log(data);
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    await getOffers();
+    // console.log('there are the offers =>', offers);
+    // const offer = offers.find(
+    //   (off) =>
+    //     off.title === formState.title &&
+    //     off.contractType === formState.contractType &&
+    //     off.location === formState.location &&
+    //     off.company === formState.company &&
+    //     off.companyDescription === formState.companyDescription &&
+    //     off.description === formState.description &&
+    //     off.skills === formState.skills &&
+    //     off.website === formState.website &&
+    //     off.categoryId === formState.categoryId
+    // );
+    // setOffer(offer);
+
+    // const offerIdentifier = offer.id;
+    // console.log('this is my offer identifier =>', offerIdentifier);
+    // const res = await axios.post('/api/favorite/create', {
+    //   offerId: offerIdentifier,
+    //   isFavorite: true,
+    // });
+
     router.push('/');
   };
 
@@ -71,7 +130,7 @@ function Create_offer(props) {
                 style={{ marginBottom: '5vh' }}
                 name="title"
                 id="title"
-              />{' '}
+              />
               <input
                 value={formState.contractType}
                 onChange={handleInputChange}
@@ -81,7 +140,7 @@ function Create_offer(props) {
                 style={{ marginBottom: '5vh' }}
                 name="contractType"
                 id="contractType"
-              />{' '}
+              />
             </div>
             <div className="col-md-6">
               <input
@@ -93,7 +152,7 @@ function Create_offer(props) {
                 style={{ marginBottom: '5vh' }}
                 name="company"
                 id="company"
-              />{' '}
+              />
               <input
                 value={formState.location}
                 onChange={handleInputChange}
@@ -103,7 +162,7 @@ function Create_offer(props) {
                 style={{ marginBottom: '5vh' }}
                 name="location"
                 id="location"
-              />{' '}
+              />
             </div>
 
             <select

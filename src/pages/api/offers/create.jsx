@@ -25,18 +25,21 @@ export default async function handler(req, res) {
         salary: data.salary,
         website: data.website,
         companyDescription: data.companyDescription,
+
         user: {
           connect: { id: user.id },
         },
         category: {
           connect: { id: category.id },
         },
-        // include: {
-        //   user: true,
-        //   category: true,
-        // },
       },
     });
+    const favorite = await prisma.favorite.create({
+      data: {
+        offer: { connect: { id: offer.id } },
+      },
+    });
+
     await prisma.$disconnect();
     res.json(offer);
   } catch (error) {
