@@ -23,9 +23,9 @@ function JobDetailsPage({
   const [userData, setUserData] = useState({});
   const [myFavorite, setMyFavorite] = useState({ isFavorite: false });
   const [isLoaded, setIsLoaded] = useState(true);
+  const [button, setButton] = useState(false);
 
   useEffect(() => {
-    // console.log('xxmyfavorite', myFavorite);
     if (myFavorite !== undefined) {
       setIsLoaded(false);
     }
@@ -36,29 +36,25 @@ function JobDetailsPage({
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          // console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-
-  // const getFavorite = async () => {
-  //   const res = await axios.get(`/api/favorite`).then((res) => {
-  //     const matchedData = res.data.find((fav) => fav.offerId === id);
-  //     // console.log('matchedData', matchedData);
-  //     setMyFavorite(matchedData);
-  //   });
-  // };
-
-  const getFavorite = async () => {
-    const res = await axios.get(`/api/favorite`);
-    const matchedData = res.data.find((fav) => fav.offerId === id);
-    setMyFavorite(matchedData || { isFavorite: false });
-  };
   useEffect(() => {
-    getFavorite();
-  }, []);
+    const getFavorite = async () => {
+      const res = await axios.get(`/api/favorite`);
+      const matchedData = res.data.find(
+        (fav) => fav.offerId === id && fav.userId === session?.user.id
+      );
+      setMyFavorite(matchedData || { isFavorite: false });
+
+      setIsLoaded(true);
+    };
+    if (session?.user.id) {
+      getFavorite();
+    }
+  }, [session?.user.id]);
 
   const handleClick = async () => {
     const updatedFavorite = {
@@ -68,46 +64,33 @@ function JobDetailsPage({
     setMyFavorite(updatedFavorite);
 
     try {
-      const res = await axios.put(`/api/favorite/edit`, {
-        id: updatedFavorite.id,
+      const res = await axios.post(`/api/favorite/create`, {
         offerId: id,
         userId: session?.user.id,
         isFavorite: updatedFavorite.isFavorite,
       });
       setMyFavorite(res.data);
+      localStorage.setItem(
+        `myFavorite_${session?.user.id}`,
+        JSON.stringify(res.data)
+      );
+      setButton(updatedFavorite.isFavorite);
     } catch (err) {
       console.log(err);
       setMyFavorite(myFavorite);
     }
   };
 
-  // const handleClick = async () => {
-  //   setMyFavorite((prev) => ({ ...prev, isFavorite: !prev.isFavorite }));
-  //   // console.log('myFavorite', myFavorite);
+  const handleClick2 = async () => {
+    const result = await axios.post(`/api/favorite/_delete`, {
+      id: myFavorite.id,
+    });
+    setMyFavorite({ isFavorite: false });
+    localStorage.removeItem(`myFavorite_${session?.user.id}`);
+    setButton(false);
+  };
 
-  //   // console.log(
-  //   //   'favorite',
-  //   //   myFavorite.isFavorite,
-  //   //   myFavorite.id,
-  //   //   myFavorite.userId,
-  //   //   myFavorite.offerId,
-  //   //   userId,
-  //   //   id
-  //   // );
-  //   // console.log('iddddd', id);
-  //   // console.log('userIdddddd', userId);
-
-  //   const res = await axios.put(`/api/favorite/edit`, {
-  //     id: myFavorite.id,
-  //     offerId: id,
-  //     userId: session?.user.id,
-  //     isFavorite: myFavorite.isFavorite,
-  //   });
-  //   // console.log('res.data', res.data);
-  // };
-  console.log('res.data', myFavorite);
-  // console.log('myFavorite XXX', myFavorite);
-  if (isLoaded) {
+  if (!isLoaded) {
     return <div>Loading...</div>;
   }
 
@@ -121,7 +104,7 @@ function JobDetailsPage({
           userData?.role === 'APPLICANT' &&
           myFavorite != null &&
           myFavorite != undefined &&
-          myFavorite.isFavorite === false && (
+          !myFavorite.isFavorite && (
             <button onClick={handleClick}>
               <AiOutlineHeart size={30} />
             </button>
@@ -131,7 +114,7 @@ function JobDetailsPage({
           myFavorite != null &&
           myFavorite != undefined &&
           myFavorite.isFavorite === true && (
-            <button onClick={handleClick}>
+            <button onClick={handleClick2}>
               <AiTwotoneHeart size={30} />
             </button>
           )}

@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 
 export default async function handler(req, res) {
   const { id } = req.body;
-  console.log('idds', req);
+
   const document = await prisma.document.findUnique({
     where: {
       id,
