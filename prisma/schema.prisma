@@ -60,6 +60,7 @@ model Offer {
 
 model Application {
   id      String @id @unique @default(uuid())
+  cv String?
   user    User?   @relation("applicant_applications", fields: [userId], references: [id], onDelete: Cascade)
   userId  String?
   offer   Offer?  @relation("offer_applications", fields: [offerId], references: [id], onDelete: Cascade)
@@ -68,8 +69,9 @@ model Application {
   applied     Boolean @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  document Document? @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  document Document? @relation(fields: [documentId], references: [id])
   documentId String?
+ 
 
 }
 

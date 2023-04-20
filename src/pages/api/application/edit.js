@@ -1,17 +1,18 @@
 import prisma from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
-  const { userId, offerId, coverLetter, applied } = req.body;
-  const { applicationId } = req.query;
+  const { id, userId, offerId, coverLetter, applied, documentId, cv } =
+    req.body;
+  //const { applicationId } = req.query;
 
   try {
     const result = await prisma.application.update({
       where: {
-        id: applicationId,
+        id,
       },
       data: {
         coverLetter,
-
+        cv,
         applied,
         user: {
           connect: {
@@ -21,6 +22,11 @@ export default async function handler(req, res) {
         offer: {
           connect: {
             id: offerId,
+          },
+        },
+        document: {
+          connect: {
+            id: documentId,
           },
         },
       },
