@@ -21,13 +21,13 @@ export default function UploadCoverLetter({
             onChange={(e) => setCoverLetter(e.target.value)}
           ></textarea>
 
-          <button
+          {/* <button
             type="submit"
             className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
             onClick={handleApplication}
           >
-            Upload
-          </button>
+            Apply
+          </button> */}
         </form>
       </div>
     </>

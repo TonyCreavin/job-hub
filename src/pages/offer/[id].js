@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-
+import UploadCv from '../../components/UploadCv';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import EditOffer from '../../components/EditOffer';
 import { useRouter } from 'next/router';
 import JobDetailsPage from '../../components/JobDetailsPage';
 import UploadCoverLetter from '../../components/UploadCoverLetter';
+import fs from 'fs/promises';
+import path from 'path';
 
 import { getSession, useSession } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
-export default function Offer({ offer, user, application }) {
+export default function Offer({ offer, user, application, cvs }) {
   const [userData, setUserData] = React.useState({});
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
@@ -95,17 +97,28 @@ export default function Offer({ offer, user, application }) {
         </button>
       )}
       {showApplicationModal && (
-        <UploadCoverLetter
-          handleApplication={handleApplication}
-          setCoverLetter={setCoverLetter}
-          coverLetter={coverLetter}
-          closeModal={() => setShowApplicationModal(false)}
-          offer={offer}
-          document={document}
-          user={user}
-          application={application}
-        />
+        <>
+          <UploadCoverLetter
+            handleApplication={handleApplication}
+            setCoverLetter={setCoverLetter}
+            coverLetter={coverLetter}
+            closeModal={() => setShowApplicationModal(false)}
+            offer={offer}
+            document={document}
+            user={user}
+            application={application}
+          />
+          <UploadCv cvs={cvs} />
+          <button
+            type="submit"
+            className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
+            onClick={handleApplication}
+          >
+            Apply
+          </button>
+        </>
       )}
+
       {showEditOfferModal ? (
         <EditOffer
           offer={offer}
@@ -119,6 +132,10 @@ export default function Offer({ offer, user, application }) {
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const session = await getSession(context);
+  const props = { cvs: [] };
+
+  const cvs = await fs.readdir(path.join(process.env.CV_DIR));
+  props.cvs = cvs;
 
   if (!session) {
     return {
@@ -138,6 +155,7 @@ export async function getServerSideProps(context) {
     props: {
       offer: JSON.parse(JSON.stringify(offer)),
       session: session,
+      cvs: props.cvs,
     },
   };
 }
