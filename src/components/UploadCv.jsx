@@ -10,7 +10,7 @@ import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home({ cvs }) {
+export default function Home({ cvs, cv }) {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
@@ -71,10 +71,11 @@ export default function Home({ cvs }) {
       formData.append('myCv', selectedFile);
       const { data } = await axios.post('/api/document/create', formData);
       console.log(data);
+      setCv(data);
+
       await getDocuments();
       setSelectedFile(null);
       setUploading(false);
-      //router.push('/profile');
     } catch (error) {
       console.log(error.response?.data);
     }

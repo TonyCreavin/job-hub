@@ -20,6 +20,8 @@ export default function Offer({ offer, user, application, cvs }) {
   const [showEditOfferModal, setShowEditOfferModal] = useState(false);
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
+  const [cv, setCv] = useState([]);
+  const [appcv, setAppcv] = useState([]);
 
   const router = useRouter();
 
@@ -30,17 +32,50 @@ export default function Offer({ offer, user, application, cvs }) {
     router.push('/');
   }
 
+  const getDocument = async () => {
+    const res = await axios.get(`/api/document/`).then((res) => {
+      const matchedData = res.data.find(
+        (data) => data.userId === session?.user.id
+      );
+
+      setCv(matchedData);
+    });
+  };
+  useEffect(() => {
+    getDocument();
+  }, []);
+
   async function handleApplication(e) {
     e.preventDefault();
 
-    await axios.post('/api/application/create', {
-      userId: session.user.id,
-      offerId: offer.id,
-      coverLetter: coverLetter,
-      applied: true,
-    });
-    router.push('/');
+    await axios
+      .post('/api/application/create', {
+        userId: session.user.id,
+        offerId: offer.id,
+        coverLetter: coverLetter,
+        applied: true,
+        documentId: cv.id,
+        cv: 'my cv',
+      })
+      .then((res) => {
+        console.log('res.data... => ', res.data);
+        setAppcv(res.data);
+      });
   }
+  const finalbutton = async () => {
+    const res = await axios.put(`/api/application/edit/`, {
+      id: appcv.id,
+      userId: session.user.id,
+      offerId: appcv.offerId,
+      coverLetter: appcv.coverLetter,
+      applied: true,
+      documentId: appcv.documentId,
+      cv: appcv.documentId,
+    });
+
+    router.push('/');
+    console.log('cv', cv.id);
+  };
 
   useEffect(() => {
     if (session?.user.id) {
@@ -115,6 +150,13 @@ export default function Offer({ offer, user, application, cvs }) {
             onClick={handleApplication}
           >
             Apply
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
+            onClick={finalbutton}
+          >
+            finalise
           </button>
         </>
       )}

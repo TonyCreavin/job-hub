@@ -9,8 +9,9 @@ export default function DocumentList({ application, user }) {
   const [offer, setOffer] = useState({});
 
   const getDocuments = async () => {
-    const result = await axios.get('/api/document').catch((err) => {
-      console.log('Error fetching documents:', err);
+    const result = await axios.get('/api/document').then((result) => {
+      result.data.find((doc) => doc.id === application.documentId);
+      setDocuments(result.data);
     });
     if (result) {
       setDocuments(result.data);
@@ -59,14 +60,12 @@ export default function DocumentList({ application, user }) {
         {/* <h3>offerId : {application.offerId}</h3> */}
         {offer.title && <h3 key={offer.id}>offer : {offer.title}</h3>}
         <h3>company : {offer.company}</h3>
-
-        {documents
-          .filter((doc) => doc.userId === application.userId)
-          .map((document) => (
-            <p key={document.id} onClick={() => openDocument(document)}>
-              cv: {document.filename}
-            </p>
-          ))}
+        <h3>cv: {application.cv}</h3>
+        {documents.map((document) => (
+          <p key={document.id} onClick={() => openDocument(document)}>
+            cv: {document.filename}
+          </p>
+        ))}
 
         <div className="flex flex-col items-start">
           <button
