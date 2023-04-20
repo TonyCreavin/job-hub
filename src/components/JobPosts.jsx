@@ -8,6 +8,13 @@ function JobPost({ offer }) {
   const [myFavorite, setMyFavorite] = useState({ isFavorite: false });
   const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
+  const [isLoaded, setIsLoaded] = useState(true);
+
+  useEffect(() => {
+    if (myFavorite !== undefined) {
+      setIsLoaded(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (session?.user.id) {
@@ -20,17 +27,20 @@ function JobPost({ offer }) {
     }
   }, [session?.user.id]);
 
-  const getOffer = async () => {
-    const result = await axios.get(`/api/favorite`).then((result) => {
-      const matchedData = result.data.find(
+  useEffect(() => {
+    const getFavorite = async () => {
+      const res = await axios.get(`/api/favorite`);
+      const matchedData = res.data.find(
         (fav) => fav.offerId === offer.id && fav.userId === session?.user.id
       );
       setMyFavorite(matchedData || { isFavorite: false });
-    });
-  };
-  useEffect(() => {
-    getOffer();
-  }, []);
+
+      setIsLoaded(true);
+    };
+    if (session?.user.id) {
+      getFavorite();
+    }
+  }, [session?.user.id]);
 
   return (
     <Link href={`/offer/${offer.id}`} className="no-underline text-black">
