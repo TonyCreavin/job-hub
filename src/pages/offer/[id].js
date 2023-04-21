@@ -133,6 +133,10 @@ export default function Offer({ offer, user, application, cvs }) {
       )}
       {showApplicationModal && (
         <>
+          <UploadCv
+            cvs={cvs}
+            setShowApplicationModal={setShowApplicationModal}
+          />
           <UploadCoverLetter
             handleApplication={handleApplication}
             setCoverLetter={setCoverLetter}
@@ -143,7 +147,7 @@ export default function Offer({ offer, user, application, cvs }) {
             user={user}
             application={application}
           />
-          <UploadCv cvs={cvs} />
+
           <button
             type="submit"
             className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
