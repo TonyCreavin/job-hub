@@ -74,7 +74,6 @@ export default function Home({ cvs }) {
       await getDocuments();
       setSelectedFile(null);
       setUploading(false);
-      //router.push('/profile');
     } catch (error) {
       console.log(error.response?.data);
     }

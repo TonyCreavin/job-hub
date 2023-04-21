@@ -51,6 +51,7 @@ function JobPost({ offer }) {
         <div className="flex justify-between">
           <h3>Post: {offer.title}</h3>
           {myFavorite != undefined &&
+            userData.role === 'APPLICANT' &&
             myFavorite != null &&
             myFavorite.isFavorite && <AiTwotoneHeart size={30} />}
         </div>

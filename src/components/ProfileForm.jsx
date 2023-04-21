@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
-
+import UploadCv from '../components/UploadCv';
 export default function ProfileForm({
   userData,
 
@@ -212,6 +212,7 @@ export default function ProfileForm({
             send
           </button>
         </div>
+        {session && userData.role === 'APPLICANT' && <UploadCv />}
       </div>
     </div>
   );
