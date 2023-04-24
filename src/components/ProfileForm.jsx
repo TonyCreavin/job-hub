@@ -2,11 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import UploadCv from '../components/UploadCv';
-export default function ProfileForm({
-  userData,
-
-  session,
-}) {
+import { sendNotification } from '../../lib/notification';
+export default function ProfileForm({ userData, session }) {
   const [formState, setFormState] = useState(userData);
   console.log(
     'this is is??, ',
@@ -14,6 +11,12 @@ export default function ProfileForm({
     formState.firstName,
     session?.user.id
   );
+
+  const values = {
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    email: userData.email,
+  };
 
   const handleInputChange = (event) => {
     console.log('event.target.name => ', event.target.name);
@@ -46,6 +49,7 @@ export default function ProfileForm({
         country: formState.country,
       }),
     });
+    await sendNotification(values);
   };
 
   return (
