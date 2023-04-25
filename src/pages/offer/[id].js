@@ -8,6 +8,7 @@ import JobDetailsPage from '../../components/JobDetailsPage';
 import UploadCoverLetter from '../../components/UploadCoverLetter';
 import fs from 'fs/promises';
 import path from 'path';
+import { toast } from 'react-toastify';
 
 import { getSession, useSession } from 'next-auth/react';
 
@@ -38,6 +39,11 @@ export default function Offer({ offer, user, application, cvs }) {
       offerId: offer.id,
       coverLetter: coverLetter,
       applied: true,
+    });
+    toast('Application sent', {
+      hideProgressBar: true,
+      autoClose: 2000,
+      type: 'success',
     });
     router.push('/');
   }
