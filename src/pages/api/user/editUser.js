@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     emailVerified,
     address,
     email,
-
+    notification,
     phone,
     linkedin,
     image,
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       skills,
       address,
       email,
-
+      notification,
       phone,
       linkedin,
       image,

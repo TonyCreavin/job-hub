@@ -124,7 +124,7 @@ const SideBar = () => {
               <ul className="navbar-nav mx-auto bd-navbar-nav d-flex">
                 <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
                   <Link href="/" className="text-white no-underline">
-                    Home
+                    Accueil
                   </Link>
                 </li>
 
@@ -134,7 +134,7 @@ const SideBar = () => {
                       href="/offers/consultantOffers"
                       className="text-white no-underline "
                     >
-                      My Offers
+                      Mes Offres
                     </Link>
                   </li>
                 )}
@@ -144,7 +144,7 @@ const SideBar = () => {
                       href="/offers/ApplicantOffers"
                       className="text-white no-underline"
                     >
-                      My Applications
+                      Mes Candidatures
                     </Link>
                   </li>
                 )}
@@ -154,7 +154,7 @@ const SideBar = () => {
                       href="/application"
                       className="text-white no-underline"
                     >
-                      Applications
+                      Candidatures
                     </Link>
                   </li>
                 )}
@@ -164,13 +164,13 @@ const SideBar = () => {
                       href="/offers/create_offer"
                       className="text-white no-underline"
                     >
-                      create offer
+                      Créer une offre
                     </Link>
                   </li>
                 )}
                 <li className="nav-item    col-6 col-lg-auto mt-2 mr-20">
                   <Link href="/profile" className="text-white no-underline">
-                    Profile
+                    Mon Profil
                   </Link>
                 </li>
               </ul>
@@ -209,7 +209,7 @@ const SideBar = () => {
                       className="bg-slate-300 p-3 mr-3 rounded-lg"
                       onClick={handleSwitchToConsultant}
                     >
-                      Recruiter
+                      Recruiteur
                     </button>
                   </Link>
                 )}
@@ -220,7 +220,7 @@ const SideBar = () => {
                       className="bg-slate-300 p-3 mr-3 rounded-lg"
                       onClick={handleSwitchToApplicant}
                     >
-                      Jobseeker
+                      Candidat
                     </button>
                   </Link>
                 )}

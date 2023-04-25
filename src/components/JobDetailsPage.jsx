@@ -119,16 +119,16 @@ function JobDetailsPage({
             </button>
           )}
 
-        <h3>Post: {title}</h3>
-        <h3>Location: {location}</h3>
+        <h3>Poste: {title}</h3>
+        <h3>Lieu: {location}</h3>
 
-        <h3>Contract: {contractType}</h3>
+        <h3>Contrat: {contractType}</h3>
       </div>
       <div className="flex flex-row justify-between">
-        <h3>company :{company}</h3>
-        <h3>website :{website}</h3>
+        <h3>Entreprise :{company}</h3>
+        <h3>Site web :{website}</h3>
       </div>
-      <h3>company description :</h3>
+      <h3>{`Description de l'entreprise`}</h3>
       <h3>{companyDescription}</h3>
       <h3>Description:</h3>
       <h3>{description}</h3>

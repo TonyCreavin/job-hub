@@ -10,9 +10,9 @@ const handler = async (req, res) => {
       await transporter.sendMail({
         ...mailOptions,
         to: data.email,
-        subject: data.subject || 'Registration successful',
+        subject: data.subject || 'Inscription réussie',
         text: data.message || 'This is a test email',
-        html: `<h1>Hello ${data.firstName}<h1><p>You have successfully registered with the following email: ${data.email}</p>`,
+        html: `<h1>Bonjour ${data.firstName}<h1><p>Vous avez réussi à vous inscrire avec le courriel suivant : ${data.email}</p>`,
       });
       return res.status(200).json({ message: 'Request successful' });
     } catch (error) {

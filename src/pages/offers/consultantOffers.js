@@ -28,7 +28,7 @@ export default function ConsultantOffers({ offers }) {
 
   return (
     <>
-      <h2 className="text-center my-5">My Offers</h2>
+      <h2 className="text-center my-5">Mes Offres</h2>
       <div className="flex flex-wrap w-full h-screen">
         {offers.map(
           (offer) =>

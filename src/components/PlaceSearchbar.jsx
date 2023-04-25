@@ -20,7 +20,7 @@ export default function PlaceSearchbar({ offers, setFilterData }) {
       <input
         type="text"
         className="w-[90vw] mb-4 md:w-[40vw] h-8 border-solid border-gray-200 border-2  rounded-md p-2 mr-2"
-        placeholder="search a city..."
+        placeholder="cherchez une ville..."
         id="jobsearch"
         onChange={handleFilter}
       />
