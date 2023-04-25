@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import axios from 'axios';
 
@@ -74,6 +75,11 @@ export default function Home({ cvs }) {
       await getDocuments();
       setSelectedFile(null);
       setUploading(false);
+      toast('CV uploaded', {
+        hideProgressBar: true,
+        autoClose: 2000,
+        type: 'success',
+      });
     } catch (error) {
       console.log(error.response?.data);
     }
