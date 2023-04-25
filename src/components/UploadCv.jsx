@@ -75,7 +75,7 @@ export default function Home({ cvs }) {
       await getDocuments();
       setSelectedFile(null);
       setUploading(false);
-      toast('CV uploaded', {
+      toast('CV téléchargé', {
         hideProgressBar: true,
         autoClose: 2000,
         type: 'success',
@@ -125,7 +125,7 @@ export default function Home({ cvs }) {
                   }
                 }}
               />
-              <h3 className="text-center mb-3">Upload you CV</h3>
+              <h3 className="text-center mb-3">Télécharger votre CV</h3>
               {documents
                 .filter((doc) => doc.userId === session?.user.id)
                 .map((document) => (
@@ -142,7 +142,7 @@ export default function Home({ cvs }) {
                       onClick={() => deleteCv(document.id)}
                       className=" w-16 h-[4vh] bg-red-500 text-white rounded-md  mb-2 "
                     >
-                      Delete
+                      Supprimer
                     </button>
                   </div>
                 ))}
@@ -150,9 +150,9 @@ export default function Home({ cvs }) {
               <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
                 {errorMessage && <p>{errorMessage}</p>}
                 {selectedImage ? (
-                  <span>CV Selected</span>
+                  <span>CV Sélectionné</span>
                 ) : (
-                  <span>Select CV</span>
+                  <span>Sélectionner CV</span>
                 )}
               </div>
             </label>
@@ -162,7 +162,7 @@ export default function Home({ cvs }) {
               style={{ opacity: uploading ? '.5' : '1' }}
               className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
             >
-              {uploading ? 'Uploading...' : 'Upload'}
+              {uploading ? 'En cours de téléchargement...' : 'Télécharger'}
             </button>
           </div>
         )}

@@ -117,7 +117,7 @@ function Create_offer(props) {
     <div className="container">
       <div className="recruiter">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5">Post an offer</h2>
+          <h2 className="text-center my-5">Créer un offre</h2>
 
           <form className="row d-flex justify-content-around">
             <div className="col-md-6">
@@ -126,7 +126,7 @@ function Create_offer(props) {
                 value={formState.title}
                 onChange={handleInputChange}
                 className="form form-control"
-                placeholder="Job title"
+                placeholder={`titre de l'offre`}
                 style={{ marginBottom: '5vh' }}
                 name="title"
                 id="title"
@@ -136,7 +136,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="contract type"
+                placeholder="type de contrat"
                 style={{ marginBottom: '5vh' }}
                 name="contractType"
                 id="contractType"
@@ -148,7 +148,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="company"
+                placeholder="entreprise"
                 style={{ marginBottom: '5vh' }}
                 name="company"
                 id="company"
@@ -158,7 +158,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="location"
+                placeholder="lieu"
                 style={{ marginBottom: '5vh' }}
                 name="location"
                 id="location"
@@ -171,7 +171,9 @@ function Create_offer(props) {
               id="categoryId"
               className="border-solid border-gray-300 border-[1px] h-[5vh] w-[65vw] rounded-md mb-5"
             >
-              <option className="text-center">Select a category </option>
+              <option className="text-center">
+                Sélectionnez une catégorie{' '}
+              </option>
               {categories.map((category) => (
                 <option value={category.id} key={category.id}>
                   {category.name}
@@ -185,7 +187,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="website"
+                placeholder="site web"
                 style={{ marginBottom: '5vh' }}
                 name="website"
                 id="website"
@@ -209,7 +211,7 @@ function Create_offer(props) {
                 name="companyDescription"
                 cols="30"
                 rows="10"
-                placeholder="company description"
+                placeholder={`description de l'entreprise`}
                 style={{ marginBottom: '5vh' }}
                 value={formState.companyDescription}
                 onChange={handleInputChange}
@@ -221,7 +223,7 @@ function Create_offer(props) {
                 className="btn btn-primary btn-block"
                 style={{ width: '100%', marginBottom: '5vh' }}
               >
-                Submit
+                Envoyer
               </button>
             </div>
           </form>

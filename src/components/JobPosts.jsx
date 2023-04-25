@@ -49,14 +49,14 @@ function JobPost({ offer }) {
         key={offer.id}
       >
         <div className="flex justify-between">
-          <h3>Post: {offer.title}</h3>
+          <h3>Poste: {offer.title}</h3>
           {myFavorite != undefined &&
             userData.role === 'APPLICANT' &&
             myFavorite != null &&
             myFavorite.isFavorite && <AiTwotoneHeart size={30} />}
         </div>
-        <h3>Location: {offer.location}</h3>
-        <h3>Contract: {offer.contractType}</h3>
+        <h3>Lieu: {offer.location}</h3>
+        <h3>Contrat: {offer.contractType}</h3>
         <h3>Description:</h3>
         <h3>{offer.description}</h3>
         <h3>{offer.id}</h3>

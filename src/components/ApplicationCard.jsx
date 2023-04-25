@@ -54,11 +54,11 @@ export default function DocumentList({ application, user }) {
       <h3>offerId: {application.offerId}</h3>
       <h3>application id: {application.id}</h3> */}
         <h3>
-          name : {user.firstName} {user.lastName}
+          nom : {user.firstName} {user.lastName}
         </h3>
         {/* <h3>offerId : {application.offerId}</h3> */}
-        {offer.title && <h3 key={offer.id}>offer : {offer.title}</h3>}
-        <h3>company : {offer.company}</h3>
+        {offer.title && <h3 key={offer.id}>offre : {offer.title}</h3>}
+        <h3>entreprise : {offer.company}</h3>
 
         {documents
           .filter((doc) => doc.userId === application.userId)
@@ -71,9 +71,11 @@ export default function DocumentList({ application, user }) {
         <div className="flex flex-col items-start">
           <button
             onClick={() => setCoverLetter((coverLetter) => !coverLetter)}
-            className="bg-green-500 text-white rounded-md w-32 h-7 mb-2"
+            className="bg-green-500 text-white rounded-md w-60 h-7 mb-2"
           >
-            {coverLetter ? 'hide coverletter' : 'show coverletter'}
+            {coverLetter
+              ? 'Masquer la lettre de motivation'
+              : 'Afficher la lettre de motivation'}
           </button>
 
           {coverLetter && application.coverLetter}
@@ -82,7 +84,7 @@ export default function DocumentList({ application, user }) {
           onClick={deleteApplication}
           className="bg-red-500 text-white rounded-md w-20 h-7"
         >
-          delete
+          supprimer
         </button>
       </div>
     </div>

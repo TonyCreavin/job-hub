@@ -29,27 +29,31 @@ export default function ProfileForm({ userData, session }) {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch('/api/user/editUser', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-      body: JSON.stringify({
-        id: session?.user.id,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-        phone: formState.phone,
-        github: formState.github,
-        linkedin: formState.linkedin,
-        skills: formState.skills,
-        address: formState.address,
-        city: formState.city,
-        postcode: formState.postcode,
-        country: formState.country,
-      }),
-    });
-    await sendNotification(values);
+    try {
+      const response = await fetch('/api/user/editUser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+        body: JSON.stringify({
+          id: session?.user.id,
+          firstName: formState.firstName,
+          lastName: formState.lastName,
+          phone: formState.phone,
+          github: formState.github,
+          linkedin: formState.linkedin,
+          skills: formState.skills,
+          address: formState.address,
+          city: formState.city,
+          postcode: formState.postcode,
+          country: formState.country,
+        }),
+      });
+      await sendNotification(values);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -61,46 +65,43 @@ export default function ProfileForm({ userData, session }) {
           <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="firstName"></label>
-              First Name
+              Prénom
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="firstname"
                 value={formState.firstName || ''}
                 onChange={handleInputChange}
                 name="firstName"
                 id="firstName"
-                style={{ marginBottom: '20px' }}
               />
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="lastName"></label>
-              Lastname
+              Nom
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="lastname"
                 value={formState.lastName || ''}
                 onChange={handleInputChange}
                 name="lastName"
                 id="lastName"
-                style={{ marginBottom: '20px' }}
               />
             </div>
           </div>
           <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="phone"> </label>
-              Phone
+              Téléphone
               <input
                 type="tel"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="phone"
                 value={formState.phone || ''}
                 onChange={handleInputChange}
                 name="phone"
                 id="phone"
-                style={{ marginBottom: '20px' }}
               />
             </div>
             <div className="flex flex-col  mb-2  ">
@@ -108,13 +109,12 @@ export default function ProfileForm({ userData, session }) {
               Github
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="github"
                 value={formState.github || ''}
                 onChange={handleInputChange}
                 name="github"
                 id="github"
-                style={{ marginBottom: '20px' }}
               />
             </div>
           </div>
@@ -124,87 +124,81 @@ export default function ProfileForm({ userData, session }) {
               Linkedin
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="linkedin"
                 value={formState.linkedin || ''}
                 onChange={handleInputChange}
                 name="linkedin"
                 id="linkedin"
-                style={{ marginBottom: '20px' }}
               />
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="skills"> </label>
-              Skills
+              Compétences
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="skills"
                 value={formState.skills || ''}
                 onChange={handleInputChange}
                 name="skills"
                 id="skills"
-                style={{ marginBottom: '20px' }}
               />
             </div>
           </div>
           <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="address"> </label>
-              Address
+              Adresse
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                 placeholder="address"
                 value={formState.address || ''}
                 onChange={handleInputChange}
                 name="address"
                 id="address"
-                style={{ marginBottom: '20px' }}
               />
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="city"> </label>
-              City
+              Ville
               <input
                 type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white  "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
                 placeholder="city"
                 value={formState.city || ''}
                 onChange={handleInputChange}
                 name="city"
                 id="city"
-                style={{ marginBottom: '20px' }}
               />
             </div>
           </div>
           <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="postcode"> </label>
-              Postcode
+              Code postal
               <input
                 type="text"
                 placeholder="postcode"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
                 value={formState.postcode || ''}
                 onChange={handleInputChange}
                 name="postcode"
                 id="postcode"
-                style={{ marginBottom: '20px' }}
               />
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="country"> </label>
-              Country
+              Pays
               <input
                 type="text"
                 placeholder="country"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[30px]"
                 value={formState.country || ''}
                 onChange={handleInputChange}
                 name="country"
                 id="country"
-                style={{ marginBottom: '30px' }}
               />
             </div>
           </div>
@@ -213,7 +207,7 @@ export default function ProfileForm({ userData, session }) {
             type="submit"
             className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg mb-4"
           >
-            send
+            Envoyer
           </button>
         </div>
         {session && userData.role === 'APPLICANT' && <UploadCv />}

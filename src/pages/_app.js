@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+
 import Script from 'next/script';
 
 import '../styles/globals.css';
@@ -33,7 +32,6 @@ export default function App({
         {/* <Navbar /> */}
         <SideBar />
         <Component {...pageProps} />
-        <ToastContainer />
         <Footer />
       </SessionProvider>
     </>

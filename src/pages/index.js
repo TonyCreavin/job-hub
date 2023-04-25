@@ -43,7 +43,7 @@ export default function Offers({ offers }) {
         id="categoryId"
         className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5 mx-3"
       >
-        <option className="text-center">Select a category </option>
+        <option className="text-center">Sélectionnez une catégorie</option>
         {category.map((category) => (
           <option value={category.id} key={category.id}>
             {category.name}

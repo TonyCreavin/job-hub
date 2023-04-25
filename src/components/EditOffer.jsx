@@ -40,13 +40,13 @@ export default function EditOffer({ closeModal, offer }) {
 
   return (
     <div className="w-full mb-10">
-      <h3 className="text-center my-5 text-2xl">Edit Offer</h3>
+      <h3 className="text-center my-5 text-2xl">{`Modifier l'Offre`}</h3>
 
       <form ref={formRef} className="w-[80vw] mx-auto">
         <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="editTitle"></label>
-            Title
+            Titre
             <input
               defaultValue={offer?.title}
               name="editTitle"
@@ -57,7 +57,7 @@ export default function EditOffer({ closeModal, offer }) {
           </div>
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="location"> </label>
-            Location
+            Lieu
             <input
               className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
               defaultValue={offer?.location}
@@ -70,7 +70,7 @@ export default function EditOffer({ closeModal, offer }) {
         <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="website"></label>
-            Website
+            Site Web
             <input
               defaultValue={offer?.website}
               name="editWebsite"
@@ -80,7 +80,7 @@ export default function EditOffer({ closeModal, offer }) {
           </div>
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="skills"></label>
-            Skills
+            Compétences
             <input
               defaultValue={offer?.skills}
               name="editSkills"
@@ -93,7 +93,7 @@ export default function EditOffer({ closeModal, offer }) {
 
         <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
           <div className="flex flex-col  mb-2  ">
-            <label htmlFor="contractType">ContractType </label>
+            <label htmlFor="contractType">Type de Contrat </label>
             <input
               defaultValue={offer?.contractType}
               name="editContractType"
@@ -103,7 +103,7 @@ export default function EditOffer({ closeModal, offer }) {
             />
           </div>
           <div className="flex flex-col  mb-2  ">
-            <label htmlFor="company">Company </label>
+            <label htmlFor="company">Entreprise </label>
             <input
               className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
               defaultValue={offer?.company}
@@ -128,7 +128,7 @@ export default function EditOffer({ closeModal, offer }) {
               rows="10"
               className="form form-control"
             ></textarea>
-            <label>Company Description</label>
+            <label>{`Description de l'entreprise`}</label>
             <textarea
               defaultValue={offer?.companyDescription}
               name="editCompanyDescription"
@@ -147,14 +147,14 @@ export default function EditOffer({ closeModal, offer }) {
           className="bg-red-500 ml-4 text-white rounded-md py-1 px-2"
           onClick={() => closeModal()}
         >
-          Cancel
+          Annuler
         </button>
         <button
           className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
           disabled={disable}
           onClick={() => editOffer()}
         >
-          Save
+          Sauvegarder
         </button>
       </div>
     </div>

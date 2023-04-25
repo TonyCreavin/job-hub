@@ -83,13 +83,13 @@ export default function Offer({ offer, user, application, cvs }) {
             className="bg-red-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
             onClick={handleDelete}
           >
-            Delete
+            Supprimer
           </button>
           <button
             onClick={() => setShowEditOfferModal((state) => !state)}
             className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
           >
-            Edit
+            Modifier
           </button>
         </div>
       )}
@@ -99,7 +99,7 @@ export default function Offer({ offer, user, application, cvs }) {
           //onClick={handleApplication}
           className="bg-blue-500 w-40 mx-auto my-4 text-white rounded-md py-1 px-2 mb-2"
         >
-          Start
+          Commencer
         </button>
       )}
       {showApplicationModal && (
@@ -124,7 +124,7 @@ export default function Offer({ offer, user, application, cvs }) {
             className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
             onClick={handleApplication}
           >
-            Apply
+            Postuler
           </button>
         </>
       )}
