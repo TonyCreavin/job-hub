@@ -1,4 +1,5 @@
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Test() {
   const onClick = () =>
@@ -8,5 +9,10 @@ export default function Test() {
       type: 'success',
     });
 
-  return <button onClick={onClick}> Click Me</button>;
+  return (
+    <div>
+      <button onClick={onClick}> Click Me</button>
+      <ToastContainer />
+    </div>
+  );
 }
