@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
@@ -60,7 +61,7 @@ export default function Home({ cvs }) {
   const openDocument = (document) => {
     window.open(`/api/document/${document.id}`, '_blank');
   };
-
+  const popupmessage = !language ? 'CV téléchargé 😁' : 'CV uploaded 😁';
   const handleUpload = async () => {
     setUploading(true);
     try {
@@ -76,7 +77,7 @@ export default function Home({ cvs }) {
       await getDocuments();
       setSelectedFile(null);
       setUploading(false);
-      toast('CV téléchargé', {
+      toast(popupmessage, {
         hideProgressBar: true,
         autoClose: 2000,
         type: 'success',
@@ -106,6 +107,7 @@ export default function Home({ cvs }) {
 
   return (
     <>
+      <ToastContainer />
       <form
         onSubmit={handleUpload}
         encType="multipart/form-data"
