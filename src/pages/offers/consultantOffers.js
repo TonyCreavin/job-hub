@@ -5,11 +5,14 @@ import { PrismaClient } from '@prisma/client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import LanguageContext from '../../LanguageContext';
+import { useContext } from 'react';
 const prisma = new PrismaClient();
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function ConsultantOffers({ offers }) {
+  const { language } = useContext(LanguageContext);
   const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
   console.log('inter', userData);
@@ -28,7 +31,9 @@ export default function ConsultantOffers({ offers }) {
 
   return (
     <>
-      <h2 className="text-center my-5">Mes Offres</h2>
+      <h2 className="text-center my-5">
+        {!language ? 'Mes Offres' : 'My Offers'}
+      </h2>
       <div className="flex flex-wrap w-full h-screen">
         {offers.map(
           (offer) =>

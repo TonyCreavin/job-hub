@@ -1,15 +1,12 @@
-import { useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import Script from 'next/script';
-
 import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
 import 'bootstrap/dist/css/bootstrap.css';
-
 import SideBar from '../components/SideBar';
-
 import Footer from '../components/Footer';
 import { useRouter } from 'next/router';
+import { LanguageProvider } from '../LanguageContext';
 
 export default function App({
   Component,
@@ -21,6 +18,7 @@ export default function App({
       ? require('bootstrap/dist/js/bootstrap')
       : null;
   }, [router.events]);
+
   return (
     <>
       <Script
@@ -28,11 +26,13 @@ export default function App({
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossOrigin="anonymous"
       />
+
       <SessionProvider session={session}>
-        {/* <Navbar /> */}
-        <SideBar />
-        <Component {...pageProps} />
-        <Footer />
+        <LanguageProvider>
+          <SideBar />
+          <Component {...pageProps} />
+          <Footer />
+        </LanguageProvider>
       </SessionProvider>
     </>
   );

@@ -4,9 +4,12 @@ import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import LanguageContext from '../../LanguageContext';
+import { useContext } from 'react';
 const prisma = new PrismaClient();
 
 export default function Application({ applications }) {
+  const { language } = useContext(LanguageContext);
   const { data: session, status } = useSession();
 
   const [userData, setUserData] = useState({});
@@ -25,7 +28,9 @@ export default function Application({ applications }) {
   console.log('userData => ', userData);
   return (
     <div className="w-full h-full">
-      <h2 className="text-center my-5">Mes Candidatures</h2>
+      <h2 className="text-center my-5">
+        {!language ? 'Mes Candidatures' : 'My Applications'}
+      </h2>
       {applications
         .filter((application) => application.userId === userData.id)
         .map((application) => {

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-
 import axios from 'axios';
-
 import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({ cvs }) {
+  const { language } = useContext(LanguageContext);
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
@@ -125,7 +126,9 @@ export default function Home({ cvs }) {
                   }
                 }}
               />
-              <h3 className="text-center mb-3">Télécharger votre CV</h3>
+              <h3 className="text-center mb-3">
+                {!language ? 'Télécharger votre CV' : 'Upload your Cv'}
+              </h3>
               {documents
                 .filter((doc) => doc.userId === session?.user.id)
                 .map((document) => (
@@ -140,9 +143,9 @@ export default function Home({ cvs }) {
                     <button
                       type="button"
                       onClick={() => deleteCv(document.id)}
-                      className=" w-16 h-[4vh] bg-red-500 text-white rounded-md  mb-2 "
+                      className=" w-20 h-[4vh] bg-red-500 text-white rounded-md  mb-2 "
                     >
-                      Supprimer
+                      {!language ? 'Supprimer' : 'Delete'}
                     </button>
                   </div>
                 ))}
@@ -150,9 +153,9 @@ export default function Home({ cvs }) {
               <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
                 {errorMessage && <p>{errorMessage}</p>}
                 {selectedImage ? (
-                  <span>CV Sélectionné</span>
+                  <span>{!language ? 'CV Sélectionné' : 'CV Selected'}</span>
                 ) : (
-                  <span>Sélectionner CV</span>
+                  <span>{!language ? 'Sélectionner CV' : 'Select CV'}</span>
                 )}
               </div>
             </label>
@@ -162,7 +165,10 @@ export default function Home({ cvs }) {
               style={{ opacity: uploading ? '.5' : '1' }}
               className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
             >
-              {uploading ? 'En cours de téléchargement...' : 'Télécharger'}
+              {!language && uploading && 'En cours de téléchargement...'}
+              {!language && !uploading && 'Télécharger'}
+              {language && uploading && 'Uploading...'}
+              {language && !uploading && 'Upload'}
             </button>
           </div>
         )}

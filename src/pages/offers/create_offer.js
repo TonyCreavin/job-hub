@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import LanguageContext from '../../LanguageContext';
+import { useContext } from 'react';
 
 function Create_offer(props) {
+  const { language } = useContext(LanguageContext);
   const [categories, setCategories] = useState([]);
+
   const [offer, setOffer] = useState(null);
   const router = useRouter();
   const [offers, setOffers] = useState([]);
@@ -112,12 +116,15 @@ function Create_offer(props) {
       [name]: value,
     });
   };
+
   console.log('this is my session =>', props.data.user.id);
   return (
     <div className="container">
       <div className="recruiter">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5">Créer un offre</h2>
+          <h2 className="text-center my-5">
+            {!language ? 'Créer un offre ' : 'Create an offer'}
+          </h2>
 
           <form className="row d-flex justify-content-around">
             <div className="col-md-6">
@@ -126,7 +133,7 @@ function Create_offer(props) {
                 value={formState.title}
                 onChange={handleInputChange}
                 className="form form-control"
-                placeholder={`titre de l'offre`}
+                placeholder={!language ? `titre de l'offre` : 'offer title'}
                 style={{ marginBottom: '5vh' }}
                 name="title"
                 id="title"
@@ -136,7 +143,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="type de contrat"
+                placeholder={!language ? 'type de contrat' : 'contract type'}
                 style={{ marginBottom: '5vh' }}
                 name="contractType"
                 id="contractType"
@@ -148,7 +155,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="entreprise"
+                placeholder={!language ? 'entreprise' : 'company'}
                 style={{ marginBottom: '5vh' }}
                 name="company"
                 id="company"
@@ -158,7 +165,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="lieu"
+                placeholder={!language ? 'lieu' : 'location'}
                 style={{ marginBottom: '5vh' }}
                 name="location"
                 id="location"
@@ -172,7 +179,7 @@ function Create_offer(props) {
               className="border-solid border-gray-300 border-[1px] h-[5vh] w-[65vw] rounded-md mb-5"
             >
               <option className="text-center">
-                Sélectionnez une catégorie{' '}
+                {!language ? 'Sélectionnez une catégorie' : 'Select a category'}
               </option>
               {categories.map((category) => (
                 <option value={category.id} key={category.id}>
@@ -187,7 +194,7 @@ function Create_offer(props) {
                 onChange={handleInputChange}
                 type="text"
                 className="form form-control"
-                placeholder="site web"
+                placeholder={!language ? 'site web' : 'website'}
                 style={{ marginBottom: '5vh' }}
                 name="website"
                 id="website"
@@ -202,7 +209,7 @@ function Create_offer(props) {
                 cols="30"
                 rows="10"
                 name="description"
-                placeholder="description"
+                placeholder={!language ? 'description' : 'description'}
                 style={{ marginBottom: '5vh' }}
               ></textarea>
               <textarea
@@ -211,7 +218,11 @@ function Create_offer(props) {
                 name="companyDescription"
                 cols="30"
                 rows="10"
-                placeholder={`description de l'entreprise`}
+                placeholder={
+                  !language
+                    ? `description de l'entreprise`
+                    : 'company description'
+                }
                 style={{ marginBottom: '5vh' }}
                 value={formState.companyDescription}
                 onChange={handleInputChange}
@@ -223,7 +234,7 @@ function Create_offer(props) {
                 className="btn btn-primary btn-block"
                 style={{ width: '100%', marginBottom: '5vh' }}
               >
-                Envoyer
+                {!language ? 'Envoyer' : 'Send'}
               </button>
             </div>
           </form>

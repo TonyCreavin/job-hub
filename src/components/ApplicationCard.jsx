@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 export default function DocumentList({ application, user }) {
+  const { language } = useContext(LanguageContext);
   const router = useRouter();
   const [documents, setDocuments] = useState([]);
   const [coverLetter, setCoverLetter] = useState(false);
@@ -54,11 +57,17 @@ export default function DocumentList({ application, user }) {
       <h3>offerId: {application.offerId}</h3>
       <h3>application id: {application.id}</h3> */}
         <h3>
-          nom : {user.firstName} {user.lastName}
+          {!language ? 'nom' : 'name'}: {user.firstName} {user.lastName}
         </h3>
         {/* <h3>offerId : {application.offerId}</h3> */}
-        {offer.title && <h3 key={offer.id}>offre : {offer.title}</h3>}
-        <h3>entreprise : {offer.company}</h3>
+        {offer.title && (
+          <h3 key={offer.id}>
+            {!language ? 'offre' : 'offer'} : {offer.title}
+          </h3>
+        )}
+        <h3>
+          {!language ? 'entreprise' : 'company'} : {offer.company}
+        </h3>
 
         {documents
           .filter((doc) => doc.userId === application.userId)
@@ -73,9 +82,10 @@ export default function DocumentList({ application, user }) {
             onClick={() => setCoverLetter((coverLetter) => !coverLetter)}
             className="bg-green-500 text-white rounded-md w-60 h-7 mb-2"
           >
-            {coverLetter
-              ? 'Masquer la lettre de motivation'
-              : 'Afficher la lettre de motivation'}
+            {!language && coverLetter && 'Masquer la lettre de motivation'}
+            {!language && !coverLetter && 'Afficher la lettre de motivation'}
+            {language && coverLetter && 'Hide coverletter'}
+            {language && !coverLetter && 'Show coverletter'}
           </button>
 
           {coverLetter && application.coverLetter}
@@ -84,7 +94,7 @@ export default function DocumentList({ application, user }) {
           onClick={deleteApplication}
           className="bg-red-500 text-white rounded-md w-20 h-7"
         >
-          supprimer
+          {!language ? 'supprimer' : 'delete'}
         </button>
       </div>
     </div>

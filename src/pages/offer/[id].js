@@ -9,12 +9,15 @@ import UploadCoverLetter from '../../components/UploadCoverLetter';
 import fs from 'fs/promises';
 import path from 'path';
 import { toast } from 'react-toastify';
+import LanguageContext from '../../LanguageContext';
+import { useContext } from 'react';
 
 import { getSession, useSession } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
 export default function Offer({ offer, user, application, cvs }) {
+  const { language } = useContext(LanguageContext);
   const [userData, setUserData] = React.useState({});
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
@@ -83,13 +86,13 @@ export default function Offer({ offer, user, application, cvs }) {
             className="bg-red-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
             onClick={handleDelete}
           >
-            Supprimer
+            {!language ? ' Supprimer' : 'Delete'}
           </button>
           <button
             onClick={() => setShowEditOfferModal((state) => !state)}
             className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
           >
-            Modifier
+            {!language ? 'Modifier' : 'Edit'}
           </button>
         </div>
       )}
@@ -99,7 +102,7 @@ export default function Offer({ offer, user, application, cvs }) {
           //onClick={handleApplication}
           className="bg-blue-500 w-40 mx-auto my-4 text-white rounded-md py-1 px-2 mb-2"
         >
-          Commencer
+          {!language ? 'Commencer' : 'Start'}
         </button>
       )}
       {showApplicationModal && (
@@ -124,7 +127,7 @@ export default function Offer({ offer, user, application, cvs }) {
             className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
             onClick={handleApplication}
           >
-            Postuler
+            {!language ? 'Postuler' : 'Apply'}
           </button>
         </>
       )}

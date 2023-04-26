@@ -1,13 +1,18 @@
 import ApplicationCard from '../../components/ApplicationCard';
 import React from 'react';
 import { PrismaClient } from '@prisma/client';
+import LanguageContext from '../../LanguageContext';
+import { useContext } from 'react';
 
 const prisma = new PrismaClient();
 
 export default function Application({ applications }) {
+  const { language } = useContext(LanguageContext);
   return (
     <div className="w-full h-full">
-      <h2 className="text-center my-5">Candidats</h2>
+      <h2 className="text-center my-5">
+        {!language ? 'Candidats' : 'Applicants'}
+      </h2>
       {applications.map((application) => {
         return (
           <ApplicationCard

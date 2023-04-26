@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiTwotoneHeart } from 'react-icons/ai';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 function JobDetailsPage({
   title,
@@ -16,6 +18,7 @@ function JobDetailsPage({
   id,
   userId,
 }) {
+  const { language } = useContext(LanguageContext);
   const router = useRouter();
   // console.log('id', id);
 
@@ -119,14 +122,24 @@ function JobDetailsPage({
             </button>
           )}
 
-        <h3>Poste: {title}</h3>
-        <h3>Lieu: {location}</h3>
+        <h3>
+          {!language ? 'Poste' : 'Post'}: {title}
+        </h3>
+        <h3>
+          {!language ? 'Lieu' : 'Location'}: {location}
+        </h3>
 
-        <h3>Contrat: {contractType}</h3>
+        <h3>
+          {!language ? 'Contrat' : 'Contract'}: {contractType}
+        </h3>
       </div>
       <div className="flex flex-row justify-between">
-        <h3>Entreprise :{company}</h3>
-        <h3>Site web :{website}</h3>
+        <h3>
+          {!language ? 'Entreprise' : 'Company'} :{company}
+        </h3>
+        <h3>
+          {!language ? 'Site web' : 'Website'} :{website}
+        </h3>
       </div>
       <h3>{`Description de l'entreprise`}</h3>
       <h3>{companyDescription}</h3>

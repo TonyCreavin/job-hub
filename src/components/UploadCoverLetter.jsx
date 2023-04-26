@@ -1,15 +1,22 @@
 import axios from 'axios';
 import React from 'react';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 export default function UploadCoverLetter({
   handleApplication,
   coverLetter,
   setCoverLetter,
 }) {
+  const { language } = useContext(LanguageContext);
   return (
     <>
       <div className="flex flex-col items-center">
-        <h3 className="text-center">Ecrivez une lettre de motivation</h3>
+        <h3 className="text-center">
+          {!language
+            ? 'Ecrivez une lettre de motivation'
+            : 'Write a coverletter'}
+        </h3>
         <form onSubmit={handleApplication} className="flex flex-col">
           <textarea
             name="coverLetter"

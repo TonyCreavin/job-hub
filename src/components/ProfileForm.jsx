@@ -3,7 +3,10 @@ import React from 'react';
 import { useState } from 'react';
 import UploadCv from '../components/UploadCv';
 import { sendNotification } from '../../lib/notification';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 export default function ProfileForm({ userData, session }) {
+  const { language } = useContext(LanguageContext);
   const [formState, setFormState] = useState(userData);
   console.log(
     'this is is??, ',
@@ -60,12 +63,14 @@ export default function ProfileForm({ userData, session }) {
     <div className="container">
       <div className="jobseeker">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5">My Profile</h2>
+          <h2 className="text-center my-5">
+            {!language ? 'Mon Profil' : 'My Profile'}
+          </h2>
 
           <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="firstName"></label>
-              Prénom
+              {!language ? 'Prénom' : 'First Name'}
               <input
                 type="text"
                 className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -78,7 +83,7 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="lastName"></label>
-              Nom
+              {!language ? 'Nom' : 'Last Name'}
               <input
                 type="text"
                 className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -93,7 +98,7 @@ export default function ProfileForm({ userData, session }) {
           <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="phone"> </label>
-              Téléphone
+              {!language ? 'Téléphone' : 'Phone'}
               <input
                 type="tel"
                 className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -134,7 +139,7 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="skills"> </label>
-              Compétences
+              {!language ? 'Compétences' : 'Skills'}
               <input
                 type="text"
                 className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -149,7 +154,7 @@ export default function ProfileForm({ userData, session }) {
           <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="address"> </label>
-              Adresse
+              {!language ? 'Adresse' : 'Address'}
               <input
                 type="text"
                 className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -162,7 +167,7 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="city"> </label>
-              Ville
+              {!language ? 'Ville' : 'City'}
               <input
                 type="text"
                 className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
@@ -177,7 +182,7 @@ export default function ProfileForm({ userData, session }) {
           <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="postcode"> </label>
-              Code postal
+              {!language ? 'Code postal' : 'Postcode'}
               <input
                 type="text"
                 placeholder="postcode"
@@ -190,7 +195,7 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col  mb-2  ">
               <label htmlFor="country"> </label>
-              Pays
+              {!language ? 'Pays' : 'Country'}
               <input
                 type="text"
                 placeholder="country"
@@ -207,7 +212,7 @@ export default function ProfileForm({ userData, session }) {
             type="submit"
             className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg mb-4"
           >
-            Envoyer
+            {!language ? 'Envoyer' : 'Send'}
           </button>
         </div>
         {session && userData.role === 'APPLICANT' && <UploadCv />}
