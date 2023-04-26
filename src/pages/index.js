@@ -6,12 +6,15 @@ import JobPost from '../components/JobPosts';
 import { PrismaClient } from '@prisma/client';
 import PlaceSearchbar from '../components/PlaceSearchbar';
 import JobSearchbar from '../components/JobSearchbar';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 const prisma = new PrismaClient();
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Offers({ offers }) {
+  const { language } = useContext(LanguageContext);
   const [filterData, setFilterData] = useState([]);
   const [filterJob, setFilterJob] = useState([]);
   const [category, setCategory] = useState([]);
@@ -43,7 +46,9 @@ export default function Offers({ offers }) {
         id="categoryId"
         className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5 mx-3"
       >
-        <option className="text-center">Sélectionnez une catégorie</option>
+        <option className="text-center">
+          {!language ? 'Sélectionnez une catégorie' : 'Select a category'}
+        </option>
         {category.map((category) => (
           <option value={category.id} key={category.id}>
             {category.name}

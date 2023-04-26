@@ -1,7 +1,10 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 export default function EditOffer({ closeModal, offer }) {
+  const { language } = useContext(LanguageContext);
   const formRef = useRef();
   const [disable, setDisable] = useState(false);
 
@@ -46,7 +49,7 @@ export default function EditOffer({ closeModal, offer }) {
         <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="editTitle"></label>
-            Titre
+            {!language ? 'Titre' : 'Title'}
             <input
               defaultValue={offer?.title}
               name="editTitle"
@@ -57,7 +60,7 @@ export default function EditOffer({ closeModal, offer }) {
           </div>
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="location"> </label>
-            Lieu
+            {!language ? 'Lieu' : 'Location'}
             <input
               className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
               defaultValue={offer?.location}
@@ -70,7 +73,7 @@ export default function EditOffer({ closeModal, offer }) {
         <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="website"></label>
-            Site Web
+            {!language ? 'Site Web' : 'Website'}
             <input
               defaultValue={offer?.website}
               name="editWebsite"
@@ -80,7 +83,7 @@ export default function EditOffer({ closeModal, offer }) {
           </div>
           <div className="flex flex-col  mb-2  ">
             <label htmlFor="skills"></label>
-            Compétences
+            {!language ? 'Compétences' : 'Skills'}
             <input
               defaultValue={offer?.skills}
               name="editSkills"
@@ -93,7 +96,9 @@ export default function EditOffer({ closeModal, offer }) {
 
         <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
           <div className="flex flex-col  mb-2  ">
-            <label htmlFor="contractType">Type de Contrat </label>
+            <label htmlFor="contractType">
+              {!language ? 'Type de Contrat' : 'Type of Contract'}
+            </label>
             <input
               defaultValue={offer?.contractType}
               name="editContractType"
@@ -103,7 +108,9 @@ export default function EditOffer({ closeModal, offer }) {
             />
           </div>
           <div className="flex flex-col  mb-2  ">
-            <label htmlFor="company">Entreprise </label>
+            <label htmlFor="company">
+              {!language ? 'Entreprise' : 'Company'}{' '}
+            </label>
             <input
               className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
               defaultValue={offer?.company}
@@ -147,14 +154,14 @@ export default function EditOffer({ closeModal, offer }) {
           className="bg-red-500 ml-4 text-white rounded-md py-1 px-2"
           onClick={() => closeModal()}
         >
-          Annuler
+          {!language ? 'Annuler' : 'Cancel'}
         </button>
         <button
           className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2"
           disabled={disable}
           onClick={() => editOffer()}
         >
-          Sauvegarder
+          {!language ? 'Sauvegarder' : 'Save'}
         </button>
       </div>
     </div>

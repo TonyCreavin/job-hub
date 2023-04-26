@@ -3,14 +3,18 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import axios from 'axios';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 const SideBar = () => {
+  const { language, buttonHandler } = useContext(LanguageContext);
+
   const route = useRouter();
   const { data: session, status } = useSession();
   console.log('session => ', session);
   console.log('status => ', status);
   console.log('session.user.email => ', session?.user.email);
-  const [userData, setUserData] = React.useState({});
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     if (session?.user.id) {
@@ -111,6 +115,7 @@ const SideBar = () => {
               >
                 HDM
               </h3>
+
               <button
                 type="button"
                 className="btn-close btn-close-white"
@@ -124,7 +129,7 @@ const SideBar = () => {
               <ul className="navbar-nav mx-auto bd-navbar-nav d-flex">
                 <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
                   <Link href="/" className="text-white no-underline">
-                    Accueil
+                    {!language ? 'Accueil' : 'Home'}
                   </Link>
                 </li>
 
@@ -134,7 +139,7 @@ const SideBar = () => {
                       href="/offers/consultantOffers"
                       className="text-white no-underline "
                     >
-                      Mes Offres
+                      {!language ? 'Mes Offres' : 'My Offers'}
                     </Link>
                   </li>
                 )}
@@ -144,7 +149,7 @@ const SideBar = () => {
                       href="/offers/ApplicantOffers"
                       className="text-white no-underline"
                     >
-                      Mes Candidatures
+                      {!language ? 'Mes Candidatures' : 'My Applications'}
                     </Link>
                   </li>
                 )}
@@ -154,7 +159,7 @@ const SideBar = () => {
                       href="/application"
                       className="text-white no-underline"
                     >
-                      Candidatures
+                      {!language ? 'Candidatures' : 'Applications'}
                     </Link>
                   </li>
                 )}
@@ -164,17 +169,22 @@ const SideBar = () => {
                       href="/offers/create_offer"
                       className="text-white no-underline"
                     >
-                      Créer une offre
+                      {!language ? 'Créer une offre' : 'Create an offer'}
                     </Link>
                   </li>
                 )}
                 <li className="nav-item    col-6 col-lg-auto mt-2 mr-20">
                   <Link href="/profile" className="text-white no-underline">
-                    Mon Profil
+                    {!language ? 'Mon Profil' : 'My Profile'}
                   </Link>
                 </li>
-              </ul>
 
+                <li>
+                  <button onClick={buttonHandler} className="btn btn-primary">
+                    {!language ? 'EN' : 'FR'}
+                  </button>
+                </li>
+              </ul>
               <div className="flex justify-end">
                 {!session && status !== 'authenticated' && (
                   <Link
@@ -209,7 +219,7 @@ const SideBar = () => {
                       className="bg-slate-300 p-3 mr-3 rounded-lg"
                       onClick={handleSwitchToConsultant}
                     >
-                      Recruiteur
+                      {!language ? 'Recruiteur' : 'Recruiter'}
                     </button>
                   </Link>
                 )}
@@ -220,7 +230,7 @@ const SideBar = () => {
                       className="bg-slate-300 p-3 mr-3 rounded-lg"
                       onClick={handleSwitchToApplicant}
                     >
-                      Candidat
+                      {!language ? 'Candidat' : 'Applicant'}
                     </button>
                   </Link>
                 )}

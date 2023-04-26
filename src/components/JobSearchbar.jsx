@@ -1,6 +1,9 @@
 import React from 'react';
+import LanguageContext from '../LanguageContext';
+import { useContext } from 'react';
 
 export default function JobSearchbar({ offers, setFilterJob }) {
+  const { language } = useContext(LanguageContext);
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     const newFilter = offers.filter((value) => {
@@ -20,7 +23,7 @@ export default function JobSearchbar({ offers, setFilterJob }) {
       <input
         type="text"
         className=" w-[90vw] mb-4 md:w-[40vw] h-8 border-solid border-gray-200 border-2  rounded-md p-2 mr-2"
-        placeholder="cherchez un poste..."
+        placeholder={!language ? 'cherchez un poste...' : 'search a job...'}
         id="jobsearch"
         onChange={handleFilter}
       />
