@@ -27,7 +27,7 @@ export default function Application({ applications }) {
   }, [session?.user.id]);
   console.log('userData => ', userData);
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-screen overflow-scroll">
       <h2 className="text-center my-5">
         {!language ? 'Mes Candidatures' : 'My Applications'}
       </h2>

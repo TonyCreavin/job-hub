@@ -6,6 +6,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { AiTwotoneHeart } from 'react-icons/ai';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
+import Link from 'next/link';
 
 function JobDetailsPage({
   title,
@@ -14,6 +15,7 @@ function JobDetailsPage({
   description,
   company,
   website,
+  skills,
   companyDescription,
   id,
   userId,
@@ -99,7 +101,7 @@ function JobDetailsPage({
 
   return (
     <div
-      className="w-[80vw] h-screen   border-gray-200 border-2  mx-auto border-solid rounded-lg mt-3 p-2 overflow-scroll"
+      className="w-[80vw] h-screen   border-gray-200 border-2  mx-auto border-solid rounded-lg mt-10 p-2 overflow-scroll"
       key={id}
     >
       <div className="flex flex-col md:flex-row justify-between">
@@ -122,31 +124,28 @@ function JobDetailsPage({
             </button>
           )}
 
-        <h3>
-          {!language ? 'Poste' : 'Post'}: {title}
-        </h3>
-        <h3>
-          {!language ? 'Lieu' : 'Location'}: {location}
-        </h3>
+        <h3 className="text-black font-semibold font-serif">{title}</h3>
 
-        <h3>
-          {!language ? 'Contrat' : 'Contract'}: {contractType}
-        </h3>
+        <h3>{contractType}</h3>
       </div>
+      <h3 className="font-serif text-[25px]">{skills}</h3>
       <div className="flex flex-row justify-between">
-        <h3>
-          {!language ? 'Entreprise' : 'Company'} :{company}
+        <h3 className="text-blue-400 font-normal text-md font-serif">
+          {company}
         </h3>
-        <h3>
-          {!language ? 'Site web' : 'Website'} :{website}
-        </h3>
+        <a href={`http://${website}/`}>{website}</a>
       </div>
-      <h3>{`Description de l'entreprise`}</h3>
-      <h3>{companyDescription}</h3>
+      <h3 className="text-md text-gray-700 font-serif border-b-2 border-slate-500 mb-5 pb-3">
+        {location}
+      </h3>
+      <h3>
+        {!language ? `Description de l'entreprise` : 'Company description'}
+      </h3>
+      <h3 className="font-serif text-[1.5rem] border-b-2 border-slate-500 mb-5 pb-3">
+        {companyDescription}
+      </h3>
       <h3>Description:</h3>
-      <h3>{description}</h3>
-      <h3>id: {id}</h3>
-      <h3>userId : {userId}</h3>
+      <h3 className="font-serif text-[1.5rem]">{description}</h3>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import PlaceSearchbar from '../components/PlaceSearchbar';
 import JobSearchbar from '../components/JobSearchbar';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
+import Footer from '../components/Footer';
 
 const prisma = new PrismaClient();
 
@@ -36,48 +37,50 @@ export default function Offers({ offers }) {
 
   return (
     <>
-      <div className="flex flex-col items-center  md:flex-row w-full  justify-around my-5 border-b border-solid border-gray-500  ">
-        <JobSearchbar offers={offers} setFilterJob={setFilterJob} />
-        <PlaceSearchbar offers={offers} setFilterData={setFilterData} />
-      </div>
-      <select
-        onChange={handleChange}
-        name="categoryId"
-        id="categoryId"
-        className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5 mx-3"
-      >
-        <option className="text-center">
-          {!language ? 'Sélectionnez une catégorie' : 'Select a category'}
-        </option>
-        {category.map((category) => (
-          <option value={category.id} key={category.id}>
-            {category.name}
+      <div className="w-full h-screen overflow-scroll">
+        <div className="flex flex-col items-center md:flex-row w-full  justify-around my-5 border-b border-solid border-gray-500  ">
+          <JobSearchbar offers={offers} setFilterJob={setFilterJob} />
+          <PlaceSearchbar offers={offers} setFilterData={setFilterData} />
+        </div>
+        <select
+          onChange={handleChange}
+          name="categoryId"
+          id="categoryId"
+          className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5 mx-3"
+        >
+          <option className="text-center ">
+            {!language ? 'Sélectionnez une catégorie' : 'Select a category'}
           </option>
-        ))}
-      </select>
+          {category.map((category) => (
+            <option value={category.id} key={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
 
-      <div className=" w-full h-full">
-        {filterData.length !== 0 && (
-          <div className="flex flex-wrap w-full h-full">
-            {filterData.map((offer) => (
-              <JobPost key={offer.id} offer={offer} />
-            ))}
-          </div>
-        )}
-        {filterJob.length !== 0 && (
-          <div className="flex flex-wrap w-full h-full">
-            {filterJob.map((offer) => (
-              <JobPost key={offer.id} offer={offer} />
-            ))}
-          </div>
-        )}
-        {filterData.length === 0 && filterJob.length === 0 && (
-          <div className="flex flex-wrap w-full h-full">
-            {offers.map((offer) => (
-              <JobPost key={offer.id} offer={offer} />
-            ))}
-          </div>
-        )}
+        <div className=" w-full h-full">
+          {filterData.length !== 0 && (
+            <div className="flex flex-wrap w-full h-full">
+              {filterData.map((offer) => (
+                <JobPost key={offer.id} offer={offer} />
+              ))}
+            </div>
+          )}
+          {filterJob.length !== 0 && (
+            <div className="flex flex-wrap w-full h-full">
+              {filterJob.map((offer) => (
+                <JobPost key={offer.id} offer={offer} />
+              ))}
+            </div>
+          )}
+          {filterData.length === 0 && filterJob.length === 0 && (
+            <div className="flex flex-wrap w-full h-full">
+              {offers.map((offer) => (
+                <JobPost key={offer.id} offer={offer} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

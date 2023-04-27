@@ -9,7 +9,7 @@ export default function Footer() {
         height: '100px',
         padding: '30px',
         textAlign: 'center',
-        bottom: 0,
+
         width: '100%',
       }}
     >
