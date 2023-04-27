@@ -72,7 +72,7 @@ const SideBar = () => {
         >
           <div className="bd-navbar-toggle"></div>
 
-          <h1 className="navbar-brand p-0 me-0 me-lg-2 text-white font-semibold text-2xl">
+          <h1 className="navbar-brand p-0 me-0  text-white font-semibold text-2xl">
             HDM
           </h1>
 
@@ -110,7 +110,7 @@ const SideBar = () => {
           >
             <div className="offcanvas-header px-4 pb-0 bg-[#2D3E64]">
               <h3
-                className="offcanvas-title text-white font-semibold text-2xl"
+                className="offcanvas-title text-white font-semibold text-2xl "
                 id="bdNavbarOffcanvasLabel"
               >
                 HDM
@@ -125,16 +125,16 @@ const SideBar = () => {
               ></button>
             </div>
 
-            <div className="offcanvas-body p-4 pt-0 p-lg-0 bg-[#2D3E64]">
-              <ul className="navbar-nav mx-auto bd-navbar-nav d-flex">
-                <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+            <div className="offcanvas-body p-4 pt-0 p-lg-0 bg-[#2D3E64] ">
+              <ul className="navbar-nav mx-auto bd-navbar-nav d-flex my-3 ">
+                <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                   <Link href="/" className="text-white no-underline">
                     {!language ? 'Accueil' : 'Home'}
                   </Link>
                 </li>
 
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li className="nav-item col-6 col-lg-auto mt-2 mr-20">
+                  <li className="nav-item col-6 col-lg-auto mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/offers/consultantOffers"
                       className="text-white no-underline "
@@ -144,7 +144,7 @@ const SideBar = () => {
                   </li>
                 )}
                 {session && userData?.role === 'APPLICANT' && (
-                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/offers/ApplicantOffers"
                       className="text-white no-underline"
@@ -154,7 +154,7 @@ const SideBar = () => {
                   </li>
                 )}
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/application"
                       className="text-white no-underline"
@@ -164,7 +164,7 @@ const SideBar = () => {
                   </li>
                 )}
                 {session && userData?.role === 'CONSULTANT' && (
-                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-20">
+                  <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/offers/create_offer"
                       className="text-white no-underline"
@@ -173,68 +173,82 @@ const SideBar = () => {
                     </Link>
                   </li>
                 )}
-                <li className="nav-item    col-6 col-lg-auto mt-2 mr-20">
-                  <Link href="/profile" className="text-white no-underline">
+                <li className="nav-item    col-6 col-lg-auto mt-2 mr-10 lg:mr-16 ">
+                  <Link
+                    href="/profile"
+                    className="text-white no-underline text-sm "
+                  >
                     {!language ? 'Mon Profil' : 'My Profile'}
                   </Link>
                 </li>
-
+              </ul>
+              <ul className="navbar-nav  bd-navbar-nav d-flex justiy-content-end ">
                 <li>
-                  <button onClick={buttonHandler} className="btn btn-primary">
+                  <button
+                    onClick={buttonHandler}
+                    className="w-10 h-10 bg-blue-500 text-white rounded-md text-sm mr-5 my-3"
+                  >
                     {!language ? 'EN' : 'FR'}
                   </button>
                 </li>
-              </ul>
-              <div className="flex justify-end">
+
                 {!session && status !== 'authenticated' && (
-                  <Link
-                    href="/api/auth/signin"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      signIn();
-                    }}
-                  >
-                    <button className="bg-slate-300 p-3 mr-3 rounded-lg float-end">
-                      Sign In
-                    </button>
-                  </Link>
+                  <li>
+                    <Link
+                      href="/api/auth/signin"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        signIn();
+                      }}
+                    >
+                      <button className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2">
+                        {!language ? 'Se Connecter' : 'Sign In'}
+                      </button>
+                    </Link>
+                  </li>
                 )}
                 {session && (
-                  <Link
-                    href="/api/auth/signout"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      signOut();
-                    }}
-                  >
-                    <button className="bg-slate-300 p-3 mr-3 rounded-lg">
-                      Sign Out
-                    </button>
-                  </Link>
+                  <li>
+                    <Link
+                      href="/api/auth/signout"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        signOut();
+                      }}
+                    >
+                      <button className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2">
+                        {!language ? 'Déconnexion' : 'Sign Out'}
+                      </button>
+                    </Link>
+                  </li>
                 )}
 
                 {session && userData?.role === 'APPLICANT' && (
-                  <Link href="/">
-                    <button
-                      className="bg-slate-300 p-3 mr-3 rounded-lg"
-                      onClick={handleSwitchToConsultant}
-                    >
-                      {!language ? 'Recruiteur' : 'Recruiter'}
-                    </button>
-                  </Link>
+                  <li>
+                    <Link href="/">
+                      <button
+                        className="bg-slate-300 p-3 mr-3 rounded-lg text-sm"
+                        onClick={handleSwitchToConsultant}
+                      >
+                        {!language ? 'Recruiteur' : 'Recruiter'}
+                      </button>
+                    </Link>
+                  </li>
                 )}
 
                 {session && userData?.role === 'CONSULTANT' && (
-                  <Link href="/">
-                    <button
-                      className="bg-slate-300 p-3 mr-3 rounded-lg"
-                      onClick={handleSwitchToApplicant}
-                    >
-                      {!language ? 'Candidat' : 'Applicant'}
-                    </button>
-                  </Link>
+                  <li>
+                    <Link href="/">
+                      <button
+                        className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2"
+                        onClick={handleSwitchToApplicant}
+                      >
+                        {!language ? 'Candidat' : 'Applicant'}
+                      </button>
+                    </Link>
+                  </li>
                 )}
-              </div>
+              </ul>
             </div>
           </div>
         </nav>
