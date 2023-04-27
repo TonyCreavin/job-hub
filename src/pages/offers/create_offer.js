@@ -149,6 +149,7 @@ function Create_offer(props) {
                 id="contractType"
               />
             </div>
+
             <div className="col-md-6">
               <input
                 value={formState.company}
@@ -200,6 +201,7 @@ function Create_offer(props) {
                 id="website"
               />
             </div>
+
             <div className="col-12">
               <textarea
                 className="form form-control"
@@ -212,6 +214,7 @@ function Create_offer(props) {
                 placeholder={!language ? 'description' : 'description'}
                 style={{ marginBottom: '5vh' }}
               ></textarea>
+
               <textarea
                 className="form form-control"
                 id="companyDescription"
@@ -227,7 +230,6 @@ function Create_offer(props) {
                 value={formState.companyDescription}
                 onChange={handleInputChange}
               ></textarea>
-
               <button
                 type="submit"
                 onClick={handleSubmit}
