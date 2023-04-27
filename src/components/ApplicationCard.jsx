@@ -48,7 +48,7 @@ export default function DocumentList({ application, user }) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center my-4 justify-center">
+    <div className="w-full h-[30vh] flex flex-col items-center my-4 justify-center">
       <div
         className=" flex flex-col items-start border-solid overflow-scroll  border-gray-200 border-2  w-[90vw] h-[40vh] rounded-lg p-3 bg-white"
         key={application.id}

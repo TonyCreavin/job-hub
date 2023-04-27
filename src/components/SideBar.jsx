@@ -128,7 +128,7 @@ const SideBar = () => {
             <div className="offcanvas-body p-4 pt-0 p-lg-0 bg-[#2D3E64] ">
               <ul className="navbar-nav mx-auto bd-navbar-nav d-flex my-3 ">
                 <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
-                  <Link href="/" className="text-white no-underline">
+                  <Link href="/" className="text-white no-underline font-serif">
                     {!language ? 'Accueil' : 'Home'}
                   </Link>
                 </li>
@@ -137,7 +137,7 @@ const SideBar = () => {
                   <li className="nav-item col-6 col-lg-auto mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/offers/consultantOffers"
-                      className="text-white no-underline "
+                      className="text-white no-underline font-serif"
                     >
                       {!language ? 'Mes Offres' : 'My Offers'}
                     </Link>
@@ -147,7 +147,7 @@ const SideBar = () => {
                   <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/offers/ApplicantOffers"
-                      className="text-white no-underline"
+                      className="text-white no-underline font-serif"
                     >
                       {!language ? 'Mes Candidatures' : 'My Applications'}
                     </Link>
@@ -157,7 +157,7 @@ const SideBar = () => {
                   <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/application"
-                      className="text-white no-underline"
+                      className="text-white no-underline font-serif"
                     >
                       {!language ? 'Candidatures' : 'Applications'}
                     </Link>
@@ -167,7 +167,7 @@ const SideBar = () => {
                   <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
                       href="/offers/create_offer"
-                      className="text-white no-underline"
+                      className="text-white no-underline font-serif"
                     >
                       {!language ? 'Créer une offre' : 'Create an offer'}
                     </Link>
@@ -176,7 +176,7 @@ const SideBar = () => {
                 <li className="nav-item    col-6 col-lg-auto mt-2 mr-10 lg:mr-16 ">
                   <Link
                     href="/profile"
-                    className="text-white no-underline text-sm "
+                    className="text-white no-underline text-sm font-serif"
                   >
                     {!language ? 'Mon Profil' : 'My Profile'}
                   </Link>
@@ -201,7 +201,7 @@ const SideBar = () => {
                         signIn();
                       }}
                     >
-                      <button className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2">
+                      <button className="bg-blue-500 text-white p-3 mr-3 rounded-lg text-sm my-2">
                         {!language ? 'Se Connecter' : 'Sign In'}
                       </button>
                     </Link>
@@ -216,7 +216,7 @@ const SideBar = () => {
                         signOut();
                       }}
                     >
-                      <button className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2">
+                      <button className="bg-blue-500 text-white p-3 mr-3 rounded-lg text-sm my-2">
                         {!language ? 'Déconnexion' : 'Sign Out'}
                       </button>
                     </Link>
@@ -227,7 +227,7 @@ const SideBar = () => {
                   <li>
                     <Link href="/">
                       <button
-                        className="bg-slate-300 p-3 mr-3 rounded-lg text-sm"
+                        className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2"
                         onClick={handleSwitchToConsultant}
                       >
                         {!language ? 'Recruiteur' : 'Recruiter'}
@@ -240,7 +240,7 @@ const SideBar = () => {
                   <li>
                     <Link href="/">
                       <button
-                        className="bg-slate-300 p-3 mr-3 rounded-lg text-sm my-2"
+                        className="bg-blue-500 text-white p-3 mr-3 rounded-lg text-sm my-2"
                         onClick={handleSwitchToApplicant}
                       >
                         {!language ? 'Candidat' : 'Applicant'}

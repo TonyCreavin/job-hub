@@ -52,23 +52,30 @@ function JobPost({ offer }) {
         key={offer.id}
       >
         <div className="flex justify-between">
-          <h3>
-            {!language ? 'Poste' : 'Post'}: {offer.title}
+          <h3 className="text-black font-semibold font-serif">
+            {' '}
+            {offer.title}
           </h3>
           {myFavorite != undefined &&
             userData.role === 'APPLICANT' &&
             myFavorite != null &&
             myFavorite.isFavorite && <AiTwotoneHeart size={30} />}
         </div>
-        <h3>
-          {!language ? 'Lieu' : 'location'}: {offer.location}
+        <h3 className="font-serif text-[25px]">{offer.skills}</h3>
+        <h3 className="text-blue-400 font-normal text-md font-serif">
+          {offer.company}
         </h3>
-        <h3>
-          {!language ? 'Contrat' : 'Contract'}: {offer.contractType}
-        </h3>
-        <h3>Description:</h3>
-        <h3>{offer.description}</h3>
-        <h3>{offer.id}</h3>
+        <div className="flex justify-start gap-4 border-slate-500 border-b-2 mb-5">
+          <h3 className="text-[25px] text-gray-700 font-serif">
+            {offer.contractType}
+          </h3>
+          <h3 className="text-md text-gray-700 font-serif">
+            {' '}
+            {offer.location}
+          </h3>
+        </div>
+        <h3 className="font-serif">Description:</h3>
+        <h3 className="font-serif text-[1.5rem]">{offer.description}</h3>
       </div>
     </Link>
   );

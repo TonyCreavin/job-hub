@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export default function Application({ applications }) {
   const { language } = useContext(LanguageContext);
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-screen overflox-scroll">
       <h2 className="text-center my-5">
         {!language ? 'Candidats' : 'Applicants'}
       </h2>
