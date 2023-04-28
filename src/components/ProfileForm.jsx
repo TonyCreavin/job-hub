@@ -63,7 +63,7 @@ export default function ProfileForm({ userData, session }) {
     <div className="container">
       <div className="jobseeker">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5">
+          <h2 className="text-center my-5 font-serif">
             {!language ? 'Mon Profil' : 'My Profile'}
           </h2>
 

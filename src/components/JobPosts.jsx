@@ -66,16 +66,18 @@ function JobPost({ offer }) {
           {offer.company}
         </h3>
         <div className="flex justify-start gap-4 border-slate-500 border-b-2 mb-5">
-          <h3 className="text-[25px] text-gray-700 font-serif">
+          <h3 className="text-[1.3rem] text-gray-700 font-serif">
             {offer.contractType}
           </h3>
-          <h3 className="text-md text-gray-700 font-serif">
+          <h3 className="text-[1.3rem] text-gray-700 font-serif">
             {' '}
             {offer.location}
           </h3>
         </div>
-        <h3 className="font-serif">Description:</h3>
-        <h3 className="font-serif text-[1.5rem]">{offer.description}</h3>
+        <h3 className="font-serif font-semibold text-[24px]">
+          Description du poste:
+        </h3>
+        <h3 className="font-serif text-[1.3rem]">{offer.description}</h3>
       </div>
     </Link>
   );

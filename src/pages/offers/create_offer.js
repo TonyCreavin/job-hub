@@ -123,7 +123,7 @@ function Create_offer(props) {
     <div className="container">
       <div className="recruiter">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5">
+          <h2 className="text-center my-5 font-serif">
             {!language ? 'Créer un offre ' : 'Create an offer'}
           </h2>
 

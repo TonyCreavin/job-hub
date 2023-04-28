@@ -12,7 +12,7 @@ export default function UploadCoverLetter({
   return (
     <>
       <div className="flex flex-col items-center">
-        <h3 className="text-center">
+        <h3 className="text-center font-serif">
           {!language
             ? 'Ecrivez une lettre de motivation'
             : 'Write a coverletter'}

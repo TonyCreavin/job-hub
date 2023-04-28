@@ -49,7 +49,7 @@ export default function EditOffer({ closeModal, offer }) {
 
   return (
     <div className="w-full mb-10">
-      <h3 className="text-center my-5 text-2xl">{`Modifier l'Offre`}</h3>
+      <h3 className="text-center my-5 text-2xl font-serif">{`Modifier l'Offre`}</h3>
 
       <form ref={formRef} className="w-[80vw] mx-auto">
         <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
@@ -126,14 +126,16 @@ export default function EditOffer({ closeModal, offer }) {
             />
           </div>
         </div>
-        <input
-          className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
-          defaultValue={offer?.salary}
-          name="editSalary"
-          type="text"
-          id="salary"
-        />
-
+        <div className="flex flex-col  mb-2  ">
+          <label htmlFor="salary">{!language ? 'Salaire' : 'Salary'} </label>
+          <input
+            className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+            defaultValue={offer?.salary}
+            name="editSalary"
+            type="text"
+            id="salary"
+          />
+        </div>
         <div className="inputField">
           <div className="label">
             <label htmlFor="description">Description</label>

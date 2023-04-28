@@ -128,7 +128,7 @@ export default function Home({ cvs }) {
                   }
                 }}
               />
-              <h3 className="text-center mb-3">
+              <h3 className="text-center mb-3 font-serif">
                 {!language ? 'Télécharger votre CV' : 'Upload your Cv'}
               </h3>
               {documents
