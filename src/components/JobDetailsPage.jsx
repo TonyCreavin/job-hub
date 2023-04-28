@@ -18,7 +18,7 @@ function JobDetailsPage({
   skills,
   companyDescription,
   id,
-  userId,
+  salary,
 }) {
   const { language } = useContext(LanguageContext);
   const router = useRouter();
@@ -135,16 +135,26 @@ function JobDetailsPage({
         </h3>
         <a href={`http://${website}/`}>{website}</a>
       </div>
-      <h3 className="text-md text-gray-700 font-serif border-b-2 border-slate-500 mb-5 pb-3">
-        {location}
-      </h3>
+      <div className="border-b-2 border-slate-500 mb-5 pb-3 flex flex-row justify-between">
+        <h3 className="text-md text-gray-700 font-serif ">{location}</h3>
+        <div className="flex flex-row">
+          <h3 className="font-serif text-[1.5rem]">
+            {!language ? 'Salaire:' : 'Salary:'}
+          </h3>
+          <h3 className="text-[24px] font-serif ml-1 ">
+            {language && !salary && 'to be negotiated'}
+            {!language && !salary && 'à négocier'}
+            {salary && salary}
+          </h3>
+        </div>
+      </div>
       <h3>
         {!language ? `Description de l'entreprise` : 'Company description'}
       </h3>
       <h3 className="font-serif text-[1.5rem] border-b-2 border-slate-500 mb-5 pb-3">
         {companyDescription}
       </h3>
-      <h3>Description:</h3>
+      <h3>{!language ? 'Description du poste' : 'Job description'}</h3>
       <h3 className="font-serif text-[1.5rem]">{description}</h3>
     </div>
   );

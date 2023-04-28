@@ -65,7 +65,7 @@ const SideBar = () => {
 
   return (
     <>
-      <header className=" navbar navbar-expand-lg bd-navbar sticky-top w-full h-20 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-stretch">
+      <header className=" navbar navbar-expand-lg bd-navbar sticky-top w-full h-24 pl-[15px] bg-[#2D3E64] flex justify-between align-center items-stretch">
         <nav
           className="container-xxl bd-gutter flex-wrap flex-lg-nowrap"
           aria-label="Main navigation"

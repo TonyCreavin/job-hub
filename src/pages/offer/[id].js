@@ -72,6 +72,7 @@ export default function Offer({ offer, user, application, cvs }) {
         location={offer?.location}
         contractType={offer?.contractType}
         skills={offer?.skills}
+        salary={offer?.salary}
         description={offer?.description}
         company={offer?.company}
         companyDescription={offer?.companyDescription}
