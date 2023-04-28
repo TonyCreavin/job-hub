@@ -56,17 +56,19 @@ export default function DocumentList({ application, user }) {
         {/* <h3>userId: {application.userId}</h3>
       <h3>offerId: {application.offerId}</h3>
       <h3>application id: {application.id}</h3> */}
-        <h3>
-          {!language ? 'nom' : 'name'}: {user.firstName} {user.lastName}
-        </h3>
+
         {/* <h3>offerId : {application.offerId}</h3> */}
         {offer.title && (
-          <h3 key={offer.id}>
-            {!language ? 'offre' : 'offer'} : {offer.title}
+          <h3 className="text-black font-semibold font-serif" key={offer.id}>
+            {offer.title}
           </h3>
         )}
-        <h3>
-          {!language ? 'entreprise' : 'company'} : {offer.company}
+        <h3 className="text-blue-400 font-normal text-md font-serif">
+          {offer.company}
+        </h3>
+        <h3 className="font-serif text-[20px]">
+          {!language ? 'candidat' : 'applicant'}: {user.firstName}{' '}
+          {user.lastName}
         </h3>
 
         {documents

@@ -18,6 +18,8 @@ export default function EditOffer({ closeModal, offer }) {
       editDescription,
       editContractType,
       editCompany,
+      editCompanyDescription,
+      editSalary,
     } = formRef.current;
     const title = editTitle.value;
     const location = editLocation.value;
@@ -26,6 +28,8 @@ export default function EditOffer({ closeModal, offer }) {
     const description = editDescription.value;
     const contractType = editContractType.value;
     const company = editCompany.value;
+    const companyDescription = editCompanyDescription.value;
+    const salary = editSalary.value;
 
     await axios.put('/api/offers/edit', {
       id: offer.id,
@@ -36,6 +40,8 @@ export default function EditOffer({ closeModal, offer }) {
       description,
       contractType,
       company,
+      companyDescription,
+      salary,
     });
     setDisable(false);
     window.location.reload();
@@ -120,6 +126,13 @@ export default function EditOffer({ closeModal, offer }) {
             />
           </div>
         </div>
+        <input
+          className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+          defaultValue={offer?.salary}
+          name="editSalary"
+          type="text"
+          id="salary"
+        />
 
         <div className="inputField">
           <div className="label">
