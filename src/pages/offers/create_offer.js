@@ -22,6 +22,7 @@ function Create_offer(props) {
     company: '',
     companyDescription: '',
     categoryId: '',
+    salary: '',
   });
 
   const [formCategory, setFormCategory] = useState({
@@ -189,7 +190,7 @@ function Create_offer(props) {
               ))}
             </select>
 
-            <div className="col-12">
+            <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
               <input
                 value={formState.website}
                 onChange={handleInputChange}
@@ -199,6 +200,17 @@ function Create_offer(props) {
                 style={{ marginBottom: '5vh' }}
                 name="website"
                 id="website"
+              />
+
+              <input
+                value={formState.salary}
+                onChange={handleInputChange}
+                type="text"
+                className="form form-control"
+                placeholder={!language ? 'salaire' : 'salary'}
+                style={{ marginBottom: '5vh' }}
+                name="salary"
+                id="salary"
               />
             </div>
 
