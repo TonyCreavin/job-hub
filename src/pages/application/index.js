@@ -10,7 +10,7 @@ export default function Application({ applications }) {
   const { language } = useContext(LanguageContext);
   return (
     <div className="w-full h-screen overflow-y-scroll">
-      <h2 className="text-center my-5">
+      <h2 className="text-center my-5 font-serif">
         {!language ? 'Candidats' : 'Applicants'}
       </h2>
       {applications.map((application) => {

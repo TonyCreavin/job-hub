@@ -28,7 +28,7 @@ export default function Application({ applications }) {
   console.log('userData => ', userData);
   return (
     <div className="w-full h-screen overflow-scroll">
-      <h2 className="text-center my-5">
+      <h2 className="text-center my-5 font-serif">
         {!language ? 'Mes Candidatures' : 'My Applications'}
       </h2>
       {applications

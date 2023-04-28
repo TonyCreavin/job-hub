@@ -32,7 +32,7 @@ export default function ConsultantOffers({ offers }) {
   return (
     <>
       <div className="w-full h-screen overflow-y-scroll">
-        <h2 className="text-center my-5">
+        <h2 className="text-center my-5 font-serif">
           {!language ? 'Mes Offres' : 'My Offers'}
         </h2>
         <div className="flex flex-wrap w-full h-screen">

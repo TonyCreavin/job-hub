@@ -126,7 +126,9 @@ function JobDetailsPage({
 
         <h3 className="text-black font-semibold font-serif">{title}</h3>
 
-        <h3>{contractType}</h3>
+        <h3 className="text-[1.5rem] text-gray-700 font-serif ">
+          {contractType}
+        </h3>
       </div>
       <h3 className="font-serif text-[25px]">{skills}</h3>
       <div className="flex flex-row justify-between">
@@ -136,7 +138,7 @@ function JobDetailsPage({
         <a href={`http://${website}/`}>{website}</a>
       </div>
       <div className="border-b-2 border-slate-500 mb-5 pb-3 flex flex-row justify-between">
-        <h3 className="text-md text-gray-700 font-serif ">{location}</h3>
+        <h3 className="text-[1.5rem] text-gray-700 font-serif ">{location}</h3>
         <div className="flex flex-row">
           <h3 className="font-serif text-[1.5rem]">
             {!language ? 'Salaire:' : 'Salary:'}
@@ -148,14 +150,16 @@ function JobDetailsPage({
           </h3>
         </div>
       </div>
-      <h3>
+      <h3 className="font-serif font-semibold text-[24px]">
         {!language ? `Description de l'entreprise` : 'Company description'}
       </h3>
       <h3 className="font-serif text-[1.5rem] border-b-2 border-slate-500 mb-5 pb-3">
         {companyDescription}
       </h3>
-      <h3>{!language ? 'Description du poste' : 'Job description'}</h3>
-      <h3 className="font-serif text-[1.5rem]">{description}</h3>
+      <h3 className="font-serif font-semibold text-[24px]">
+        {!language ? 'Description du poste' : 'Job description'}
+      </h3>
+      <h3 className="font-serif text-[1.3rem]">{description}</h3>
     </div>
   );
 }
