@@ -31,17 +31,19 @@ export default function ConsultantOffers({ offers }) {
 
   return (
     <>
-      <h2 className="text-center my-5">
-        {!language ? 'Mes Offres' : 'My Offers'}
-      </h2>
-      <div className="flex flex-wrap w-full h-screen">
-        {offers.map(
-          (offer) =>
-            userData.role === 'CONSULTANT' &&
-            userData.id === offer.userId && (
-              <JobPost key={offer.id} offer={offer} />
-            )
-        )}
+      <div className="w-full h-screen overflow-y-scroll">
+        <h2 className="text-center my-5">
+          {!language ? 'Mes Offres' : 'My Offers'}
+        </h2>
+        <div className="flex flex-wrap w-full h-screen">
+          {offers.map(
+            (offer) =>
+              userData.role === 'CONSULTANT' &&
+              userData.id === offer.userId && (
+                <JobPost key={offer.id} offer={offer} />
+              )
+          )}
+        </div>
       </div>
     </>
   );
