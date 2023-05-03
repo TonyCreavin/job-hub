@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
-
+import TipTap from '../../components/Tiptap';
+import parser from 'html-react-parser';
 function Create_offer(props) {
   const { language } = useContext(LanguageContext);
   const [categories, setCategories] = useState([]);
-
+  const [content, setContent] = useState('');
+  const [content2, setContent2] = useState('');
   const [offer, setOffer] = useState(null);
   const router = useRouter();
   const [offers, setOffers] = useState([]);
@@ -35,6 +37,7 @@ function Create_offer(props) {
     console.log('res.data =>', response.data);
     setOffers(data);
     console.log('data =>', data);
+    router.reload();
   };
 
   const getCategory = async () => {
@@ -46,28 +49,6 @@ function Create_offer(props) {
     getCategory();
   }, []);
 
-  // useEffect(() => {
-  //   const findOffer = () => {
-  //     const offer = offers.find(
-  //       (off) =>
-  //         off.title === formState.title &&
-  //         off.contractType === formState.contractType &&
-  //         off.location === formState.location &&
-  //         off.company === formState.company &&
-  //         off.companyDescription === formState.companyDescription &&
-  //         off.description === formState.description &&
-  //         off.skills === formState.skills &&
-  //         off.website === formState.website &&
-  //         off.categoryId === formState.categoryId
-  //     );
-  //     if (offer) {
-  //       setOffer(offer);
-  //     }
-  //   };
-
-  //   findOffer();
-  // }, [offers, formState]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = props.data.user.id;
@@ -76,6 +57,7 @@ function Create_offer(props) {
       '/api/offers/create',
       {
         ...formState,
+
         userId,
       },
       {
@@ -85,35 +67,16 @@ function Create_offer(props) {
       }
     );
     await getOffers();
-    // console.log('there are the offers =>', offers);
-    // const offer = offers.find(
-    //   (off) =>
-    //     off.title === formState.title &&
-    //     off.contractType === formState.contractType &&
-    //     off.location === formState.location &&
-    //     off.company === formState.company &&
-    //     off.companyDescription === formState.companyDescription &&
-    //     off.description === formState.description &&
-    //     off.skills === formState.skills &&
-    //     off.website === formState.website &&
-    //     off.categoryId === formState.categoryId
-    // );
-    // setOffer(offer);
-
-    // const offerIdentifier = offer.id;
-    // console.log('this is my offer identifier =>', offerIdentifier);
-    // const res = await axios.post('/api/favorite/create', {
-    //   offerId: offerIdentifier,
-    //   isFavorite: true,
-    // });
 
     router.push('/');
   };
 
   const handleInputChange = (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
     setFormState({
       ...formState,
+
       [name]: value,
     });
   };
@@ -123,11 +86,11 @@ function Create_offer(props) {
     <div className="container">
       <div className="recruiter">
         <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5 font-serif">
+          <h2 className="text-center my-5 ">
             {!language ? 'Créer un offre ' : 'Create an offer'}
           </h2>
 
-          <form className="row d-flex justify-content-around">
+          <div className="row d-flex justify-content-around">
             <div className="col-md-6">
               <input
                 type="text"
@@ -215,7 +178,7 @@ function Create_offer(props) {
             </div>
 
             <div className="col-12">
-              <textarea
+              {/* <textarea
                 className="form form-control"
                 value={formState.description}
                 onChange={handleInputChange}
@@ -225,9 +188,19 @@ function Create_offer(props) {
                 name="description"
                 placeholder={!language ? 'description' : 'description'}
                 style={{ marginBottom: '5vh' }}
-              ></textarea>
-
-              <textarea
+              ></textarea> */}
+              <TipTap
+                value={formState.description}
+                onChange={handleInputChange}
+                id="description"
+                name="description"
+                placeholder={!language ? 'description' : 'description'}
+                setContent={(content) =>
+                  setFormState({ ...formState, description: content })
+                }
+              />
+              <div>{parser(content)}</div>
+              {/* <textarea
                 className="form form-control"
                 id="companyDescription"
                 name="companyDescription"
@@ -241,7 +214,23 @@ function Create_offer(props) {
                 style={{ marginBottom: '5vh' }}
                 value={formState.companyDescription}
                 onChange={handleInputChange}
-              ></textarea>
+              ></textarea> */}
+
+              <TipTap
+                value={formState.companyDescription}
+                onChange={handleInputChange}
+                id="companyDescription"
+                name="companyDescription"
+                placeholder={
+                  !language
+                    ? `description de l'entreprise`
+                    : 'company description'
+                }
+                setContent={(content) =>
+                  setFormState({ ...formState, companyDescription: content })
+                }
+              />
+              <div>{parser(content2)}</div>
               <button
                 type="submit"
                 onClick={handleSubmit}
@@ -251,7 +240,7 @@ function Create_offer(props) {
                 {!language ? 'Envoyer' : 'Send'}
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

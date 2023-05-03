@@ -22,9 +22,6 @@ export default function ProfileForm({ userData, session }) {
   };
 
   const handleInputChange = (event) => {
-    console.log('event.target.name => ', event.target.name);
-    console.log('event.target.value => ', event.target.value);
-
     setFormState((state) => ({
       ...state,
       [event.target.name]: event.target.value,

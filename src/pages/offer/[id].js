@@ -21,8 +21,8 @@ export default function Offer({ offer, user, application, cvs }) {
   const [userData, setUserData] = React.useState({});
   const { data: session, status } = useSession();
   console.log('my session=>', session.user.id);
-  const [showEditOfferModal, setShowEditOfferModal] = useState(false);
-  const [showApplicationModal, setShowApplicationModal] = useState(false);
+  const [showEditOfferWindow, setShowEditOfferWindow] = useState(false);
+  const [showApplicationWindow, setShowApplicationWindow] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
 
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function Offer({ offer, user, application, cvs }) {
   console.log('userData => ', userData);
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-screen overflow-scroll">
       <JobDetailsPage
         title={offer?.title}
         key={offer?.id}
@@ -90,7 +90,7 @@ export default function Offer({ offer, user, application, cvs }) {
             {!language ? ' Supprimer' : 'Delete'}
           </button>
           <button
-            onClick={() => setShowEditOfferModal((state) => !state)}
+            onClick={() => setShowEditOfferWindow((state) => !state)}
             className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
           >
             {!language ? 'Modifier' : 'Edit'}
@@ -99,24 +99,24 @@ export default function Offer({ offer, user, application, cvs }) {
       )}
       {session && userData.role === 'APPLICANT' && (
         <button
-          onClick={() => setShowApplicationModal((state) => !state)}
+          onClick={() => setShowApplicationWindow((state) => !state)}
           //onClick={handleApplication}
-          className="bg-blue-500 w-40 mx-auto my-4 text-white rounded-md py-1 px-2 mb-2"
+          className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
         >
           {!language ? 'Commencer' : 'Start'}
         </button>
       )}
-      {showApplicationModal && (
+      {showApplicationWindow && (
         <>
           <UploadCv
             cvs={cvs}
-            setShowApplicationModal={setShowApplicationModal}
+            setShowApplicationWindow={setShowApplicationWindow}
           />
           <UploadCoverLetter
             handleApplication={handleApplication}
             setCoverLetter={setCoverLetter}
             coverLetter={coverLetter}
-            closeModal={() => setShowApplicationModal(false)}
+            closeWindow={() => setShowApplicationWindow(false)}
             offer={offer}
             document={document}
             user={user}
@@ -133,10 +133,11 @@ export default function Offer({ offer, user, application, cvs }) {
         </>
       )}
 
-      {showEditOfferModal ? (
+      {showEditOfferWindow ? (
         <EditOffer
           offer={offer}
-          closeModal={() => setShowEditOfferModal(false)}
+          closeWindow={() => setShowEditOfferWindow(false)}
+          setShowEditOfferWindow={setShowEditOfferWindow}
         />
       ) : null}
     </div>
@@ -173,35 +174,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-//   const application = await prisma.application.findUnique({
-//     where: {
-//       id,
-//     },
-//   });
-//   const offer = await prisma.offer.findUnique({
-//     where: {
-//       id,
-//     },
-//   });
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       id,
-//     },
-//   });
-//   const document = await prisma.document.findUnique({
-//     where: {
-//       id,
-//     },
-//   });
-
-//   return {
-//     props: {
-//       application: JSON.parse(JSON.stringify(application)),
-//       user: JSON.parse(JSON.stringify(user)),
-//       document: JSON.parse(JSON.stringify(document)),
-//       offer: JSON.parse(JSON.stringify(offer)),
-//       session: session,
-//     },
-//   };
-// }

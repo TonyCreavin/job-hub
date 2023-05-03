@@ -7,6 +7,7 @@ import { AiTwotoneHeart } from 'react-icons/ai';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
 import Link from 'next/link';
+import parser from 'html-react-parser';
 
 function JobDetailsPage({
   title,
@@ -153,13 +154,14 @@ function JobDetailsPage({
       <h3 className="font-serif font-semibold text-[24px]">
         {!language ? `Description de l'entreprise` : 'Company description'}
       </h3>
-      <h3 className="font-serif text-[1.5rem] border-b-2 border-slate-500 mb-5 pb-3">
-        {companyDescription}
+      <h3 className="font-serif text-[1.3rem] border-b-2 border-slate-500 mb-5 pb-3 ">
+        {parser(companyDescription)}
       </h3>
+
       <h3 className="font-serif font-semibold text-[24px]">
         {!language ? 'Description du poste' : 'Job description'}
       </h3>
-      <h3 className="font-serif text-[1.3rem]">{description}</h3>
+      <h3 className="font-serif text-[1.3rem]">{parser(description)}</h3>
     </div>
   );
 }

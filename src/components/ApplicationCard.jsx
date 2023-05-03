@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
+import parser from 'html-react-parser';
 
 export default function DocumentList({ application, user }) {
   const { language } = useContext(LanguageContext);
@@ -90,7 +91,7 @@ export default function DocumentList({ application, user }) {
             {language && !coverLetter && 'Show coverletter'}
           </button>
 
-          {coverLetter && application.coverLetter}
+          {coverLetter && parser(application.coverLetter)}
         </div>
         <button
           onClick={deleteApplication}
