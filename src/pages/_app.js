@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Script from 'next/script';
 import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';

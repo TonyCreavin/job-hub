@@ -7,7 +7,6 @@ import { Inter } from 'next/font/google';
 import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfileForm from '../components/ProfileForm';
-//import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -107,6 +106,7 @@ export default function Home({ cvs }) {
         className="flex flex-col items-center justify-center"
       > */}
       <ProfileForm userData={userData} key={userData.id} session={session} />
+
       {/* {session && userData?.role === 'APPLICANT' && (
           <div className="max-w-4xl mx-auto py-20 space-y-6 flex flex-col">
             <label>

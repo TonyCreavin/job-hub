@@ -18,7 +18,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/api/document/create.ts"
+    "src/pages/api/document/create.ts",
+    "src/components/MyEditor.jsx"
   ],
   "exclude": ["node_modules"]
 }

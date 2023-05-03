@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
+import parser from 'html-react-parser';
 
 function JobPost({ offer }) {
   const { language } = useContext(LanguageContext);
@@ -77,7 +78,9 @@ function JobPost({ offer }) {
         <h3 className="font-serif font-semibold text-[24px]">
           Description du poste:
         </h3>
-        <h3 className="font-serif text-[1.3rem]">{offer.description}</h3>
+        <h3 className="font-serif text-[1.3rem]">
+          {parser(offer.description)}
+        </h3>
       </div>
     </Link>
   );
