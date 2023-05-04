@@ -123,6 +123,7 @@ model Document {
 model Category {
   id String @id @unique @default(uuid())
   name String
+  name_en String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   offers Offer[]
