@@ -8,7 +8,7 @@ import JobDetailsPage from '../../components/JobDetailsPage';
 import UploadCoverLetter from '../../components/UploadCoverLetter';
 import fs from 'fs/promises';
 import path from 'path';
-import { toast } from 'react-toastify';
+
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 
@@ -24,6 +24,7 @@ export default function Offer({ offer, user, application, cvs }) {
   const [showEditOfferWindow, setShowEditOfferWindow] = useState(false);
   const [showApplicationWindow, setShowApplicationWindow] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
+  const [getOne, setGetOne] = useState({});
 
   const router = useRouter();
 
@@ -33,6 +34,17 @@ export default function Offer({ offer, user, application, cvs }) {
     await axios.post('/api/offers/deleteOffer', { id: offer.id });
     router.push('/');
   }
+  async function handleGetOne() {
+    const res = await axios.get('/api/application');
+    const data = res.data.find(
+      (application) => application.offerId === offer.id
+    );
+    console.log('data =>', data);
+    setGetOne(data);
+  }
+  useEffect(() => {
+    handleGetOne();
+  }, []);
 
   async function handleApplication(e) {
     e.preventDefault();
@@ -43,11 +55,7 @@ export default function Offer({ offer, user, application, cvs }) {
       coverLetter: coverLetter,
       applied: true,
     });
-    toast('Application sent', {
-      hideProgressBar: true,
-      autoClose: 2000,
-      type: 'success',
-    });
+
     router.push('/');
   }
 
@@ -62,7 +70,7 @@ export default function Offer({ offer, user, application, cvs }) {
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userData => ', userData);
+  console.log('userData => => =>', getOne?.applied);
 
   return (
     <>
@@ -104,17 +112,33 @@ export default function Offer({ offer, user, application, cvs }) {
               </button>
             </div>
           )}
-        {session && userData.role === 'APPLICANT' && (
-          <button
-            onClick={() => setShowApplicationWindow((state) => !state)}
-            className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
-          >
-            {!language && !showApplicationWindow && 'Postuler'}
-            {!language && showApplicationWindow && 'Annuler'}
-            {language && !showApplicationWindow && 'Apply'}
-            {language && showApplicationWindow && 'Cancel'}
-          </button>
-        )}
+        {session &&
+          userData.role === 'APPLICANT' &&
+          getOne?.applied === undefined && (
+            <button
+              onClick={() => setShowApplicationWindow((state) => !state)}
+              className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
+            >
+              {!language && !showApplicationWindow && 'Postuler'}
+              {!language && showApplicationWindow && 'Annuler'}
+              {language && !showApplicationWindow && 'Apply'}
+              {language && showApplicationWindow && 'Cancel'}
+            </button>
+          )}
+
+        {session &&
+          userData.role === 'APPLICANT' &&
+          getOne?.applied === true && (
+            <button
+              disabled
+              className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
+            >
+              {!language && !showApplicationWindow && 'Postulé'}
+
+              {language && !showApplicationWindow && 'Applied'}
+            </button>
+          )}
+
         {showApplicationWindow && (
           <>
             <div className="flex flex-col mx-auto">
