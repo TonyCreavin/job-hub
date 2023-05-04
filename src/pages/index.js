@@ -53,7 +53,7 @@ export default function Offers({ offers }) {
           </option>
           {category.map((category) => (
             <option value={category.id} key={category.id}>
-              {category.name}
+              {!language ? category.name : category.name_en}
             </option>
           ))}
         </select>

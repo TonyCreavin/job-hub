@@ -148,7 +148,7 @@ function Create_offer(props) {
               </option>
               {categories.map((category) => (
                 <option value={category.id} key={category.id}>
-                  {category.name}
+                  {!language ? category.name : category.name_en}
                 </option>
               ))}
             </select>
