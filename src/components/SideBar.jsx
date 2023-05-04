@@ -72,9 +72,9 @@ const SideBar = () => {
         >
           <div className="bd-navbar-toggle"></div>
 
-          <h1 className="navbar-brand p-0 me-0  text-white font-semibold text-2xl">
+          <h3 className="navbar-brand p-0 me-0  text-white font-semibold text-2xl">
             HDM
-          </h1>
+          </h3>
 
           <div className="d-flex">
             <button

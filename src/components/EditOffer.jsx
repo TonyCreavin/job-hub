@@ -52,14 +52,14 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
   return (
     <>
       <div className="container">
-        <div className="w-full mb-10">
+        <div className="w-full mb-10 ">
           <h3 className="text-center my-5 text-2xl font-serif">
             {!language ? `Modifier l'Offre` : 'Edit Offer'}
           </h3>
           <form onSubmit={handleSubmit} className="w-[80vw] mx-auto">
             <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="editTitle"></label>
+                <label htmlFor="title">{!language ? 'Poste' : 'Post'}</label>
                 <input
                   value={formState.title || ' '}
                   name="title"
@@ -91,6 +91,7 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
                   onChange={handleInputChange}
                   name="website"
                   type="text"
+                  id="website"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
                 />
               </div>
@@ -150,24 +151,30 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
               />
             </div>
           </form>
-          <div className="inputField">
-            <label>{`Description de l'entreprise`}</label>
-
-            <DescriptionEditor
-              value={formState.companyDescription || ''}
-              name="companyDescription"
-              onChange={handleInputChange}
-              type="text"
-              id="companyDescription"
-              setContent={(content) =>
-                setFormState({ ...formState, companyDescription: content })
-              }
-            />
-
-            <div className="label">
-              <label htmlFor="description">Description</label>
-            </div>
+          <div className="flex flex-col   w-[80vw] mx-auto">
+            <label className="mt-5">
+              {!language
+                ? `Description de l'entreprise`
+                : 'Company Description'}
+            </label>
           </div>
+          <DescriptionEditor
+            value={formState.companyDescription || ''}
+            name="companyDescription"
+            onChange={handleInputChange}
+            type="text"
+            id="companyDescription"
+            //className="w-[80vw] mx-auto"
+            setContent={(content) =>
+              setFormState({ ...formState, companyDescription: content })
+            }
+          />
+        </div>
+        <div className="flex flex-col  mb-2  ">
+          <label>
+            {' '}
+            {!language ? `Description du Poste` : 'Job Description'}
+          </label>
 
           <div>
             <DescriptionEditor
@@ -181,6 +188,7 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
               }
             />
           </div>
+
           <form onSubmit={handleSubmit} className="w-[80vw] mx-auto">
             <div className=" flex flex-row justify-center my-4">
               <button
