@@ -4,8 +4,7 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import React from 'react';
-import parser from 'html-react-parser';
-import DOMPurify from 'dompurify';
+
 import {
   FaBold,
   FaCode,
@@ -19,12 +18,6 @@ import {
   FaUnderline,
   FaUndo,
 } from 'react-icons/fa';
-
-// const parseRichText = (content) => {
-//   const parser = new DOMParser();
-//   const doc = parser.parseFromString(content, 'text/html');
-//   return doc.body.innerHTML;
-// };
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -71,10 +64,10 @@ const MenuBar = ({ editor }) => {
         </button>
         <button
           onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
+            editor.chain().focus().toggleHeading({ level: 6 }).run()
           }
           className={
-            editor.isActive('heading', { level: 1 }) ? 'is-active' : ''
+            editor.isActive('heading', { level: 6 }) ? 'is-active' : ''
           }
         >
           <FaHeading />
@@ -121,7 +114,7 @@ const MenuBar = ({ editor }) => {
 const TipTap = ({ setContent }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline, TextStyle],
-    content: ``, // Utiliser la valeur de l'état local comme contenu de l'éditeur Tiptap
+    content: ``,
     onUpdate: ({ editor }) => {
       setContent(editor.getHTML()), console.log(editor.getHTML());
     },
@@ -145,7 +138,7 @@ export const DescriptionEditor = ({ value, setContent }) => {
   });
 
   return (
-    <div className="text-editor">
+    <div className="text-editor2">
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>

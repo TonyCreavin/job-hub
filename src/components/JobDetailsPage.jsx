@@ -6,7 +6,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { AiTwotoneHeart } from 'react-icons/ai';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
-import Link from 'next/link';
+
 import parser from 'html-react-parser';
 
 function JobDetailsPage({
@@ -16,14 +16,14 @@ function JobDetailsPage({
   description,
   company,
   website,
-  skills,
   companyDescription,
   id,
   salary,
+  createdAt,
+  updatedAt,
 }) {
   const { language } = useContext(LanguageContext);
   const router = useRouter();
-  // console.log('id', id);
 
   const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
@@ -105,7 +105,8 @@ function JobDetailsPage({
       className="w-[80vw] h-screen   border-gray-200 border-2  mx-auto border-solid rounded-lg mt-10 p-2 overflow-scroll"
       key={id}
     >
-      <div className="flex flex-col md:flex-row justify-between">
+      <div className="flex flex-row justify-between">
+        <h4 className=" font-semibold font-serif">{title}</h4>
         {session &&
           userData?.role === 'APPLICANT' &&
           myFavorite != null &&
@@ -124,44 +125,49 @@ function JobDetailsPage({
               <AiTwotoneHeart size={30} />
             </button>
           )}
-
-        <h3 className="text-black font-semibold font-serif">{title}</h3>
-
-        <h3 className="text-[1.5rem] text-gray-700 font-serif ">
-          {contractType}
-        </h3>
       </div>
-      <h3 className="font-serif text-[25px]">{skills}</h3>
+
       <div className="flex flex-row justify-between">
-        <h3 className="text-blue-400 font-normal text-md font-serif">
-          {company}
-        </h3>
+        <h4 className="text-blue-400 font-normal font-serif">{company}</h4>
         <a href={`http://${website}/`}>{website}</a>
       </div>
-      <div className="border-b-2 border-slate-500 mb-5 pb-3 flex flex-row justify-between">
-        <h3 className="text-[1.5rem] text-gray-700 font-serif ">{location}</h3>
-        <div className="flex flex-row">
-          <h3 className="font-serif text-[1.5rem]">
-            {!language ? 'Salaire:' : 'Salary:'}
-          </h3>
-          <h3 className="text-[24px] font-serif ml-1 ">
-            {language && !salary && 'to be negotiated'}
-            {!language && !salary && 'à négocier'}
-            {salary && salary}
-          </h3>
-        </div>
-      </div>
-      <h3 className="font-serif font-semibold text-[24px]">
-        {!language ? `Description de l'entreprise` : 'Company description'}
-      </h3>
-      <h3 className="font-serif text-[1.3rem] border-b-2 border-slate-500 mb-5 pb-3 ">
-        {parser(companyDescription)}
-      </h3>
 
-      <h3 className="font-serif font-semibold text-[24px]">
+      <div className=" flex flex-row justify-between">
+        <h5 className=" text-gray-700 font-serif ">{location}</h5>
+
+        <h5 className=" font-serif ml-1 ">
+          💰
+          {language && !salary && ' to be negotiated'}
+          {!language && !salary && ' à négocier'}
+          {salary && salary}
+        </h5>
+      </div>
+      <div className="border-b-2 border-slate-500 mb-5 ">
+        <h5 className="font-serif">{contractType}</h5>
+      </div>
+
+      <h5 className="font-serif font-semibold ">
+        {!language ? `Description de l'entreprise` : 'Company description'}
+      </h5>
+      <div className="border-b-2 border-slate-500 mb-5">
+        {companyDescription && parser(companyDescription)}
+      </div>
+
+      <h5 className="font-serif font-semibold">
         {!language ? 'Description du poste' : 'Job description'}
-      </h3>
-      <h3 className="font-serif text-[1.3rem]">{parser(description)}</h3>
+      </h5>
+      <div>{description && parser(description)}</div>
+      <p className=" text-gray-700 font-serif ">
+        {!language ? 'Date de publication' : 'Publication date '}:
+        {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/
+        {createdAt.substring(0, 4)}
+      </p>
+      {updatedAt > createdAt && (
+        <p className=" text-gray-700 font-serif ">
+          {!language ? 'Mise à jour' : 'Update '}:{createdAt.substring(8, 10)}/
+          {createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}
+        </p>
+      )}
     </div>
   );
 }

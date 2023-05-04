@@ -44,18 +44,9 @@ export default function Home({ cvs }) {
       setDocuments(result.data);
     }
   };
-  //   const getApplicants = async () => {
-  //     const result = await axios.get('/api/application').catch((err) => {
-  //       console.log('Error fetching applicants:', err);
-  //     });
-  //     if (result) {
-  //       setApplication(result.data);
-  //     }
-  //   };
 
   useEffect(() => {
     getDocuments();
-    // getApplicants();
   }, []);
 
   const openDocument = (document) => {
@@ -99,7 +90,6 @@ export default function Home({ cvs }) {
       getDocuments();
       console.log('CV deleted successfully!');
       setSelectedFile(null);
-      //router.push('/profile');
     } catch (error) {
       console.log('Error deleting CV:', error);
     }

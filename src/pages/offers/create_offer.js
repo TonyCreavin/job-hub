@@ -5,13 +5,11 @@ import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 import TipTap from '../../components/Tiptap';
-import parser from 'html-react-parser';
 function Create_offer(props) {
   const { language } = useContext(LanguageContext);
   const [categories, setCategories] = useState([]);
   const [content, setContent] = useState('');
   const [content2, setContent2] = useState('');
-  const [offer, setOffer] = useState(null);
   const router = useRouter();
   const [offers, setOffers] = useState([]);
   const [formState, setFormState] = useState({
@@ -27,17 +25,13 @@ function Create_offer(props) {
     salary: '',
   });
 
-  const [formCategory, setFormCategory] = useState({
-    name: '',
-  });
-
   const getOffers = async () => {
     const response = await axios.get('/api/offers');
     const data = await response.data;
     console.log('res.data =>', response.data);
     setOffers(data);
     console.log('data =>', data);
-    router.reload();
+    router.push('/');
   };
 
   const getCategory = async () => {
@@ -178,44 +172,11 @@ function Create_offer(props) {
             </div>
 
             <div className="col-12">
-              {/* <textarea
-                className="form form-control"
-                value={formState.description}
-                onChange={handleInputChange}
-                id="description"
-                cols="30"
-                rows="10"
-                name="description"
-                placeholder={!language ? 'description' : 'description'}
-                style={{ marginBottom: '5vh' }}
-              ></textarea> */}
-              <TipTap
-                value={formState.description}
-                onChange={handleInputChange}
-                id="description"
-                name="description"
-                placeholder={!language ? 'description' : 'description'}
-                setContent={(content) =>
-                  setFormState({ ...formState, description: content })
-                }
-              />
-              <div>{parser(content)}</div>
-              {/* <textarea
-                className="form form-control"
-                id="companyDescription"
-                name="companyDescription"
-                cols="30"
-                rows="10"
-                placeholder={
-                  !language
-                    ? `description de l'entreprise`
-                    : 'company description'
-                }
-                style={{ marginBottom: '5vh' }}
-                value={formState.companyDescription}
-                onChange={handleInputChange}
-              ></textarea> */}
-
+              <h5>
+                {!language
+                  ? `Description du l'entreprise`
+                  : 'Company Description'}
+              </h5>
               <TipTap
                 value={formState.companyDescription}
                 onChange={handleInputChange}
@@ -230,7 +191,19 @@ function Create_offer(props) {
                   setFormState({ ...formState, companyDescription: content })
                 }
               />
-              <div>{parser(content2)}</div>
+
+              <h5>{!language ? 'Description du poste' : 'Job description'}</h5>
+              <TipTap
+                value={formState.description}
+                onChange={handleInputChange}
+                id="description"
+                name="description"
+                placeholder={!language ? 'description' : 'description'}
+                setContent={(content) =>
+                  setFormState({ ...formState, description: content })
+                }
+              />
+
               <button
                 type="submit"
                 onClick={handleSubmit}

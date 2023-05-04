@@ -65,82 +65,100 @@ export default function Offer({ offer, user, application, cvs }) {
   console.log('userData => ', userData);
 
   return (
-    <div className="flex flex-col w-full h-screen overflow-scroll">
-      <JobDetailsPage
-        title={offer?.title}
-        key={offer?.id}
-        location={offer?.location}
-        contractType={offer?.contractType}
-        skills={offer?.skills}
-        salary={offer?.salary}
-        description={offer?.description}
-        company={offer?.company}
-        companyDescription={offer?.companyDescription}
-        website={offer?.website}
-        favorite={offer?.favorite}
-        id={offer?.id}
-        userId={offer?.userId}
-      />
-      {userData.role === 'CONSULTANT' && session.user.id === offer?.userId && (
-        <div className="  mx-auto my-4">
-          <button
-            className="bg-red-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
-            onClick={handleDelete}
-          >
-            {!language ? ' Supprimer' : 'Delete'}
-          </button>
-          <button
-            onClick={() => setShowEditOfferWindow((state) => !state)}
-            className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
-          >
-            {!language ? 'Modifier' : 'Edit'}
-          </button>
-        </div>
-      )}
-      {session && userData.role === 'APPLICANT' && (
-        <button
-          onClick={() => setShowApplicationWindow((state) => !state)}
-          //onClick={handleApplication}
-          className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
-        >
-          {!language ? 'Commencer' : 'Start'}
-        </button>
-      )}
-      {showApplicationWindow && (
-        <>
-          <UploadCv
-            cvs={cvs}
-            setShowApplicationWindow={setShowApplicationWindow}
+    <>
+      <div className="flex flex-col w-full h-screen overflow-scroll">
+        {!showApplicationWindow && !showEditOfferWindow ? (
+          <JobDetailsPage
+            title={offer?.title}
+            key={offer?.id}
+            location={offer?.location}
+            contractType={offer?.contractType}
+            salary={offer?.salary}
+            description={offer?.description}
+            company={offer?.company}
+            companyDescription={offer?.companyDescription}
+            website={offer?.website}
+            favorite={offer?.favorite}
+            id={offer?.id}
+            userId={offer?.userId}
+            createdAt={offer?.createdAt}
+            updatedAt={offer?.updatedAt}
           />
-          <UploadCoverLetter
-            handleApplication={handleApplication}
-            setCoverLetter={setCoverLetter}
-            coverLetter={coverLetter}
-            closeWindow={() => setShowApplicationWindow(false)}
+        ) : (
+          ''
+        )}
+        {userData.role === 'CONSULTANT' &&
+          session.user.id === offer?.userId && (
+            <div className="  mx-auto my-4">
+              <button
+                className="bg-red-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
+                onClick={handleDelete}
+              >
+                {!language ? ' Supprimer' : 'Delete'}
+              </button>
+              <button
+                onClick={() => setShowEditOfferWindow((state) => !state)}
+                className="bg-blue-500 ml-4 text-white rounded-md py-1 px-2 mb-2"
+              >
+                {!language ? 'Modifier' : 'Edit'}
+              </button>
+            </div>
+          )}
+        {session && userData.role === 'APPLICANT' && (
+          <button
+            onClick={() => setShowApplicationWindow((state) => !state)}
+            className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
+          >
+            {!language && !showApplicationWindow && 'Postuler'}
+            {!language && showApplicationWindow && 'Annuler'}
+            {language && !showApplicationWindow && 'Apply'}
+            {language && showApplicationWindow && 'Cancel'}
+          </button>
+        )}
+        {showApplicationWindow && (
+          <>
+            <div className="flex flex-col mx-auto">
+              <h3 className="flex justify-center font-semibold font-serif">
+                {offer?.title}
+              </h3>
+              <h4 className="flex justify-center text-blue-400 font-normal font-serif">
+                {offer?.company}
+              </h4>
+            </div>
+            <UploadCv
+              cvs={cvs}
+              setShowApplicationWindow={setShowApplicationWindow}
+            />
+            <UploadCoverLetter
+              handleApplication={handleApplication}
+              setCoverLetter={setCoverLetter}
+              coverLetter={coverLetter}
+              closeWindow={() => setShowApplicationWindow(false)}
+              offer={offer}
+              document={document}
+              user={user}
+              application={application}
+            />
+
+            <button
+              type="submit"
+              className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
+              onClick={handleApplication}
+            >
+              {!language ? 'Postuler' : 'Apply'}
+            </button>
+          </>
+        )}
+
+        {showEditOfferWindow ? (
+          <EditOffer
             offer={offer}
-            document={document}
-            user={user}
-            application={application}
+            closeWindow={() => setShowEditOfferWindow(false)}
+            setShowEditOfferWindow={setShowEditOfferWindow}
           />
-
-          <button
-            type="submit"
-            className="bg-blue-500 rounded-md text-white w-32 h-7   mx-auto my-6"
-            onClick={handleApplication}
-          >
-            {!language ? 'Postuler' : 'Apply'}
-          </button>
-        </>
-      )}
-
-      {showEditOfferWindow ? (
-        <EditOffer
-          offer={offer}
-          closeWindow={() => setShowEditOfferWindow(false)}
-          setShowEditOfferWindow={setShowEditOfferWindow}
-        />
-      ) : null}
-    </div>
+        ) : null}
+      </div>
+    </>
   );
 }
 
