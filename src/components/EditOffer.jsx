@@ -47,7 +47,6 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
       [event.target.name]: event.target.value,
     }));
   };
-  //const sanitizedDescription = DOMPurify.sanitize(offer.description);
 
   return (
     <>

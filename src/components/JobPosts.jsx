@@ -49,38 +49,33 @@ function JobPost({ offer }) {
   return (
     <Link href={`/offer/${offer.id}`} className="no-underline text-black">
       <div
-        className=" border-solid overflow-scroll border-gray-200 border-2  w-[40vw] h-[40vh] m-4 rounded-lg p-3 bg-white"
+        className=" border-solid overflow-scroll border-gray-200 border-2  w-[80vw] h-[40vh] md:w-[40vw] m-4 rounded-lg p-3 bg-white"
         key={offer.id}
       >
         <div className="flex justify-between">
-          <h3 className="text-black font-semibold font-serif">
-            {' '}
-            {offer.title}
-          </h3>
+          <h5 className=" font-semibold font-serif">{offer.title}</h5>
           {myFavorite != undefined &&
             userData.role === 'APPLICANT' &&
             myFavorite != null &&
             myFavorite.isFavorite && <AiTwotoneHeart size={30} />}
         </div>
-        <h3 className="font-serif text-[25px]">{offer.skills}</h3>
-        <h3 className="text-blue-400 font-normal text-md font-serif">
+
+        <h5 className="text-blue-400 font-normal text-md font-serif">
           {offer.company}
-        </h3>
+        </h5>
+        <h6 className="font-sans">
+          💰 {language && !offer.salary && 'to be negotiated'}
+          {!language && !offer.salary && 'à négocier'}
+          {offer.salary && offer.salary}
+        </h6>
         <div className="flex justify-start gap-4 border-slate-500 border-b-2 mb-5">
-          <h3 className="text-[1.3rem] text-gray-700 font-serif">
-            {offer.contractType}
-          </h3>
-          <h3 className="text-[1.3rem] text-gray-700 font-serif">
-            {' '}
-            {offer.location}
-          </h3>
+          <h6 className=" text-gray-700 font-serif">{offer.contractType}</h6>
+          <h6 className=" text-gray-700 font-serif"> {offer.location}</h6>
         </div>
-        <h3 className="font-serif font-semibold text-[24px]">
-          Description du poste:
-        </h3>
-        <h3 className="font-serif text-[1.3rem]">
-          {parser(offer.description)}
-        </h3>
+        <h5 className="font-serif font-medium ">
+          {!language ? 'Description du poste:' : 'Job description:'}
+        </h5>
+        <div>{parser(offer.description)}</div>
       </div>
     </Link>
   );

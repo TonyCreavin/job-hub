@@ -1,7 +1,6 @@
 import prisma from '../../../../lib/prisma';
 
 export default async function handle(req, res) {
-  //const { categoryId } = req.query;
   const { id, name, name_en } = req.body;
   try {
     const category = await prisma.category.update({

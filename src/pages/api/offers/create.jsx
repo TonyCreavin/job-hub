@@ -34,11 +34,6 @@ export default async function handler(req, res) {
         },
       },
     });
-    // const favorite = await prisma.favorite.create({
-    //   data: {
-    //     offer: { connect: { id: offer.id } },
-    //   },
-    // });
 
     await prisma.$disconnect();
     res.json(offer);

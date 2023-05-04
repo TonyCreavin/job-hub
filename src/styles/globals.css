@@ -107,10 +107,19 @@ a {
 .text-editor {
   border-radius: 5px;
   border: 1px solid grey;
-  max-width: 100%;
-  min-height: 300px;
+  max-width: 80%;
+  min-height: 400px;
   margin: 5rem auto;
 }
+
+.text-editor2 {
+  border-radius: 5px;
+  border: 1px solid grey;
+  max-width: 95%;
+  min-height: 400px;
+  margin: 5rem auto;
+}
+
 .menu-bar {
   padding-bottom: 5px;
   display: flex;

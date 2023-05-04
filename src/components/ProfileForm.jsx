@@ -1,13 +1,16 @@
-import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import UploadCv from '../components/UploadCv';
 import { sendNotification } from '../../lib/notification';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
+
 export default function ProfileForm({ userData, session }) {
   const { language } = useContext(LanguageContext);
   const [formState, setFormState] = useState(userData);
+  const router = useRouter();
+
   console.log(
     'this is is??, ',
     userData.firstName,
@@ -51,6 +54,7 @@ export default function ProfileForm({ userData, session }) {
         }),
       });
       await sendNotification(values);
+      router.reload();
     } catch (error) {
       console.log(error);
     }
