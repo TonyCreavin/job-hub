@@ -101,7 +101,7 @@ export default function Home({ cvs }) {
       <form
         onSubmit={handleUpload}
         encType="multipart/form-data"
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col items-center justify-center "
       >
         {session && userData?.role === 'APPLICANT' && (
           <div className="max-w-4xl mx-auto py-20 space-y-6 flex flex-col">

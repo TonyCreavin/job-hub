@@ -37,44 +37,46 @@ export default function Offers({ offers }) {
 
   return (
     <>
-      <div className="w-full h-screen overflow-scroll">
+      <div className="w-full h-screen overflow-scroll ">
         <div className="flex flex-col items-center md:flex-row w-full  justify-around my-5 border-b border-solid border-gray-500  ">
           <JobSearchbar offers={offers} setFilterJob={setFilterJob} />
           <PlaceSearchbar offers={offers} setFilterData={setFilterData} />
         </div>
-        <select
-          onChange={handleChange}
-          name="categoryId"
-          id="categoryId"
-          className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5 mx-3"
-        >
-          <option className="text-center ">
-            {!language ? 'Sélectionnez une catégorie' : 'Select a category'}
-          </option>
-          {category.map((category) => (
-            <option value={category.id} key={category.id}>
-              {!language ? category.name : category.name_en}
+        <div className="flex justify-center">
+          <select
+            onChange={handleChange}
+            name="categoryId"
+            id="categoryId"
+            className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5  "
+          >
+            <option className="text-center ">
+              {!language ? 'Sélectionnez une catégorie' : 'Select a category'}
             </option>
-          ))}
-        </select>
+            {category.map((category) => (
+              <option value={category.id} key={category.id}>
+                {!language ? category.name : category.name_en}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <div className=" w-full h-full">
           {filterData.length !== 0 && (
-            <div className="flex flex-wrap w-full h-full">
+            <div className="flex flex-wrap w-full h-full justify-center">
               {filterData.map((offer) => (
                 <JobPost key={offer.id} offer={offer} />
               ))}
             </div>
           )}
           {filterJob.length !== 0 && (
-            <div className="flex flex-wrap w-full h-full">
+            <div className="flex flex-wrap w-full h-full justify-center">
               {filterJob.map((offer) => (
                 <JobPost key={offer.id} offer={offer} />
               ))}
             </div>
           )}
           {filterData.length === 0 && filterJob.length === 0 && (
-            <div className="flex flex-wrap w-full h-full">
+            <div className="flex flex-wrap w-full h-full justify-center">
               {offers.map((offer) => (
                 <JobPost key={offer.id} offer={offer} />
               ))}

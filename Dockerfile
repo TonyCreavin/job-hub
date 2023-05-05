@@ -1,14 +1,16 @@
-FROM node:16-alpine
+FROM node:alpine
 
-WORKDIR /app
+# create & set working directory
+RUN mkdir -p /usr/src
+WORKDIR /usr/src
 
-COPY package*.json ./
+# copy source files
+COPY . /usr/src
 
+# install dependencies
 RUN npm install
 
-COPY . .
-
-ENV PORT=8080
-EXPOSE 8080
-
-CMD npm run dev
+# start app
+RUN npm run build
+EXPOSE 3000
+CMD npm run start

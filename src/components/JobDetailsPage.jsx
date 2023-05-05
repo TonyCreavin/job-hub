@@ -32,12 +32,6 @@ function JobDetailsPage({
   const [button, setButton] = useState(false);
 
   useEffect(() => {
-    if (myFavorite !== undefined) {
-      setIsLoaded(false);
-    }
-  }, []);
-
-  useEffect(() => {
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
@@ -47,6 +41,7 @@ function JobDetailsPage({
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
+
   useEffect(() => {
     const getFavorite = async () => {
       const res = await axios.get(`/api/favorite`);
@@ -60,7 +55,7 @@ function JobDetailsPage({
     if (session?.user.id) {
       getFavorite();
     }
-  }, [session?.user.id]);
+  }, [session?.user.id, id]);
 
   const handleClick = async () => {
     const updatedFavorite = {
