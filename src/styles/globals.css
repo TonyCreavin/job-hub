@@ -107,7 +107,8 @@ a {
 .text-editor {
   border-radius: 5px;
   border: 1px solid grey;
-  max-width: 80%;
+  width: 100%;
+
   min-height: 400px;
   margin: 5rem auto;
 }
@@ -153,8 +154,7 @@ button.is-active {
   margin-top: 0.75em;
 }
 
-.ProseMirror ul,
-.ProseMirror ol {
+.ProseMirror ul {
   padding: 0 1rem;
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
@@ -20,7 +20,18 @@ export default function DocumentList({ application, user }) {
       setDocuments(result.data);
     }
   };
-  const getOffer = async () => {
+  // const getOffer = async () => {
+  //   try {
+  //     const result = await axios.get('/api/offers');
+  //     const data = result.data.find(
+  //       (offer) => offer.id === application.offerId
+  //     );
+  //     setOffer(data);
+  //   } catch (err) {
+  //     console.log('Error getting data', err);
+  //   }
+  // };
+  const getOffer = useCallback(async () => {
     try {
       const result = await axios.get('/api/offers');
       const data = result.data.find(
@@ -30,7 +41,7 @@ export default function DocumentList({ application, user }) {
     } catch (err) {
       console.log('Error getting data', err);
     }
-  };
+  }, [application.offerId]);
 
   const deleteApplication = async () => {
     await axios.post(`/api/application/deleteApplication`, {
@@ -41,8 +52,10 @@ export default function DocumentList({ application, user }) {
 
   useEffect(() => {
     getDocuments();
-    getOffer();
   }, []);
+  useEffect(() => {
+    getOffer();
+  }, [getOffer]);
 
   const openDocument = (document) => {
     window.open(`/api/document/${document.id}`, '_blank');

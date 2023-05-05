@@ -15,12 +15,6 @@ function JobPost({ offer }) {
   const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
-    if (myFavorite !== undefined) {
-      setIsLoaded(false);
-    }
-  }, []);
-
-  useEffect(() => {
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
@@ -44,7 +38,7 @@ function JobPost({ offer }) {
     if (session?.user.id) {
       getFavorite();
     }
-  }, [session?.user.id]);
+  }, [session?.user.id, offer.id]);
 
   return (
     <Link href={`/offer/${offer.id}`} className="no-underline text-black">

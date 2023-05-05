@@ -34,17 +34,18 @@ export default function Offer({ offer, user, application, cvs }) {
     await axios.post('/api/offers/deleteOffer', { id: offer.id });
     router.push('/');
   }
-  async function handleGetOne() {
-    const res = await axios.get('/api/application');
-    const data = res.data.find(
-      (application) => application.offerId === offer.id
-    );
-    console.log('data =>', data);
-    setGetOne(data);
-  }
+
   useEffect(() => {
+    async function handleGetOne() {
+      const res = await axios.get('/api/application');
+      const data = res.data.find(
+        (application) => application.offerId === offer.id
+      );
+      console.log('data =>', data);
+      setGetOne(data);
+    }
     handleGetOne();
-  }, []);
+  }, [offer.id]);
 
   async function handleApplication(e) {
     e.preventDefault();
@@ -74,7 +75,7 @@ export default function Offer({ offer, user, application, cvs }) {
 
   return (
     <>
-      <div className="flex flex-col w-full h-screen overflow-scroll">
+      <div className="flex flex-col w-full h-screen overflow-scroll ">
         {!showApplicationWindow && !showEditOfferWindow ? (
           <JobDetailsPage
             title={offer?.title}
@@ -131,7 +132,7 @@ export default function Offer({ offer, user, application, cvs }) {
           getOne?.applied === true && (
             <button
               disabled
-              className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
+              className="bg-blue-300 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
             >
               {!language && !showApplicationWindow && 'Postulé'}
 
