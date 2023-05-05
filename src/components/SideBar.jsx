@@ -173,14 +173,16 @@ const SideBar = () => {
                     </Link>
                   </li>
                 )}
-                <li className="nav-item    col-6 col-lg-auto mt-2 mr-10 lg:mr-16 ">
-                  <Link
-                    href="/profile"
-                    className="text-white no-underline text-sm font-serif"
-                  >
-                    {!language ? 'Mon Profil' : 'My Profile'}
-                  </Link>
-                </li>
+                {session && (
+                  <li className="nav-item    col-6 col-lg-auto mt-2 mr-10 lg:mr-16 ">
+                    <Link
+                      href="/profile"
+                      className="text-white no-underline text-sm font-serif"
+                    >
+                      {!language ? 'Mon Profil' : 'My Profile'}
+                    </Link>
+                  </li>
+                )}
               </ul>
               <ul className="navbar-nav  bd-navbar-nav d-flex justiy-content-end ">
                 <li>

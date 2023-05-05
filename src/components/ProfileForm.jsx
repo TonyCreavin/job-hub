@@ -5,6 +5,7 @@ import { sendNotification } from '../../lib/notification';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ProfileForm({ userData, session }) {
   const { language } = useContext(LanguageContext);
@@ -30,7 +31,9 @@ export default function ProfileForm({ userData, session }) {
       [event.target.name]: event.target.value,
     }));
   };
-
+  const resistrationmessage = !language
+    ? 'Vos renseignements ont été enregistrés'
+    : 'Your information has been saved';
   const handleSubmit = async () => {
     try {
       const response = await fetch('/api/user/editUser', {
@@ -53,6 +56,11 @@ export default function ProfileForm({ userData, session }) {
           country: formState.country,
         }),
       });
+      toast(resistrationmessage, {
+        hideProgressBar: true,
+        autoClose: 2000,
+        type: 'success',
+      });
       await sendNotification(values);
       router.reload();
     } catch (error) {
@@ -61,163 +69,166 @@ export default function ProfileForm({ userData, session }) {
   };
 
   return (
-    <div className="container">
-      <div className="jobseeker">
-        <div style={{ width: '80vw', margin: 'auto' }}>
-          <h2 className="text-center my-5 font-serif">
-            {!language ? 'Mon Profil' : 'My Profile'}
-          </h2>
+    <>
+      <ToastContainer />
+      <div className="container">
+        <div className="jobseeker">
+          <div style={{ width: '80vw', margin: 'auto' }}>
+            <h2 className="text-center my-5 font-serif">
+              {!language ? 'Mon Profil' : 'My Profile'}
+            </h2>
 
-          <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="firstName"></label>
-              {!language ? 'Prénom' : 'First Name'}
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="firstname"
-                value={formState.firstName || ''}
-                onChange={handleInputChange}
-                name="firstName"
-                id="firstName"
-              />
+            <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="firstName"></label>
+                {!language ? 'Prénom' : 'First Name'}
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="firstname"
+                  value={formState.firstName || ''}
+                  onChange={handleInputChange}
+                  name="firstName"
+                  id="firstName"
+                />
+              </div>
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="lastName"></label>
+                {!language ? 'Nom' : 'Last Name'}
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="lastname"
+                  value={formState.lastName || ''}
+                  onChange={handleInputChange}
+                  name="lastName"
+                  id="lastName"
+                />
+              </div>
             </div>
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="lastName"></label>
-              {!language ? 'Nom' : 'Last Name'}
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="lastname"
-                value={formState.lastName || ''}
-                onChange={handleInputChange}
-                name="lastName"
-                id="lastName"
-              />
+            <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="phone"> </label>
+                {!language ? 'Téléphone' : 'Phone'}
+                <input
+                  type="tel"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="phone"
+                  value={formState.phone || ''}
+                  onChange={handleInputChange}
+                  name="phone"
+                  id="phone"
+                />
+              </div>
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="github"> </label>
+                Github
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="github"
+                  value={formState.github || ''}
+                  onChange={handleInputChange}
+                  name="github"
+                  id="github"
+                />
+              </div>
             </div>
+            <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="linkedin"> </label>
+                Linkedin
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="linkedin"
+                  value={formState.linkedin || ''}
+                  onChange={handleInputChange}
+                  name="linkedin"
+                  id="linkedin"
+                />
+              </div>
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="skills"> </label>
+                {!language ? 'Compétences' : 'Skills'}
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="skills"
+                  value={formState.skills || ''}
+                  onChange={handleInputChange}
+                  name="skills"
+                  id="skills"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="address"> </label>
+                {!language ? 'Adresse' : 'Address'}
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
+                  placeholder="address"
+                  value={formState.address || ''}
+                  onChange={handleInputChange}
+                  name="address"
+                  id="address"
+                />
+              </div>
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="city"> </label>
+                {!language ? 'Ville' : 'City'}
+                <input
+                  type="text"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
+                  placeholder="city"
+                  value={formState.city || ''}
+                  onChange={handleInputChange}
+                  name="city"
+                  id="city"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="postcode"> </label>
+                {!language ? 'Code postal' : 'Postcode'}
+                <input
+                  type="text"
+                  placeholder="postcode"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
+                  value={formState.postcode || ''}
+                  onChange={handleInputChange}
+                  name="postcode"
+                  id="postcode"
+                />
+              </div>
+              <div className="flex flex-col  mb-2  ">
+                <label htmlFor="country"> </label>
+                {!language ? 'Pays' : 'Country'}
+                <input
+                  type="text"
+                  placeholder="country"
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[30px]"
+                  value={formState.country || ''}
+                  onChange={handleInputChange}
+                  name="country"
+                  id="country"
+                />
+              </div>
+            </div>
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg mb-4"
+            >
+              {!language ? 'Envoyer' : 'Send'}
+            </button>
           </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="phone"> </label>
-              {!language ? 'Téléphone' : 'Phone'}
-              <input
-                type="tel"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="phone"
-                value={formState.phone || ''}
-                onChange={handleInputChange}
-                name="phone"
-                id="phone"
-              />
-            </div>
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="github"> </label>
-              Github
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="github"
-                value={formState.github || ''}
-                onChange={handleInputChange}
-                name="github"
-                id="github"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="linkedin"> </label>
-              Linkedin
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="linkedin"
-                value={formState.linkedin || ''}
-                onChange={handleInputChange}
-                name="linkedin"
-                id="linkedin"
-              />
-            </div>
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="skills"> </label>
-              {!language ? 'Compétences' : 'Skills'}
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="skills"
-                value={formState.skills || ''}
-                onChange={handleInputChange}
-                name="skills"
-                id="skills"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="address"> </label>
-              {!language ? 'Adresse' : 'Address'}
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
-                placeholder="address"
-                value={formState.address || ''}
-                onChange={handleInputChange}
-                name="address"
-                id="address"
-              />
-            </div>
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="city"> </label>
-              {!language ? 'Ville' : 'City'}
-              <input
-                type="text"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
-                placeholder="city"
-                value={formState.city || ''}
-                onChange={handleInputChange}
-                name="city"
-                id="city"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="postcode"> </label>
-              {!language ? 'Code postal' : 'Postcode'}
-              <input
-                type="text"
-                placeholder="postcode"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
-                value={formState.postcode || ''}
-                onChange={handleInputChange}
-                name="postcode"
-                id="postcode"
-              />
-            </div>
-            <div className="flex flex-col  mb-2  ">
-              <label htmlFor="country"> </label>
-              {!language ? 'Pays' : 'Country'}
-              <input
-                type="text"
-                placeholder="country"
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[30px]"
-                value={formState.country || ''}
-                onChange={handleInputChange}
-                name="country"
-                id="country"
-              />
-            </div>
-          </div>
-          <button
-            onClick={handleSubmit}
-            type="submit"
-            className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg mb-4"
-          >
-            {!language ? 'Envoyer' : 'Send'}
-          </button>
+          {session && userData.role === 'APPLICANT' && <UploadCv />}
         </div>
-        {session && userData.role === 'APPLICANT' && <UploadCv />}
       </div>
-    </div>
+    </>
   );
 }
