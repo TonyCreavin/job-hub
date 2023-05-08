@@ -1,11 +1,14 @@
 FROM node:alpine
 
 # create & set working directory
-RUN mkdir -p /usr/src
-WORKDIR /usr/src
+RUN mkdir -p /usr/app/
+WORKDIR /usr/app
+
+
 
 # copy source files
-COPY . /usr/src
+COPY  . .
+
 
 # install dependencies
 RUN npm install
@@ -13,4 +16,4 @@ RUN npm install
 # start app
 RUN npm run build
 EXPOSE 3000
-CMD npm run start
+CMD ["npm", "start"]
