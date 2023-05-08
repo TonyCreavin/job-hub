@@ -37,7 +37,6 @@ export default function ConsultantsApplications({ applications, offers }) {
       </h2>
       {filteredOffers.map((offer) => (
         <div key={offer.id}>
-          {/* <h2>{offer.title}</h2> */}
           {filteredApplications
             .filter((application) => application.offerId === offer.id)
             .map((application) => (
