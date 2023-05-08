@@ -20,7 +20,17 @@ export default function DocumentList({ application, user }) {
       setDocuments(result.data);
     }
   };
-
+  // const getOffer = async () => {
+  //   try {
+  //     const result = await axios.get('/api/offers');
+  //     const data = result.data.find(
+  //       (offer) => offer.id === application.offerId
+  //     );
+  //     setOffer(data);
+  //   } catch (err) {
+  //     console.log('Error getting data', err);
+  //   }
+  // };
   const getOffer = useCallback(async () => {
     try {
       const result = await axios.get('/api/offers');
