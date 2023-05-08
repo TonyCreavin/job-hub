@@ -156,7 +156,7 @@ const SideBar = () => {
                 {session && userData?.role === 'CONSULTANT' && (
                   <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
-                      href="application"
+                      href="/application"
                       className="text-white no-underline font-serif"
                     >
                       {!language ? 'Candidatures' : 'Applications'}
