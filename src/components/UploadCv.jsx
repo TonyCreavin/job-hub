@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
@@ -18,7 +18,7 @@ export default function Home({ cvs }) {
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [selectedImage, setSelectedImage] = useState('');
-  const [userData, setUserData] = React.useState({});
+  const [userData, setUserData] = useState({});
   const { data: session, status } = useSession();
   const [documents, setDocuments] = useState([]);
   const [application, setApplication] = useState([]);

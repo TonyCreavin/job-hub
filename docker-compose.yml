@@ -11,24 +11,6 @@ services:
     environment:
       NODE_ENV: development
 
-  db:
-    image: postgres:latest
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - postgres:/data/postgres
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080
-    environment:
-      ADMINER_DESIGN: mvt
-
-volumes:
-  postgres:
+links:
+  - btz-makesense-project3-09-2022: db-1
+  - btz-makesense-project3-09-2022: adminer-1
