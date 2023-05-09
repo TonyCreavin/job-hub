@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { Inter } from 'next/font/google';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';

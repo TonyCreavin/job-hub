@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UploadCv from '../../components/UploadCv';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../../../lib/prisma';
 import axios from 'axios';
 import EditOffer from '../../components/EditOffer';
 import { useRouter } from 'next/router';
@@ -13,8 +13,6 @@ import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 
 import { getSession, useSession } from 'next-auth/react';
-
-const prisma = new PrismaClient();
 
 export default function Offer({ offer, user, application, cvs }) {
   const { data: session } = useSession();
