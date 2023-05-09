@@ -3,14 +3,11 @@ services:
   web:
     build:
       context: ./
+
     volumes:
       - .:/app
-
+    command: npm run dev
     ports:
-      - 3000:3000
+      - '3000:3000'
     environment:
       NODE_ENV: development
-
-links:
-  - btz-makesense-project3-09-2022: db-1
-  - btz-makesense-project3-09-2022: adminer-1
