@@ -54,7 +54,7 @@ model Offer {
   applications       Application[] @relation("offer_applications")
   category Category?  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId String?
-   user User @relation(fields: [userId], references: [id])
+   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
   favorites Favorite[]
 }

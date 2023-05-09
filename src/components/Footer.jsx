@@ -1,9 +1,21 @@
 import React from 'react';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 export default function Footer() {
+  const { data: session } = useSession();
   const { language } = useContext(LanguageContext);
+  console.log('session => ', session);
+
+  const handleDelete = async () => {
+    const response = await axios.post('/api/user/deleteUser/', {
+      id: session.user.id,
+    });
+    console.log('resonse => ', response);
+  };
+
   return (
     <div
       className="flex justify-between"
@@ -49,6 +61,12 @@ export default function Footer() {
           Privacy Policy
         </a>
       )}
+      <button
+        onClick={handleDelete}
+        className="bg-red-500 h-11 text-white rounded-lg text-sm p-2 py-1"
+      >
+        {!language ? 'Supprimer le compte' : 'Delete account'}
+      </button>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { Inter } from 'next/font/google';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfileForm from '../components/ProfileForm';
 
@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({ cvs }) {
   const router = useRouter();
-  const [userData, setUserData] = React.useState({});
+  const [userData, setUserData] = useState({});
   const { data: session, status } = useSession();
 
   useEffect(() => {
