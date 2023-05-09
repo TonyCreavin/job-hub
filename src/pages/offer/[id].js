@@ -56,7 +56,7 @@ export default function Offer({ offer, user, application, cvs }) {
       coverLetter: coverLetter,
       applied: true,
     });
-    getOne();
+
     router.push('/');
   }
 
