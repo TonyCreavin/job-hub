@@ -1,8 +1,9 @@
 import React from 'react';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import axios from 'axios';
+import Link from 'next/link';
 
 export default function Footer() {
   const { data: session } = useSession();
@@ -61,12 +62,21 @@ export default function Footer() {
           Privacy Policy
         </a>
       )}
-      <button
-        onClick={handleDelete}
-        className="bg-red-500 h-11 text-white rounded-lg text-sm p-2 py-1"
-      >
-        {!language ? 'Supprimer le compte' : 'Delete account'}
-      </button>
+
+      {session && (
+        <Link
+          href="/api/auth/signout"
+          onClick={(e) => {
+            e.preventDefault();
+            handleDelete();
+            signOut();
+          }}
+        >
+          <button className="underline text-white rounded-lg text-sm p-2 py-1">
+            {!language ? 'Supprimer le compte' : 'Delete account'}
+          </button>
+        </Link>
+      )}
     </div>
   );
 }
