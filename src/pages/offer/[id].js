@@ -12,17 +12,19 @@ import path from 'path';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
-export default function Offer({ offer, user, application, cvs, session }) {
+export default function Offer({ offer, user, application, cvs }) {
+  const { data: session } = useSession();
   const { language } = useContext(LanguageContext);
   const [userData, setUserData] = useState({});
   const [showEditOfferWindow, setShowEditOfferWindow] = useState(false);
   const [showApplicationWindow, setShowApplicationWindow] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
-  const [getOne, setGetOne] = useState({});
+  const [getOne, setGetOne] = useState([]);
+  const [matched, setMatched] = useState({});
 
   const router = useRouter();
 
@@ -36,10 +38,10 @@ export default function Offer({ offer, user, application, cvs, session }) {
   useEffect(() => {
     async function handleGetOne() {
       const res = await axios.get('/api/application');
-      const data = res.data.find(
+      const data = res.data.filter(
         (application) => application.offerId === offer.id
       );
-      console.log('data =>', data);
+      console.log('data +=>', data);
       setGetOne(data);
     }
     handleGetOne();
@@ -54,7 +56,7 @@ export default function Offer({ offer, user, application, cvs, session }) {
       coverLetter: coverLetter,
       applied: true,
     });
-
+    getOne();
     router.push('/');
   }
 
@@ -70,6 +72,14 @@ export default function Offer({ offer, user, application, cvs, session }) {
     }
   }, [session?.user.id]);
   console.log('userData => => =>', getOne?.applied);
+
+  useEffect(() => {
+    const matchedData = getOne.find(
+      (application) => application.userId === userData.id
+    );
+    console.log('matched', matchedData);
+    setMatched(matchedData);
+  }, [getOne, userData.id]);
 
   return (
     <>
@@ -113,28 +123,25 @@ export default function Offer({ offer, user, application, cvs, session }) {
           )}
         {session &&
           userData.role === 'APPLICANT' &&
-          getOne?.applied === undefined && (
-            <button
-              onClick={() => setShowApplicationWindow((state) => !state)}
-              className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
-            >
-              {!language && !showApplicationWindow && 'Postuler'}
-              {!language && showApplicationWindow && 'Annuler'}
-              {language && !showApplicationWindow && 'Apply'}
-              {language && showApplicationWindow && 'Cancel'}
-            </button>
-          )}
-
-        {session &&
-          userData.role === 'APPLICANT' &&
-          getOne?.applied === true && (
+          matched?.userId === userData.id &&
+          matched?.applied && (
             <button
               disabled
               className="bg-blue-300 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
             >
-              {!language && !showApplicationWindow && 'Postulé'}
-
-              {language && !showApplicationWindow && 'Applied'}
+              {!language && 'Postulé'}
+              {language && 'Applied'}
+            </button>
+          )}
+        {session &&
+          userData.role === 'APPLICANT' &&
+          matched?.userId !== userData.id && (
+            <button
+              onClick={() => setShowApplicationWindow((state) => !state)}
+              className="bg-blue-500 w-40 mx-auto mt-4 text-white rounded-md py-1 px-2 mb-2"
+            >
+              {!language && 'Postuler'}
+              {language && 'Apply'}
             </button>
           )}
 

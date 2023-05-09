@@ -8,7 +8,6 @@ import PlaceSearchbar from '../components/PlaceSearchbar';
 import JobSearchbar from '../components/JobSearchbar';
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
-import Footer from '../components/Footer';
 
 const prisma = new PrismaClient();
 
