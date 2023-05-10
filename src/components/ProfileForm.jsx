@@ -111,7 +111,7 @@ export default function ProfileForm({ userData, session }) {
                 <label htmlFor="phone"> </label>
                 {!language ? 'Téléphone' : 'Phone'}
                 <input
-                  type="tel"
+                  type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                   placeholder="phone"
                   value={formState.phone || ''}

@@ -21,7 +21,7 @@ export default function Home({ cvs }) {
           console.log('res.data => ', res.data);
           setUserData(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log('Error fetching user data', err));
     }
   }, [session?.user.id]);
 

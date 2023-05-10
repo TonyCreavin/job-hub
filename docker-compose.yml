@@ -3,13 +3,19 @@ services:
   web:
     build:
       context: ./
+      target: runner
+    command: npm run dev
 
-    volumes:
-      - .:/app
     ports:
       - '3000:3000'
     environment:
       NODE_ENV: development
+
+    volumes:
+      - .:/usr/app
+      - /Users/tonycreavin/Coding/cl:/usr/app/cl
+      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+
   db:
     image: postgres:latest
     restart: always
@@ -31,3 +37,4 @@ services:
 
 volumes:
   postgres:
+  cl:

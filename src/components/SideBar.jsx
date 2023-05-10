@@ -71,10 +71,11 @@ const SideBar = () => {
           aria-label="Main navigation"
         >
           <div className="bd-navbar-toggle"></div>
-
-          <h3 className="navbar-brand p-0 me-0  text-white font-semibold text-2xl">
-            HDM
-          </h3>
+          <Link href="/" className="no-underline">
+            <h3 className="navbar-brand p-0 me-0  text-white font-semibold text-2xl">
+              HDM
+            </h3>
+          </Link>
 
           <div className="d-flex">
             <button
@@ -109,12 +110,14 @@ const SideBar = () => {
             data-bs-scroll="true"
           >
             <div className="offcanvas-header px-4 pb-0 bg-[#2D3E64]">
-              <h3
-                className="offcanvas-title text-white font-semibold text-2xl "
-                id="bdNavbarOffcanvasLabel"
-              >
-                HDM
-              </h3>
+              <Link href="/" className="no-underline">
+                <h3
+                  className="offcanvas-title text-white font-semibold text-2xl no-underline"
+                  id="bdNavbarOffcanvasLabel"
+                >
+                  HDM
+                </h3>
+              </Link>
 
               <button
                 type="button"

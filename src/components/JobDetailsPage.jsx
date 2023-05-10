@@ -154,13 +154,13 @@ function JobDetailsPage({
       <div>{description && parser(description)}</div>
       <p className=" text-gray-700 font-serif ">
         {!language ? 'Date de publication' : 'Publication date '}:
-        {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/
-        {createdAt.substring(0, 4)}
+        {createdAt?.substring(8, 10)}/{createdAt?.substring(5, 7)}/
+        {createdAt?.substring(0, 4)}
       </p>
       {updatedAt > createdAt && (
         <p className=" text-gray-700 font-serif ">
-          {!language ? 'Mise à jour' : 'Update '}:{createdAt.substring(8, 10)}/
-          {createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}
+          {!language ? 'Mise à jour' : 'Update '}:{createdAt?.substring(8, 10)}/
+          {createdAt?.substring(5, 7)}/{createdAt?.substring(0, 4)}
         </p>
       )}
     </div>

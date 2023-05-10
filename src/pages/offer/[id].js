@@ -28,8 +28,6 @@ export default function Offer({ offer, user, application, cvs }) {
 
   const router = useRouter();
 
-  console.log('recreuiter user id', userData.role);
-
   async function handleDelete() {
     await axios.post('/api/offers/deleteOffer', { id: offer.id });
     router.push('/');
@@ -39,13 +37,13 @@ export default function Offer({ offer, user, application, cvs }) {
     async function handleGetOne() {
       const res = await axios.get('/api/application');
       const data = res.data.filter(
-        (application) => application.offerId === offer.id
+        (application) => application.offerId === offer?.id
       );
       console.log('data +=>', data);
       setGetOne(data);
     }
     handleGetOne();
-  }, [offer.id]);
+  }, [offer?.id]);
 
   async function handleApplication(e) {
     e.preventDefault();
@@ -79,7 +77,7 @@ export default function Offer({ offer, user, application, cvs }) {
     );
     console.log('matched', matchedData);
     setMatched(matchedData);
-  }, [getOne, userData.id]);
+  }, [getOne, userData?.id]);
 
   return (
     <>
@@ -104,7 +102,7 @@ export default function Offer({ offer, user, application, cvs }) {
         ) : (
           ''
         )}
-        {userData.role === 'CONSULTANT' &&
+        {userData?.role === 'CONSULTANT' &&
           session.user.id === offer?.userId && (
             <div className="  mx-auto my-4">
               <button
@@ -122,7 +120,7 @@ export default function Offer({ offer, user, application, cvs }) {
             </div>
           )}
         {session &&
-          userData.role === 'APPLICANT' &&
+          userData?.role === 'APPLICANT' &&
           matched?.userId === userData.id &&
           matched?.applied && (
             <button
@@ -134,7 +132,7 @@ export default function Offer({ offer, user, application, cvs }) {
             </button>
           )}
         {session &&
-          userData.role === 'APPLICANT' &&
+          userData?.role === 'APPLICANT' &&
           matched?.userId !== userData.id && (
             <button
               onClick={() => setShowApplicationWindow((state) => !state)}

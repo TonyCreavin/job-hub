@@ -66,7 +66,7 @@ export default function DocumentList({ application, user }) {
           {offer.company}
         </h3>
         <h3 className="font-serif text-[20px]">
-          {!language ? 'candidat' : 'applicant'}: {user.firstName}{' '}
+          {!language ? 'candidat' : 'applicant'}: {user.firstName}
           {user.lastName}
         </h3>
 
