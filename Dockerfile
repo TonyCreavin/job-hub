@@ -1,7 +1,9 @@
-FROM node:alpine
+FROM node:18-alpine3.16  AS runner
 
 # create & set working directory
-RUN mkdir -p /usr/app/
+RUN mkdir /usr/app/
+RUN mkdir /usr/app/cl 
+RUN mkdir /usr/app/job-hub
 WORKDIR /usr/app
 
 

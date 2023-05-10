@@ -94,7 +94,7 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
                 />
               </div>
-              <div className="flex flex-col  mb-2  ">
+              <div className="flex flex-col  mb-2">
                 <label htmlFor="skills"></label>
                 {!language ? 'Compétences' : 'Skills'}
                 <input
@@ -109,7 +109,7 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
             </div>
 
             <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
-              <div className="flex flex-col  mb-2  ">
+              <div className="flex flex-col  mb-2">
                 <label htmlFor="contractType">
                   {!language ? 'Type de Contrat' : 'Type of Contract'}
                 </label>
@@ -119,15 +119,15 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
                   name="contractType"
                   id="contractType"
                   type="text"
-                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white"
                 />
               </div>
-              <div className="flex flex-col  mb-2  ">
+              <div className="flex flex-col  mb-2">
                 <label htmlFor="company">
                   {!language ? 'Entreprise' : 'Company'}
                 </label>
                 <input
-                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                  className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white"
                   value={formState.company || ' '}
                   onChange={handleInputChange}
                   name="company"
@@ -137,11 +137,9 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
               </div>
             </div>
             <div className="flex flex-col  mb-2  ">
-              <label htmlFor="salary">
-                {!language ? 'Salaire' : 'Salary'}{' '}
-              </label>
+              <label htmlFor="salary">{!language ? 'Salaire' : 'Salary'}</label>
               <input
-                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
+                className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white"
                 value={formState.salary || ' '}
                 onChange={handleInputChange}
                 name="salary"
@@ -150,7 +148,7 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
               />
             </div>
           </form>
-          <div className="flex flex-col   w-[80vw] mx-auto">
+          <div className="flex flex-col w-[80vw] mx-auto">
             <label className="mt-5">
               {!language
                 ? `Description de l'entreprise`
@@ -171,7 +169,6 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
         </div>
         <div className="flex flex-col  mb-2  ">
           <label>
-            {' '}
             {!language ? `Description du Poste` : 'Job Description'}
           </label>
 
