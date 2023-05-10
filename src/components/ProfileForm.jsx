@@ -14,15 +14,15 @@ export default function ProfileForm({ userData, session }) {
 
   console.log(
     'this is is??, ',
-    userData.firstName,
+    userData?.firstName,
     formState.firstName,
     session?.user.id
   );
 
   const values = {
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    email: userData.email,
+    firstName: userData?.firstName,
+    lastName: userData?.lastName,
+    email: userData?.email,
   };
 
   const handleInputChange = (event) => {
@@ -226,7 +226,7 @@ export default function ProfileForm({ userData, session }) {
               {!language ? 'Envoyer' : 'Send'}
             </button>
           </div>
-          {session && userData.role === 'APPLICANT' && <UploadCv />}
+          {session && userData?.role === 'APPLICANT' && <UploadCv />}
         </div>
       </div>
     </>

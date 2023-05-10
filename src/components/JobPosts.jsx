@@ -49,6 +49,7 @@ function JobPost({ offer }) {
         <div className="flex justify-between">
           <h5 className=" font-semibold font-serif">{offer.title}</h5>
           {myFavorite != undefined &&
+            userData !== null &&
             userData.role === 'APPLICANT' &&
             myFavorite != null &&
             myFavorite.isFavorite && <AiTwotoneHeart size={30} />}
