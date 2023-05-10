@@ -26,6 +26,6 @@ export default function Home({ cvs }) {
   }, [session?.user.id]);
 
   return (
-    <ProfileForm userData={userData} key={userData.id} session={session} />
+    <ProfileForm userData={userData} key={userData?.id} session={session} />
   );
 }
