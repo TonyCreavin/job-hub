@@ -4,6 +4,7 @@ import { sendNotification } from '../../lib/notification';
 import LanguageContext from '../LanguageContext';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function ProfileForm({ userData, session }) {
   const { language } = useContext(LanguageContext);
@@ -25,15 +26,12 @@ export default function ProfileForm({ userData, session }) {
   const registrationmessage = !language
     ? 'Vos renseignements ont été enregistrés'
     : 'Your information has been saved';
+
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/api/user/editUser', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-        body: JSON.stringify({
+      const response = await axios.put(
+        '/api/user/editUser',
+        {
           id: session?.user.id,
           firstName: formState.firstName,
           lastName: formState.lastName,
@@ -45,8 +43,14 @@ export default function ProfileForm({ userData, session }) {
           city: formState.city,
           postcode: formState.postcode,
           country: formState.country,
-        }),
-      });
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        }
+      );
       toast(registrationmessage, {
         hideProgressBar: true,
         autoClose: 2000,

@@ -32,7 +32,7 @@ export default function ConsultantOffers({ offers }) {
         <h2 className="text-center my-5 font-serif">
           {!language ? 'Mes Offres' : 'My Offers'}
         </h2>
-        <div className="flex flex-wrap w-full h-screen">
+        <div className="flex flex-wrap w-full h-screen justify-center">
           {offers.map(
             (offer) =>
               userData.role === 'CONSULTANT' &&

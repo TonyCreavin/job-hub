@@ -122,7 +122,9 @@ function JobDetailsPage({
 
       <div className="flex flex-row justify-between">
         <h4 className="text-blue-400 font-normal font-serif">{company}</h4>
-        <a href={`http://${website}/`}>{website}</a>
+        <a href={`http://${website}/`} target="_blank">
+          {website}
+        </a>
       </div>
 
       <div className=" flex flex-row justify-between">
