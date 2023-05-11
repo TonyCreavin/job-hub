@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: ./
+      target: runner
+    command: npm run dev
+
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+
+    volumes:
+      - .:/usr/app
+      - /Users/tonycreavin/Coding/cl:/usr/app/cl
+      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    environment:
+      ADMINER_DESIGN: mvt
+
+volumes:
+  postgres:
+  cl:
