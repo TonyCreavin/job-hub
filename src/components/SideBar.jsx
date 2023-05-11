@@ -184,15 +184,6 @@ const SideBar = () => {
                 )}
               </ul>
               <ul className="navbar-nav  bd-navbar-nav d-flex justiy-content-end ">
-                <li>
-                  <button
-                    onClick={buttonHandler}
-                    className="w-10 h-10 bg-blue-500 text-white rounded-md text-sm mr-5 my-3"
-                  >
-                    {!language ? 'EN' : 'FR'}
-                  </button>
-                </li>
-
                 {!session && status !== 'authenticated' && (
                   <li>
                     <Link
@@ -249,6 +240,15 @@ const SideBar = () => {
                     </Link>
                   </li>
                 )}
+                <li>
+                  <button
+                    onClick={buttonHandler}
+                    // className="w-10 h-10 bg-blue-500 text-white rounded-md text-sm mr-5 my-3"
+                    className=" text-3xl mr-5 my-3"
+                  >
+                    {!language ? '🇬🇧' : '🇫🇷'}
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
