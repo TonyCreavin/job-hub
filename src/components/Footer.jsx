@@ -32,6 +32,7 @@ export default function Footer() {
         <a
           className="no-underline hover:underline text-white text-2xl font-bold"
           href="https://www.hdmnetwork.com/fr"
+          target="_blank"
         >
           HDM
         </a>
@@ -39,6 +40,7 @@ export default function Footer() {
         <a
           className="no-underline hover:underline text-white text-2xl font-bold"
           href="https://www.hdmnetwork.com/en"
+          target="_blank"
         >
           HDM
         </a>
@@ -49,6 +51,7 @@ export default function Footer() {
         <a
           className="no-underline hover:underline text-white"
           href="https://www.hdmnetwork.com/fr/politique-de-confidentialite"
+          target="_blank"
         >
           Politique de Confidentialité
         </a>
@@ -56,6 +59,7 @@ export default function Footer() {
         <a
           className="no-underline hover:underline text-white"
           href=" https://www.hdmnetwork.com/en/privacy-policy"
+          target="_blank"
         >
           Privacy Policy
         </a>
