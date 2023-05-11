@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { AiTwotoneHeart } from 'react-icons/ai';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 import parser from 'html-react-parser';
 
 function JobPost({ offer }) {

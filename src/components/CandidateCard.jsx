@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 import parser from 'html-react-parser';
 
 export default function DocumentList({ application, user }) {

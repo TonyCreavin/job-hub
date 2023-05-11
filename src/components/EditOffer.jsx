@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 import { DescriptionEditor } from './Tiptap';
 import { useRouter } from 'next/router';
 
@@ -148,43 +147,43 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
               />
             </div>
           </form>
-          <div className="flex flex-col w-[80vw] mx-auto">
-            <label className="mt-5">
+          <div className="flex flex-col  mb-2">
+            <p className="mt-5 ml-10">
               {!language
                 ? `Description de l'entreprise`
                 : 'Company Description'}
-            </label>
+            </p>
+            <div>
+              <DescriptionEditor
+                value={formState.companyDescription || ''}
+                name="companyDescription"
+                onChange={handleInputChange}
+                type="text"
+                id="companyDescription"
+                setContent={(content) =>
+                  setFormState({ ...formState, companyDescription: content })
+                }
+              />
+            </div>
           </div>
-          <DescriptionEditor
-            value={formState.companyDescription || ''}
-            name="companyDescription"
-            onChange={handleInputChange}
-            type="text"
-            id="companyDescription"
-            //className="w-[80vw] mx-auto"
-            setContent={(content) =>
-              setFormState({ ...formState, companyDescription: content })
-            }
-          />
-        </div>
-        <div className="flex flex-col  mb-2  ">
-          <label>
-            {!language ? `Description du Poste` : 'Job Description'}
-          </label>
+          <div className="flex flex-col  mb-2">
+            <p className="mt-5 ml-10">
+              {!language ? `Description du Poste` : 'Job Description'}
+            </p>
 
-          <div>
-            <DescriptionEditor
-              value={formState.description || ''}
-              name="description"
-              onChange={handleInputChange}
-              type="text"
-              id="description"
-              setContent={(content) =>
-                setFormState({ ...formState, description: content })
-              }
-            />
+            <div>
+              <DescriptionEditor
+                value={formState.description || ''}
+                name="description"
+                onChange={handleInputChange}
+                type="text"
+                id="description"
+                setContent={(content) =>
+                  setFormState({ ...formState, description: content })
+                }
+              />
+            </div>
           </div>
-
           <form onSubmit={handleSubmit} className="w-[80vw] mx-auto">
             <div className=" flex flex-row justify-center my-4">
               <button

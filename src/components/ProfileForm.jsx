@@ -1,9 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import UploadCv from '../components/UploadCv';
 import { sendNotification } from '../../lib/notification';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -11,13 +9,6 @@ export default function ProfileForm({ userData, session }) {
   const { language } = useContext(LanguageContext);
   const [formState, setFormState] = useState(userData);
   const router = useRouter();
-
-  console.log(
-    'this is is??, ',
-    userData?.firstName,
-    formState.firstName,
-    session?.user.id
-  );
 
   const values = {
     firstName: userData?.firstName,
@@ -31,7 +22,7 @@ export default function ProfileForm({ userData, session }) {
       [event.target.name]: event.target.value,
     }));
   };
-  const resistrationmessage = !language
+  const registrationmessage = !language
     ? 'Vos renseignements ont été enregistrés'
     : 'Your information has been saved';
   const handleSubmit = async () => {
@@ -56,7 +47,7 @@ export default function ProfileForm({ userData, session }) {
           country: formState.country,
         }),
       });
-      toast(resistrationmessage, {
+      toast(registrationmessage, {
         hideProgressBar: true,
         autoClose: 2000,
         type: 'success',
@@ -90,6 +81,7 @@ export default function ProfileForm({ userData, session }) {
                   onChange={handleInputChange}
                   name="firstName"
                   id="firstName"
+                  required
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
@@ -103,6 +95,7 @@ export default function ProfileForm({ userData, session }) {
                   onChange={handleInputChange}
                   name="lastName"
                   id="lastName"
+                  required
                 />
               </div>
             </div>
@@ -111,7 +104,7 @@ export default function ProfileForm({ userData, session }) {
                 <label htmlFor="phone"> </label>
                 {!language ? 'Téléphone' : 'Phone'}
                 <input
-                  type="text"
+                  type="tel"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                   placeholder="phone"
                   value={formState.phone || ''}

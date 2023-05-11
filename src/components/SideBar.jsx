@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import axios from 'axios';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 
 const SideBar = () => {
   const { language, buttonHandler } = useContext(LanguageContext);
@@ -21,13 +20,12 @@ const SideBar = () => {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userData => ', userData);
+
   const handleSwitchToApplicant = () => {
     axios
       .put(
@@ -43,7 +41,6 @@ const SideBar = () => {
         }
       )
       .then((res) => {
-        console.log('res.data => ', res.data);
         setUserData(res.data);
       })
       .catch((err) => console.log(err));
@@ -57,7 +54,6 @@ const SideBar = () => {
         role: userData.role === 'APPLICANT' && 'CONSULTANT',
       })
       .then((res) => {
-        console.log('res.data => ', res.data);
         setUserData(res.data);
       })
       .catch((err) => console.log(err));

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
-import { useContext } from 'react';
 import TipTap from '../../components/Tiptap';
+
 function Create_offer(props) {
   const { language } = useContext(LanguageContext);
   const [categories, setCategories] = useState([]);
@@ -28,9 +28,7 @@ function Create_offer(props) {
   const getOffers = async () => {
     const response = await axios.get('/api/offers');
     const data = await response.data;
-    console.log('res.data =>', response.data);
     setOffers(data);
-    console.log('data =>', data);
     router.push('/');
   };
 
@@ -46,12 +44,10 @@ function Create_offer(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = props.data.user.id;
-
     const response = await axios.post(
       '/api/offers/create',
       {
         ...formState,
-
         userId,
       },
       {
@@ -61,7 +57,6 @@ function Create_offer(props) {
       }
     );
     await getOffers();
-
     router.push('/');
   };
 
@@ -75,7 +70,6 @@ function Create_offer(props) {
     });
   };
 
-  console.log('this is my session =>', props.data.user.id);
   return (
     <div className="container">
       <div className="recruiter">
@@ -223,7 +217,6 @@ export default Create_offer;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log('this is my session', session);
 
   if (!session) {
     return {

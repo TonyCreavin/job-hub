@@ -1,11 +1,10 @@
 import ApplicationCard from '../../components/ApplicationCard';
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import LanguageContext from '../../LanguageContext';
-import { useContext } from 'react';
+
 const prisma = new PrismaClient();
 
 export default function Application({ applications }) {
@@ -19,13 +18,12 @@ export default function Application({ applications }) {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userData => ', userData);
+
   return (
     <div className="w-full h-screen overflow-scroll">
       <h2 className="text-center my-5 font-serif">
