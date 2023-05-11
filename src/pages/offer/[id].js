@@ -39,7 +39,7 @@ export default function Offer({ offer, user, application, cvs }) {
       const data = res.data.filter(
         (application) => application.offerId === offer?.id
       );
-      console.log('data +=>', data);
+
       setGetOne(data);
     }
     handleGetOne();
@@ -54,7 +54,6 @@ export default function Offer({ offer, user, application, cvs }) {
       coverLetter: coverLetter,
       applied: true,
     });
-
     router.push('/');
   }
 
@@ -63,19 +62,16 @@ export default function Offer({ offer, user, application, cvs }) {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [session?.user.id]);
-  console.log('userData => => =>', getOne?.applied);
 
   useEffect(() => {
     const matchedData = getOne.find(
       (application) => application.userId === userData.id
     );
-    console.log('matched', matchedData);
     setMatched(matchedData);
   }, [getOne, userData?.id]);
 

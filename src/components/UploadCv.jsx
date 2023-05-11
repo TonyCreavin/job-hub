@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -6,9 +6,6 @@ import { Inter } from 'next/font/google';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
-
-import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -64,7 +61,7 @@ export default function Home({ cvs }) {
       const formData = new FormData();
       formData.append('myCv', selectedFile);
       const { data } = await axios.post('/api/document/create', formData);
-      console.log(data);
+
       await getDocuments();
       setSelectedFile(null);
       setUploading(false);
@@ -79,12 +76,7 @@ export default function Home({ cvs }) {
     setUploading(false);
   };
 
-  console.log('this is my session', userData);
-
-  console.log('files => ', process.env.CV_DIR);
-
   const deleteCv = async (id) => {
-    console.log('id');
     try {
       await axios.post(`/api/document/_delete/`, { id });
       getDocuments();
@@ -121,6 +113,9 @@ export default function Home({ cvs }) {
               <h3 className="text-center mb-3 font-serif">
                 {!language ? 'Télécharger votre CV' : 'Upload your Cv'}
               </h3>
+              <p className="text-red-500 text-right">
+                {!language ? '* un seul CV autorisé' : '* only one CV allowed'}
+              </p>
               {documents
                 .filter((doc) => doc.userId === session?.user.id)
                 .map((document) => (

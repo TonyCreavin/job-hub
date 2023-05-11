@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
 import CandidateCard from '../../components/CandidateCard';
 import LanguageContext from '../../LanguageContext';
-import { useContext } from 'react';
+
 const prisma = new PrismaClient();
 
 export default function ConsultantsApplications({ applications, offers }) {
@@ -11,15 +11,11 @@ export default function ConsultantsApplications({ applications, offers }) {
   const { data: session, status } = useSession();
   const [filteredOffers, setFilteredOffers] = useState([]);
 
-  console.log('musession', session);
-  console.log('applications', applications);
-
   useEffect(() => {
     if (offers && Array.isArray(offers)) {
       const filteredOffers = offers.filter(
         (offer) => offer.userId === session?.user.id
       );
-      console.log('filteredOffers', filteredOffers);
       setFilteredOffers(filteredOffers);
     }
   }, [offers, session]);
@@ -27,8 +23,6 @@ export default function ConsultantsApplications({ applications, offers }) {
   const filteredApplications = applications.filter((application) =>
     filteredOffers.some((offer) => offer.id === application.offerId)
   );
-
-  console.log('filteredApplications', filteredApplications);
 
   return (
     <div className="w-full h-screen overflow-scroll">

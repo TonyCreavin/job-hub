@@ -8,13 +8,11 @@ import Link from 'next/link';
 export default function Footer() {
   const { data: session } = useSession();
   const { language } = useContext(LanguageContext);
-  console.log('session => ', session);
 
   const handleDelete = async () => {
     const response = await axios.post('/api/user/deleteUser/', {
       id: session.user.id,
     });
-    console.log('resonse => ', response);
   };
 
   return (

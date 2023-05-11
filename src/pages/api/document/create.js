@@ -41,7 +41,7 @@ const handler = async (req, res) => {
     const userId = session.user.id;
 
     const file = files.myCv;
-    console.log(file);
+
     await prisma.document.create({
       data: {
         filename: file.newFilename,

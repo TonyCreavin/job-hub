@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
-
 import JobPost from '../components/JobPosts';
 import { PrismaClient } from '@prisma/client';
 import PlaceSearchbar from '../components/PlaceSearchbar';
 import JobSearchbar from '../components/JobSearchbar';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 
 const prisma = new PrismaClient();
 

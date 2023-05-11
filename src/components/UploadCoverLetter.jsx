@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 import TipTap from './Tiptap';
 
 export default function UploadCoverLetter({ coverLetter, setCoverLetter }) {

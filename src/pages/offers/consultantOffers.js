@@ -2,10 +2,10 @@ import { Inter } from 'next/font/google';
 import { useSession } from 'next-auth/react';
 import JobPost from '../../components/JobPosts';
 import { PrismaClient } from '@prisma/client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
-import { useContext } from 'react';
+
 const prisma = new PrismaClient();
 
 const inter = Inter({ subsets: ['latin'] });
@@ -14,14 +14,12 @@ export default function ConsultantOffers({ offers }) {
   const { language } = useContext(LanguageContext);
   const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
-  console.log('inter', userData);
 
   useEffect(() => {
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
         .then((res) => {
-          console.log('res.data => ', res.data);
           setUserData(res.data);
         })
         .catch((err) => console.log(err));

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import LanguageContext from '../LanguageContext';
-import { useContext } from 'react';
 
 export default function PlaceSearchbar({ offers, setFilterData }) {
   const { language } = useContext(LanguageContext);
