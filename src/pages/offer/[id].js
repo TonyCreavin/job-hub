@@ -12,12 +12,11 @@ import path from 'path';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
-export default function Offer({ offer, user, application, cvs }) {
-  const { data: session } = useSession();
+export default function Offer({ offer, user, application, cvs, session }) {
   const { language } = useContext(LanguageContext);
   const [userData, setUserData] = useState({});
   const [showEditOfferWindow, setShowEditOfferWindow] = useState(false);
