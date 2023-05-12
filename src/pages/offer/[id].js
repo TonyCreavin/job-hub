@@ -8,7 +8,6 @@ import JobDetailsPage from '../../components/JobDetailsPage';
 import UploadCoverLetter from '../../components/UploadCoverLetter';
 import fs from 'fs/promises';
 import path from 'path';
-
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 
