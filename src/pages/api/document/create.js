@@ -1,10 +1,9 @@
-import { PrismaClient } from '@prisma/client';
 import formidable from 'formidable';
 import path from 'path';
 import fs from 'fs/promises';
 import { getSession } from 'next-auth/react';
+import prisma from '../../../../lib/prisma';
 
-const prisma = new PrismaClient();
 export const config = {
   api: {
     bodyParser: false,
