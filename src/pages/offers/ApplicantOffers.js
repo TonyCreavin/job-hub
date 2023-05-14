@@ -1,11 +1,9 @@
 import ApplicationCard from '../../components/ApplicationCard';
 import React, { useEffect, useState, useContext } from 'react';
-import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import LanguageContext from '../../LanguageContext';
-
-const prisma = new PrismaClient();
+import prisma from '../../../lib/prisma';
 
 export default function Application({ applications }) {
   const { language } = useContext(LanguageContext);

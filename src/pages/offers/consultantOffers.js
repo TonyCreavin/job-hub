@@ -1,12 +1,10 @@
 import { Inter } from 'next/font/google';
 import { useSession } from 'next-auth/react';
 import JobPost from '../../components/JobPosts';
-import { PrismaClient } from '@prisma/client';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
-
-const prisma = new PrismaClient();
+import prisma from '../../../lib/prisma';
 
 const inter = Inter({ subsets: ['latin'] });
 

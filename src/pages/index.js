@@ -2,12 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
 import JobPost from '../components/JobPosts';
-import { PrismaClient } from '@prisma/client';
 import PlaceSearchbar from '../components/PlaceSearchbar';
 import JobSearchbar from '../components/JobSearchbar';
 import LanguageContext from '../LanguageContext';
-
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma';
 
 const inter = Inter({ subsets: ['latin'] });
 

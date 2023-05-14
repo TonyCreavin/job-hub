@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import UploadCv from '../../components/UploadCv';
-import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import EditOffer from '../../components/EditOffer';
 import { useRouter } from 'next/router';
@@ -8,13 +7,10 @@ import JobDetailsPage from '../../components/JobDetailsPage';
 import UploadCoverLetter from '../../components/UploadCoverLetter';
 import fs from 'fs/promises';
 import path from 'path';
-
+import prisma from '../../../lib/prisma';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
-
 import { getSession } from 'next-auth/react';
-
-const prisma = new PrismaClient();
 
 export default function Offer({ offer, user, application, cvs, session }) {
   const { language } = useContext(LanguageContext);
