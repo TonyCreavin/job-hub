@@ -13,8 +13,10 @@ services:
 
     volumes:
       - .:/usr/app
-      - /Users/tonycreavin/Coding/cl:/usr/app/cl
-      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+      - /var/jobhubApp/cl:/usr/app/cl
+      - /var/jobhubApp/job-hub:/usr/app/job-hub
+      # - /Users/tonycreavin/Coding/cl:/usr/app/cl
+      # - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
 
   db:
     image: postgres:latest
