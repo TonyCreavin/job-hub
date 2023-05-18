@@ -10,9 +10,10 @@ import path from 'path';
 import prisma from '../../../lib/prisma';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 
-export default function Offer({ offer, user, application, cvs, session }) {
+export default function Offer({ offer, user, application, cvs }) {
+  const { data: session, status } = useSession();
   const { language } = useContext(LanguageContext);
   const [userData, setUserData] = useState({});
   const [showEditOfferWindow, setShowEditOfferWindow] = useState(false);
@@ -22,6 +23,17 @@ export default function Offer({ offer, user, application, cvs, session }) {
   const [matched, setMatched] = useState({});
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (session?.user.id) {
+      axios
+        .get(`/api/user/${session?.user.id}`)
+        .then((res) => {
+          setUserData(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [session?.user.id]);
 
   async function handleDelete() {
     await axios.post('/api/offers/deleteOffer', { id: offer.id });
