@@ -10,7 +10,7 @@ import path from 'path';
 import prisma from '../../../lib/prisma';
 import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 export default function Offer({ offer, user, application, cvs }) {
   const { data: session, status } = useSession();
@@ -195,20 +195,11 @@ export default function Offer({ offer, user, application, cvs }) {
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
-  const session = await getSession(context);
   const props = { cvs: [] };
 
   const cvs = await fs.readdir(path.join(process.env.CV_DIR));
   props.cvs = cvs;
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin?callbackUrl=/',
-        permanent: false,
-      },
-    };
-  }
   const offer = await prisma.offer.findUnique({
     where: {
       id,
@@ -218,7 +209,6 @@ export async function getServerSideProps(context) {
   return {
     props: {
       offer: JSON.parse(JSON.stringify(offer)),
-      session: session,
       cvs: props.cvs,
     },
   };
