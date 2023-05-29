@@ -4,14 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import LanguageContext from '../LanguageContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({ cvs }) {
   const { language } = useContext(LanguageContext);
-  const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [selectedImage, setSelectedImage] = useState('');
@@ -19,7 +17,6 @@ export default function Home({ cvs }) {
   const { data: session, status } = useSession();
   const [documents, setDocuments] = useState([]);
   const [application, setApplication] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (session?.user.id) {
@@ -138,7 +135,6 @@ export default function Home({ cvs }) {
                 ))}
 
               <div className="w-[80vw] md:w-[40vw] aspect-video rounded flex items-center justify-around border-2 border-dashed cursor-pointer">
-                {errorMessage && <p>{errorMessage}</p>}
                 {selectedImage ? (
                   <span>{!language ? 'CV Sélectionné' : 'CV Selected'}</span>
                 ) : (

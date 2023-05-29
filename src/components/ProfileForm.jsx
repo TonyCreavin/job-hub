@@ -85,7 +85,6 @@ export default function ProfileForm({ userData, session }) {
                   onChange={handleInputChange}
                   name="firstName"
                   id="firstName"
-                  required
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
@@ -99,7 +98,6 @@ export default function ProfileForm({ userData, session }) {
                   onChange={handleInputChange}
                   name="lastName"
                   id="lastName"
-                  required
                 />
               </div>
             </div>

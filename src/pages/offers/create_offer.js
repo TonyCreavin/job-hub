@@ -11,7 +11,7 @@ function Create_offer(props) {
   const [content, setContent] = useState('');
   const [content2, setContent2] = useState('');
   const router = useRouter();
-  const [offers, setOffers] = useState([]);
+  // const [offers, setOffers] = useState([]);
   const [formState, setFormState] = useState({
     title: '',
     location: '',
@@ -24,13 +24,6 @@ function Create_offer(props) {
     categoryId: '',
     salary: '',
   });
-
-  const getOffers = async () => {
-    const response = await axios.get('/api/offers');
-    const data = await response.data;
-    setOffers(data);
-    router.push('/');
-  };
 
   const getCategory = async () => {
     const response = await axios.get('/api/category');
@@ -56,7 +49,7 @@ function Create_offer(props) {
         },
       }
     );
-    await getOffers();
+
     router.push('/');
   };
 

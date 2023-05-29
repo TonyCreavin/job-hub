@@ -10,9 +10,6 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
 
   const [formState, setFormState] = useState(offer);
 
-  const popupmessage = !language
-    ? ' informations mises à jour avec succès 😁'
-    : 'information updated successfully 😁';
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
