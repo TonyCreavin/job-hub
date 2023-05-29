@@ -12,7 +12,7 @@ import LanguageContext from '../../LanguageContext';
 import { useContext } from 'react';
 import { useSession } from 'next-auth/react';
 
-export default function Offer({ offer, user, application, cvs }) {
+export default function Offer({ offer, cvs }) {
   const { data: session, status } = useSession();
   const { language } = useContext(LanguageContext);
   const [userData, setUserData] = useState({});
@@ -63,17 +63,6 @@ export default function Offer({ offer, user, application, cvs }) {
     });
     router.push('/');
   }
-
-  useEffect(() => {
-    if (session?.user.id) {
-      axios
-        .get(`/api/user/${session?.user.id}`)
-        .then((res) => {
-          setUserData(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [session?.user.id]);
 
   useEffect(() => {
     const matchedData = getOne.find(

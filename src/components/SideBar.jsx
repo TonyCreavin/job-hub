@@ -145,7 +145,7 @@ const SideBar = () => {
                 {session && userData?.role === 'APPLICANT' && (
                   <li className="nav-item col-6 col-lg-auto  mt-2 mr-10 lg:mr-16 text-sm">
                     <Link
-                      href="/offers/ApplicantOffers"
+                      href="/offers/applicantOffers"
                       className="text-white no-underline font-serif"
                     >
                       {!language ? 'Mes Candidatures' : 'My Applications'}
@@ -243,7 +243,6 @@ const SideBar = () => {
                 <li>
                   <button
                     onClick={buttonHandler}
-                    // className="w-10 h-10 bg-blue-500 text-white rounded-md text-sm mr-5 my-3"
                     className=" text-3xl mr-5 my-3"
                   >
                     {!language ? '🇬🇧' : '🇫🇷'}
