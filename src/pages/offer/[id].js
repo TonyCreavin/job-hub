@@ -156,8 +156,8 @@ export default function Offer({ offer, cvs }) {
               closeWindow={() => setShowApplicationWindow(false)}
               offer={offer}
               document={document}
-              user={user}
-              application={application}
+              user={userData}
+              application={matched}
             />
 
             <button
