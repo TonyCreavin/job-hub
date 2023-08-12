@@ -148,8 +148,8 @@ export default function Home({ cvs }) {
               style={{ opacity: uploading ? '.5' : '1' }}
               className="w-[80vw] md:w-[40vw] bg-blue-500 h-[7vh] text-white rounded-lg"
             >
-              {!language && uploading && 'En cours de téléchargement...'}
-              {!language && !uploading && 'Télécharger'}
+              {!language && uploading && 'Sauvegarde en cours...'}
+              {!language && !uploading && 'Sauvegarder'}
               {language && uploading && 'Uploading...'}
               {language && !uploading && 'Upload'}
             </button>
