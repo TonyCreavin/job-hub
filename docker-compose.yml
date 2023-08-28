@@ -4,7 +4,7 @@ services:
     build:
       context: ./
       target: runner
-    command: npm run dev
+    command: npm run start
 
     ports:
       - 3000:3000
@@ -12,12 +12,14 @@ services:
       NODE_ENV: production
 
     volumes:
-      - node_modules:/usr/app/node_modules
-      - .vercel:/usr/app/.vercel
-      - .next:/usr/app/.next
-      - build:/usr/app/build
-      - /Users/tonycreavin/Coding/cl:/usr/app/cl
-      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+      - 'node_modules:/usr/app/node_modules'
+      - 'vercel:/usr/app/.vercel'
+      - 'next:/usr/app/.next'
+      - 'build:/usr/app/build'
+      - '/usr/app/cl:/usr/app/cl'
+      - '/usr/app/job-hub:/usr/app/job-hub'
+#      - /Users/tonycreavin/Coding/cl:/usr/app/cl
+#      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
 
   db:
     image: postgres:latest
@@ -43,6 +45,26 @@ volumes:
   cl:
   job-hub:
   node_modules:
-  .vercel:
-  .next:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/node_modules
+  vercel:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/.vercel
+  next:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/.next
   build:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/build

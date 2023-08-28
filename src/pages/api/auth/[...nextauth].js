@@ -21,7 +21,6 @@ export default NextAuth({
       from: process.env.EMAIL_FROM,
     }),
   ],
-
   session: {
     strategy: 'jwt',
   },
@@ -31,7 +30,7 @@ export default NextAuth({
   pages: {
     newUser: '/profile',
   },
-
+   
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
