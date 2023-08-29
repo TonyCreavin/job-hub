@@ -16,8 +16,10 @@ services:
       - .vercel:/usr/app/.vercel
       - .next:/usr/app/.next
       - build:/usr/app/build
-      - /Users/tonycreavin/Coding/cl:/usr/app/cl
-      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+      - /usr/app/cl:/usr/app/cl
+      - /usr/app/job-hub:/usr/app/job-hub
+      # - /Users/tonycreavin/Coding/cl:/usr/app/cl
+    #  - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
 
   db:
     image: postgres:latest

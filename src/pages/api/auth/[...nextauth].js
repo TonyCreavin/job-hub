@@ -21,7 +21,6 @@ export default NextAuth({
       from: process.env.EMAIL_FROM,
     }),
   ],
-
   session: {
     strategy: 'jwt',
   },

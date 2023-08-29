@@ -18,6 +18,7 @@ COPY  . .
 
 # install dependencies
 RUN npm install
+RUN npm audit fix
 
 ENV NODE_ENV production
 # start app
