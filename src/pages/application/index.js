@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import CandidateCard from '../../components/CandidateCard';
 import LanguageContext from '../../LanguageContext';
 import prisma from '../../../lib/prisma';
@@ -44,7 +44,16 @@ export default function ConsultantsApplications({ applications, offers }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        permanent: false,
+      },
+    };
+  }
   const [applications, users] = await Promise.all([
     prisma.application.findMany({
       include: {
@@ -61,6 +70,8 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      session,
+      data: session,
       applications: JSON.parse(JSON.stringify(applications)),
       offers: JSON.parse(JSON.stringify(offers)),
     },

@@ -1,7 +1,7 @@
 import ApplicationCard from '../../components/ApplicationCard';
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import LanguageContext from '../../LanguageContext';
 import prisma from '../../../lib/prisma';
 
@@ -41,7 +41,17 @@ export default function Application({ applications }) {
     </div>
   );
 }
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        permanent: false,
+      },
+    };
+  }
+
   const [applications, users, offers] = await Promise.all([
     prisma.application.findMany({
       include: {
@@ -54,6 +64,8 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      session,
+      data: session,
       applications: JSON.parse(JSON.stringify(applications)),
     },
   };
