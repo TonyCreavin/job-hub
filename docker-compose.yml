@@ -45,6 +45,26 @@ volumes:
   cl:
   job-hub:
   node_modules:
-  .vercel:
-  .next:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/node_modules
+  vercel:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/.vercel
+  next:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/.next
   build:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/build

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { getSession } from 'next-auth/react';
+import { getServerSession } from "next-auth/next"
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
@@ -214,7 +215,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        destination: '/api/auth/signin?callbackUrl='+process.env.CLIENT_URL,
         permanent: false,
       },
     };
