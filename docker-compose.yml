@@ -12,14 +12,14 @@ services:
       NODE_ENV: production
 
     volumes:
-      - 'node_modules:/usr/app/node_modules'
-      - 'vercel:/usr/app/.vercel'
-      - 'next:/usr/app/.next'
-      - 'build:/usr/app/build'
-      - '/usr/app/cl:/usr/app/cl'
-      - '/usr/app/job-hub:/usr/app/job-hub'
-#      - /Users/tonycreavin/Coding/cl:/usr/app/cl
-#      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+      - node_modules:/usr/app/node_modules
+      - .vercel:/usr/app/.vercel
+      - .next:/usr/app/.next
+      - build:/usr/app/build
+      - /usr/app/cl:/usr/app/cl
+      - /usr/app/job-hub:/usr/app/job-hub
+      # - /Users/tonycreavin/Coding/cl:/usr/app/cl
+    #  - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
 
   db:
     image: postgres:latest

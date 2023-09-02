@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import JobPost from '../../components/JobPosts';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -43,7 +43,16 @@ export default function ConsultantOffers({ offers }) {
     </>
   );
 }
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        permanent: false,
+      },
+    };
+  }
   const offers = await prisma.offer.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -51,6 +60,8 @@ export async function getServerSideProps() {
   });
   return {
     props: {
+      session,
+      data: session,
       offers: JSON.parse(JSON.stringify(offers)),
     },
   };

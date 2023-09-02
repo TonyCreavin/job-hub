@@ -31,8 +31,11 @@ COPY  . /usr/app
 
 # install dependencies
 RUN npm install
+<<<<<<< HEAD
 # RUN echo "ID20230827" >> /usr/app/.next/BUILD_ID
 RUN npm update
+=======
+>>>>>>> fe1a5455765e774c85e26dfe3955385c7310e16e
 RUN npm audit fix
 
 ENV NODE_ENV production

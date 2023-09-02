@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
-import { useSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 
 import ProfileForm from '../components/ProfileForm';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home() {
+export default function Home(props) {
   const [userData, setUserData] = useState({});
   const { data: session, status } = useSession();
 
@@ -25,4 +25,20 @@ export default function Home() {
   return (
     <ProfileForm userData={userData} key={userData?.id} session={session} />
   );
+}
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session, data: session },
+  };
 }

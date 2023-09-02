@@ -215,7 +215,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=/',
+        destination: '/api/auth/signin?callbackUrl='+process.env.CLIENT_URL,
         permanent: false,
       },
     };
