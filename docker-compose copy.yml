@@ -1,0 +1,102 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: ./
+      target: runner
+    command: npm run start
+
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: production
+
+    volumes:
+      - node_modules:/usr/app/node_modules
+      - .vercel:/usr/app/.vercel
+      - .next:/usr/app/.next
+      - build:/usr/app/build
+      - /usr/app/cl:/usr/app/cl
+      - /usr/app/job-hub:/usr/app/job-hub
+      # - /Users/tonycreavin/Coding/cl:/usr/app/cl
+      #  - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    environment:
+      ADMINER_DESIGN: mvt
+
+volumes:
+  postgres:
+  cl:
+  job-hub:
+  node_modules:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/node_modules
+  vercel:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/.vercel
+  next:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/.next
+  build:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/nathf/build
+
+
+
+
+volumes:
+  postgres:
+  cl:
+  job-hub:
+  node_modules:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/tonycreavin/hdm/job-hub/node_modules
+  .vercel:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/tonycreavin/hdm/job-hub/.vercel
+  .next:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/tonycreavin/hdm/job-hub/.next
+  build:
+ # driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/tonycreavin/hdm/job-hub/build

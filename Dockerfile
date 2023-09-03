@@ -9,9 +9,7 @@ RUN mkdir /usr/app/
 RUN mkdir /usr/app/cl 
 RUN mkdir /usr/app/job-hub
 RUN mkdir /usr/app/node_modules
-RUN mkdir /usr/app/.vercel
 RUN mkdir /usr/app/.next
-RUN mkdir /usr/app/build
 WORKDIR /usr/app
 
 
@@ -31,11 +29,9 @@ COPY  . /usr/app
 
 # install dependencies
 RUN npm install
-<<<<<<< HEAD
 # RUN echo "ID20230827" >> /usr/app/.next/BUILD_ID
 RUN npm update
-=======
->>>>>>> fe1a5455765e774c85e26dfe3955385c7310e16e
+RUN npm upgrade
 RUN npm audit fix
 
 ENV NODE_ENV production

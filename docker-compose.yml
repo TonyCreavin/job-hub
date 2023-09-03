@@ -13,13 +13,11 @@ services:
 
     volumes:
       - node_modules:/usr/app/node_modules
-      - .vercel:/usr/app/.vercel
-      - .next:/usr/app/.next
-      - build:/usr/app/build
-      - /usr/app/cl:/usr/app/cl
-      - /usr/app/job-hub:/usr/app/job-hub
-      # - /Users/tonycreavin/Coding/cl:/usr/app/cl
-    #  - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
+      - next:/usr/app/.next
+      #  - /usr/app/cl:/usr/app/cl
+      # - /usr/app/job-hub:/usr/app/job-hub
+      - /Users/tonycreavin/Coding/cl:/usr/app/cl
+      - /Users/tonycreavin/hdm/job-hub:/usr/app/job-hub
 
   db:
     image: postgres:latest
@@ -49,22 +47,10 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/nathf/node_modules
-  vercel:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/nathf/.vercel
+      device: /Users/tonycreavin/hdm/job-hub/node_modules
   next:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/nathf/.next
-  build:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/nathf/build
+      device: /Users/tonycreavin/hdm/job-hub/.next

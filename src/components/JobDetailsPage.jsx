@@ -159,8 +159,8 @@ function JobDetailsPage({
       </p>
       {updatedAt > createdAt && (
         <p className=" text-gray-700 font-serif ">
-          {!language ? 'Mise à jour' : 'Update '}:{createdAt?.substring(8, 10)}/
-          {createdAt?.substring(5, 7)}/{createdAt?.substring(0, 4)}
+          {!language ? 'Mise à jour' : 'Update '}:{updatedAt?.substring(8, 10)}/
+          {updatedAt?.substring(5, 7)}/{updatedAt?.substring(0, 4)}
         </p>
       )}
     </div>
