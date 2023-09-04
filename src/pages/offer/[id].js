@@ -95,6 +95,8 @@ export default function Offer({ offer, cvs }) {
           ''
         )}
         {userData?.role === 'CONSULTANT' &&
+          !showApplicationWindow &&
+          !showEditOfferWindow &&
           session.user.id === offer?.userId && (
             <div className="  mx-auto my-4">
               <button
@@ -124,6 +126,8 @@ export default function Offer({ offer, cvs }) {
             </button>
           )}
         {session &&
+          !showApplicationWindow &&
+          !showEditOfferWindow &&
           userData?.role === 'APPLICANT' &&
           matched?.userId !== userData.id && (
             <button
@@ -138,7 +142,7 @@ export default function Offer({ offer, cvs }) {
         {showApplicationWindow && (
           <>
             <div className="flex flex-col mx-auto">
-              <h3 className="flex justify-center font-semibold font-serif">
+              <h3 className="flex justify-center mt-4 font-semibold font-serif">
                 {offer?.title}
               </h3>
               <h4 className="flex justify-center text-blue-400 font-normal font-serif">
