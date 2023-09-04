@@ -13,9 +13,6 @@ export default function JobSearchbar({ offers, setFilterJob }) {
     } else {
       setFilterJob(newFilter);
     }
-    const clearInput = () => {
-      setFilterJob([]);
-    };
   };
   return (
     <div>

@@ -42,7 +42,7 @@ export default function Offers({ offers }) {
             onChange={handleChange}
             name="categoryId"
             id="categoryId"
-            className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5  "
+            className="border-solid border-gray-300 border-[1px] h-[5vh] w-[90vw] rounded-md mb-5  bg-white"
           >
             <option className="text-center ">
               {!language ? 'Sélectionnez une catégorie' : 'Select a category'}

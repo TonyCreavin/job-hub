@@ -106,7 +106,7 @@ export default function ProfileForm({ userData, session }) {
                 <label htmlFor="phone"> </label>
                 {!language ? 'Téléphone' : 'Phone'}
                 <input
-                  type="tel"
+                  type="number"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
                   placeholder="phone"
                   value={formState.phone || ''}
@@ -190,7 +190,7 @@ export default function ProfileForm({ userData, session }) {
                 <label htmlFor="postcode"> </label>
                 {!language ? 'Code postal' : 'Postcode'}
                 <input
-                  type="text"
+                  type="number"
                   placeholder="postcode"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
                   value={formState.postcode || ''}

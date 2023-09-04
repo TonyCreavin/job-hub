@@ -13,9 +13,6 @@ export default function PlaceSearchbar({ offers, setFilterData }) {
     } else {
       setFilterData(newFilter);
     }
-    const clearInput = () => {
-      setFilterData([]);
-    };
   };
   return (
     <div>
