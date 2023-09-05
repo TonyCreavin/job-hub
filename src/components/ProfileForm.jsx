@@ -75,8 +75,10 @@ export default function ProfileForm({ userData, session }) {
 
             <div className="flex flex-col md:flex-row  justify-between  gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="firstName"></label>
-                {!language ? 'Prénom' : 'First Name'}
+                <label htmlFor="firstName">
+                  {!language ? 'Prénom' : 'First Name'}
+                </label>
+
                 <input
                   type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -88,8 +90,10 @@ export default function ProfileForm({ userData, session }) {
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="lastName"></label>
-                {!language ? 'Nom' : 'Last Name'}
+                <label htmlFor="lastName">
+                  {!language ? 'Nom' : 'Last Name'}
+                </label>
+
                 <input
                   type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -103,8 +107,10 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="phone"> </label>
-                {!language ? 'Téléphone' : 'Phone'}
+                <label htmlFor="phone">
+                  {!language ? 'Téléphone' : 'Phone'}{' '}
+                </label>
+
                 <input
                   type="number"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -116,8 +122,8 @@ export default function ProfileForm({ userData, session }) {
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="github"> </label>
-                Github
+                <label htmlFor="github">Github </label>
+
                 <input
                   type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -131,7 +137,7 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="linkedin"> </label>
+                <label htmlFor="linkedin">Linkedin </label>
                 Linkedin
                 <input
                   type="text"
@@ -144,8 +150,10 @@ export default function ProfileForm({ userData, session }) {
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="skills"> </label>
-                {!language ? 'Compétences' : 'Skills'}
+                <label htmlFor="skills">
+                  {!language ? 'Compétences' : 'Skills'}{' '}
+                </label>
+
                 <input
                   type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -159,8 +167,10 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="address"> </label>
-                {!language ? 'Adresse' : 'Address'}
+                <label htmlFor="address">
+                  {!language ? 'Adresse' : 'Address'}{' '}
+                </label>
+
                 <input
                   type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px]"
@@ -172,8 +182,8 @@ export default function ProfileForm({ userData, session }) {
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="city"> </label>
-                {!language ? 'Ville' : 'City'}
+                <label htmlFor="city">{!language ? 'Ville' : 'City'} </label>
+
                 <input
                   type="text"
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white mb-[20px] "
@@ -187,8 +197,10 @@ export default function ProfileForm({ userData, session }) {
             </div>
             <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="postcode"> </label>
-                {!language ? 'Code postal' : 'Postcode'}
+                <label htmlFor="postcode">
+                  {!language ? 'Code postal' : 'Postcode'}{' '}
+                </label>
+
                 <input
                   type="number"
                   placeholder="postcode"
@@ -200,8 +212,10 @@ export default function ProfileForm({ userData, session }) {
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="country"> </label>
-                {!language ? 'Pays' : 'Country'}
+                <label htmlFor="country">
+                  {!language ? 'Pays' : 'Country'}{' '}
+                </label>
+
                 <input
                   type="text"
                   placeholder="country"

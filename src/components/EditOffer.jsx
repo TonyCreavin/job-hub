@@ -65,8 +65,10 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
                 />
               </div>
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="location"> </label>
-                {!language ? 'Lieu' : 'Location'}
+                <label htmlFor="location">
+                  {!language ? 'Lieu' : 'Location'}{' '}
+                </label>
+
                 <input
                   className="border-solid border-gray-200 border-2  w-[80vw] md:w-[40vw] h-[7vh]  rounded-lg p-3 bg-white "
                   value={formState.location || ' '}
@@ -79,8 +81,10 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
             </div>
             <div className="flex flex-col md:flex-row  justify-between gap-[2vw]">
               <div className="flex flex-col  mb-2  ">
-                <label htmlFor="website"></label>
-                {!language ? 'Site Web' : 'Website'}
+                <label htmlFor="website">
+                  {!language ? 'Site Web' : 'Website'}
+                </label>
+
                 <input
                   value={formState.website || ''}
                   onChange={handleInputChange}
@@ -91,8 +95,10 @@ export default function EditOffer({ offer, setShowEditOfferWindow }) {
                 />
               </div>
               <div className="flex flex-col  mb-2">
-                <label htmlFor="skills"></label>
-                {!language ? 'Compétences' : 'Skills'}
+                <label htmlFor="skills">
+                  {!language ? 'Compétences' : 'Skills'}
+                </label>
+
                 <input
                   value={formState.skills || ''}
                   onChange={handleInputChange}
