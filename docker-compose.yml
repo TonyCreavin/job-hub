@@ -14,6 +14,7 @@ services:
     volumes:
       - node_modules:/usr/app/node_modules
       - next:/usr/app/.next
+      - /usr/home/nathf:/usr/app
       #  - /usr/app/cl:/usr/app/cl
       # - /usr/app/job-hub:/usr/app/job-hub
       - /Users/tonycreavin/Coding/cl:/usr/app/cl

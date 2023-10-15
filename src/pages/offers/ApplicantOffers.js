@@ -1,17 +1,18 @@
 import ApplicationCard from '../../components/ApplicationCard';
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import LanguageContext from '../../LanguageContext';
 import prisma from '../../../lib/prisma';
 
-export default function Application({ applications }) {
+export default function Application({ applications, data }) {
   const { language } = useContext(LanguageContext);
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
+    const session = data;
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
@@ -20,7 +21,7 @@ export default function Application({ applications }) {
         })
         .catch((err) => console.log(err));
     }
-  }, [session?.user.id]);
+  }, [data]);
 
   return (
     <div className="w-full h-screen overflow-scroll">
@@ -46,7 +47,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };

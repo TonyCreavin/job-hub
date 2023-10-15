@@ -1,22 +1,27 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import CandidateCard from '../../components/CandidateCard';
 import LanguageContext from '../../LanguageContext';
 import prisma from '../../../lib/prisma';
 
-export default function ConsultantsApplications({ applications, offers }) {
+export default function ConsultantsApplications({
+  applications,
+  offers,
+  data,
+}) {
   const { language } = useContext(LanguageContext);
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
   const [filteredOffers, setFilteredOffers] = useState([]);
 
   useEffect(() => {
+    const session = data;
     if (offers && Array.isArray(offers)) {
       const filteredOffers = offers.filter(
         (offer) => offer.userId === session?.user.id
       );
       setFilteredOffers(filteredOffers);
     }
-  }, [offers, session]);
+  }, [offers]);
 
   const filteredApplications = applications.filter((application) =>
     filteredOffers.some((offer) => offer.id === application.offerId)
@@ -49,7 +54,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };
