@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import JobPost from '../../components/JobPosts';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -8,12 +8,13 @@ import prisma from '../../../lib/prisma';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function ConsultantOffers({ offers }) {
+export default function ConsultantOffers({ offers, data }) {
   const { language } = useContext(LanguageContext);
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
+    const session = data;
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
@@ -22,7 +23,7 @@ export default function ConsultantOffers({ offers }) {
         })
         .catch((err) => console.log(err));
     }
-  }, [session?.user.id]);
+  }, [data]);
 
   return (
     <>
@@ -48,7 +49,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };

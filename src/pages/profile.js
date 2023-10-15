@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
-import { useSession, getSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
 import ProfileForm from '../components/ProfileForm';
 
@@ -9,9 +9,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home(props) {
   const [userData, setUserData] = useState({});
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   useEffect(() => {
+    const session = props.data;
     if (session?.user.id) {
       axios
         .get(`/api/user/${session?.user.id}`)
@@ -20,10 +21,10 @@ export default function Home(props) {
         })
         .catch((err) => console.log('Error fetching user data', err));
     }
-  }, [session?.user.id]);
+  }, [props.data]);
 
   return (
-    <ProfileForm userData={userData} key={userData?.id} session={session} />
+    <ProfileForm userData={userData} key={userData?.id} session={props.data} />
   );
 }
 export async function getServerSideProps(context) {
@@ -32,7 +33,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl=http://localhost:3000/',
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
+
 import { getSession } from 'next-auth/react';
-import { getServerSession } from "next-auth/next"
+
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import LanguageContext from '../../LanguageContext';
@@ -32,8 +33,11 @@ function Create_offer(props) {
     setCategories(data);
   };
   useEffect(() => {
-    getCategory();
-  }, []);
+    const session = props.data;
+    if (session?.user.id) {
+      getCategory();
+    }
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +61,7 @@ function Create_offer(props) {
   const handleInputChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
+
     setFormState({
       ...formState,
 
@@ -215,7 +220,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin?callbackUrl='+process.env.CLIENT_URL,
+        destination: '/api/auth/signin?callbackUrl=/',
         permanent: false,
       },
     };
