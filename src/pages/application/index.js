@@ -21,7 +21,7 @@ export default function ConsultantsApplications({
       );
       setFilteredOffers(filteredOffers);
     }
-  }, [offers]);
+  }, [data, offers]);
 
   const filteredApplications = applications.filter((application) =>
     filteredOffers.some((offer) => offer.id === application.offerId)
