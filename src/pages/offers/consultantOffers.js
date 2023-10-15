@@ -23,7 +23,7 @@ export default function ConsultantOffers({ offers, data }) {
         })
         .catch((err) => console.log(err));
     }
-  }, [data]);
+  }, [data?.user.id]);
 
   return (
     <>

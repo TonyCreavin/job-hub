@@ -21,7 +21,7 @@ export default function Home(props) {
         })
         .catch((err) => console.log('Error fetching user data', err));
     }
-  }, [props.data]);
+  }, [props.data?.user.id]);
 
   return (
     <ProfileForm userData={userData} key={userData?.id} session={props.data} />
