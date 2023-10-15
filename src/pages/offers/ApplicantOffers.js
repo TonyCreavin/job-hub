@@ -21,7 +21,7 @@ export default function Application({ applications, data }) {
         })
         .catch((err) => console.log(err));
     }
-  }, [data]);
+  }, [data?.user.id]);
 
   return (
     <div className="w-full h-screen overflow-scroll">

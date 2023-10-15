@@ -37,7 +37,8 @@ function Create_offer(props) {
     if (session?.user.id) {
       getCategory();
     }
-  });
+  }),
+    [props.data?.user.id];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
