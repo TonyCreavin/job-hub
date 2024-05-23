@@ -1,11 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native","linux-musl-arm64-openssl-1.1.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-1.1.x"]
 }
-
 
 datasource db {
   provider = "postgresql"
@@ -13,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id            String        @id @unique @default(uuid())
+  id            String        @id @default(uuid())
   firstName     String?
   lastName      String?
   name          String?
@@ -28,20 +24,19 @@ model User {
   city          String?
   postcode      String?
   country       String?
-  applications  Application[] @relation("applicant_applications")
-  role          Role          @default(APPLICANT)
+  role          role          @default(APPLICANT)
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
-  offers        Offer[]
   accounts      Account[]
-  sessions      Session[]
+  applications  Application[] @relation("applicant_applications")
   documents     Document[]
   favorites     Favorite[]
-   
+  offers        Offer[]
+  sessions      Session[]
 }
 
 model Offer {
-  id                 String        @id @unique @default(uuid())
+  id                 String        @id @default(uuid())
   title              String
   contractType       String
   location           String
@@ -53,28 +48,22 @@ model Offer {
   companyDescription String
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
+  userId             String
+  categoryId         String?
   applications       Application[] @relation("offer_applications")
-  category Category?  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  categoryId String?
-   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
-  favorites Favorite[]
+  favorites          Favorite[]
+  category           Category?     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user               User          @relation(fields: [userId], references: [id])
 }
 
 model Application {
-  id      String @id @unique @default(uuid())
-  user    User?   @relation("applicant_applications", fields: [userId], references: [id], onDelete: Cascade)
-  userId  String?
-  offer   Offer?  @relation("offer_applications", fields: [offerId], references: [id], onDelete: Cascade)
-  offerId String?
+  id          String  @id @default(uuid())
+  userId      String?
+  offerId     String?
   coverLetter String?
   applied     Boolean @default(false)
-}
-
-enum Role {
-  ADMIN
-  APPLICANT
-  CONSULTANT
+  offer       Offer?  @relation("offer_applications", fields: [offerId], references: [id], onDelete: Cascade)
+  user        User?   @relation("applicant_applications", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {
@@ -83,14 +72,15 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
 }
 
@@ -106,6 +96,7 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+
   @@unique([identifier, token])
 }
 
@@ -117,28 +108,32 @@ model Document {
   size      Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String?
-  
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Category {
-  id String @id @unique @default(uuid())
-  name String
-  name_en String?
+  id        String   @id @default(uuid())
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  offers Offer[]
-  
-
+  name_en   String?
+  offers    Offer[]
 }
+
 model Favorite {
-  id         String   @id @unique @default(uuid())
+  id         String   @id @default(uuid())
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  user       User ?    @relation(fields: [userId], references: [id] , onDelete: Cascade)
   userId     String?
-  offer   Offer? @relation(fields: [offerId], references: [id], onDelete: Cascade)
-  offerId String?
-  isFavorite   Boolean @default(false)
+  offerId    String?
+  isFavorite Boolean  @default(false)
+  offer      Offer?   @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum role {
+  CONSULTANT
+  APPLICANT
+  ADMIN
 }

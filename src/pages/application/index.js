@@ -12,6 +12,7 @@ export default function ConsultantsApplications({
   const { language } = useContext(LanguageContext);
   // const { data: session, status } = useSession();
   const [filteredOffers, setFilteredOffers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const session = data;
@@ -26,6 +27,22 @@ export default function ConsultantsApplications({
   const filteredApplications = applications.filter((application) =>
     filteredOffers.some((offer) => offer.id === application.offerId)
   );
+
+  useEffect(() => {
+    const securePage = async () => {
+      const session = await getSession();
+      if (!session) {
+        signIn();
+      } else {
+        setLoading(false);
+      }
+    };
+    securePage();
+  }, []);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <div className="w-full h-screen overflow-scroll">

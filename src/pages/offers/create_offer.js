@@ -12,8 +12,9 @@ function Create_offer(props) {
   const [categories, setCategories] = useState([]);
   const [content, setContent] = useState('');
   const [content2, setContent2] = useState('');
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
-  // const [offers, setOffers] = useState([]);
   const [formState, setFormState] = useState({
     title: '',
     location: '',
@@ -214,20 +215,3 @@ function Create_offer(props) {
   );
 }
 export default Create_offer;
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin?callbackUrl=/',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session, data: session },
-  };
-}

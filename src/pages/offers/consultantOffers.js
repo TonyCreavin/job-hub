@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { getSession } from 'next-auth/react';
+import { useSession, getSession, signIn } from 'next-auth/react';
 import JobPost from '../../components/JobPosts';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -12,6 +12,7 @@ export default function ConsultantOffers({ offers, data }) {
   const { language } = useContext(LanguageContext);
   // const { data: session, status } = useSession();
   const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const session = data;
@@ -24,6 +25,22 @@ export default function ConsultantOffers({ offers, data }) {
         .catch((err) => console.log(err));
     }
   }, [data?.user.id]);
+
+  useEffect(() => {
+    const securePage = async () => {
+      const session = await getSession();
+      if (!session) {
+        signIn();
+      } else {
+        setLoading(false);
+      }
+    };
+    securePage();
+  }, []);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <>
