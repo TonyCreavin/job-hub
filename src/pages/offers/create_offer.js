@@ -215,3 +215,12 @@ function Create_offer(props) {
   );
 }
 export default Create_offer;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  return {
+    props: {
+      data: session,
+    },
+  };
+}

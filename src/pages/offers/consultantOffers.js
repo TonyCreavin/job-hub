@@ -26,21 +26,21 @@ export default function ConsultantOffers({ offers, data }) {
     }
   }, [data?.user.id]);
 
-  useEffect(() => {
-    const securePage = async () => {
-      const session = await getSession();
-      if (!session) {
-        signIn();
-      } else {
-        setLoading(false);
-      }
-    };
-    securePage();
-  }, []);
+  // useEffect(() => {
+  //   const securePage = async () => {
+  //     const session = await getSession();
+  //     if (!session) {
+  //       signIn();
+  //     } else {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   securePage();
+  // }, []);
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+  // if (loading) {
+  //   return <h2>Loading...</h2>;
+  // }
 
   return (
     <>

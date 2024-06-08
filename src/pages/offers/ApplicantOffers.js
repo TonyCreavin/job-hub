@@ -1,13 +1,13 @@
 import ApplicationCard from '../../components/ApplicationCard';
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import LanguageContext from '../../LanguageContext';
 import prisma from '../../../lib/prisma';
 
 export default function Application({ applications, data }) {
   const { language } = useContext(LanguageContext);
-  // const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
   const [userData, setUserData] = useState({});
 
@@ -21,7 +21,7 @@ export default function Application({ applications, data }) {
         })
         .catch((err) => console.log(err));
     }
-  }, [data?.user.id]);
+  }, [session?.user.id]);
 
   return (
     <div className="w-full h-screen overflow-scroll">
